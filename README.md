@@ -1,10 +1,18 @@
+<<<<<<< HEAD
 # circle 
+=======
+# Circle 
+>>>>>>> 2c75680... updated readme
 
 A professional network management app build with Flutter.
 
 ## Getting Started
 
+<<<<<<< HEAD
 To Run this App, follow the following guides to set up your Flutter environment:
+=======
+To Run this App, follow the followingn guides to set up your Flutter environment:
+>>>>>>> 2c75680... updated readme
 
 - [Set up your development enviornment for Flutter](https://flutter.dev/docs/get-started/install)
 
