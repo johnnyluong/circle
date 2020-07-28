@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "795482336850",
+    "firebase_url": "https://circlev1-fb7c1.firebaseio.com",
+    "project_id": "circlev1-fb7c1",
+    "storage_bucket": "circlev1-fb7c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795482336850:android:79105a5fbe57fcb642b98b",
+        "android_client_info": {
+          "package_name": "com.example.circle_interface"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795482336850-mls6bu748cij89cpm3rq5ken8o9opq2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMLj8ZfLU2RfIZUdzQY42yUrY4HX4oGG0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795482336850-mls6bu748cij89cpm3rq5ken8o9opq2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
