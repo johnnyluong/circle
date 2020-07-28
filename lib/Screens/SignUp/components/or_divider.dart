@@ -35,4 +35,8 @@ class OrDivider extends StatelessWidget {
       ),
     );
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 51373f7... Welcome, Login, Sign Up Screens

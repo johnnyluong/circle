@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:circle/constants.dart';
+=======
+import 'package:flutter_app/constants.dart';
+>>>>>>> 51373f7... Welcome, Login, Sign Up Screens
 
 class RoundedButton extends StatelessWidget {
   final String text;
