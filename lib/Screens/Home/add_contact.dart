@@ -30,22 +30,14 @@ class AddContactState extends State<AddContact> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
+        title: Text('Add New Contact'),
+      ),
       resizeToAvoidBottomPadding: false,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            // Page description
-            Container(
-              height: 100,
-              alignment: Alignment.bottomCenter,
-              child: Text(
-                'Add New Contact',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-            // Space between description and image
-            Container(height: 20),
             // Upload image
             Container(
               height: 100,

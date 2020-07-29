@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Screens/Home/home_screen.dart';
 import 'package:flutter_app/Screens/SignUp/signup_screen.dart';
 import 'package:flutter_app/components/already_have_an_account.dart';
 import 'package:flutter_app/components/rounded_button.dart';
 import 'package:flutter_app/components/rounded_input_field.dart';
 import 'package:flutter_app/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_app/Screens/Home/first_screen.dart';
 import 'package:flutter_app/Screens/Login/components/background.dart';
 
 class Body extends StatelessWidget {
@@ -53,7 +53,7 @@ class Body extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return FirstScreen(); //TODO: Integrate authentication
+                      return HomeScreen(); //TODO: Integrate authentication
                     },
                   ),
                 );

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/components/navigation_bar.dart';
+import 'package:flutter_app/components/rounded_button.dart';
+import 'package:flutter_app/constants.dart';
 
 import 'add_contact.dart';
 
@@ -7,8 +10,9 @@ class FirstScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Flexible(
             flex: 2,
@@ -39,31 +43,20 @@ class FirstScreen extends StatelessWidget {
               ),
             ),
           ),
-          Flexible(
-            flex: 1,
-            child: Container(
-              alignment: Alignment.topCenter,
-              child: RaisedButton(
-                color: Colors.purple,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AddContact()),
-                  );
-                },
-                child: Text(
-                  'Get Started',
-                  style: TextStyle(
-                      fontFamily: 'Aleo',
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-              ),
-            ),
+          RoundedButton(
+            text: "Get Started",
+            color: kPrimaryColor,
+            textColor: Colors.white,
+            press: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddContact()),
+              );
+            },
           ),
         ],
       ),
     );
   }
 }
+
