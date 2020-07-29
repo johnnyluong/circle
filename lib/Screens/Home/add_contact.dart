@@ -15,11 +15,13 @@ class AddContact extends StatefulWidget {
 
 class AddContactState extends State<AddContact> {
   File _image;
-  final picker = ImagePicker();
+  final _picker = ImagePicker();
 
   // Get image from photo
   Future _getImage() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    var _pickedImage = await _picker.getImage(source: ImageSource.gallery);
+
+    File image = File(_pickedImage.path);
 
     setState(() {
       _image = image;
