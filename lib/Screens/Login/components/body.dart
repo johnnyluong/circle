@@ -6,12 +6,7 @@ import 'package:circle/components/rounded_button.dart';
 import 'package:circle/components/rounded_input_field.dart';
 import 'package:circle/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
-<<<<<<< HEAD
 import 'package:circle/Screens/Login/components/background.dart';
-=======
-import 'package:flutter_app/Screens/Login/components/background.dart';
-import 'package:flutter_app/Services/Authentication/authentication.dart';
->>>>>>> 1bd6907... Finish anon login.
 
 class Body extends StatefulWidget {
   const Body({
@@ -126,16 +121,6 @@ class _BodyState extends State<Body> {
             RoundedButton(
               text: "LOGIN",
               press: () {
-<<<<<<< HEAD
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return MainScreen(); //TODO: Integrate authentication
-                    },
-                  ),
-                );
-=======
                 validateAndSubmit();
                 // while (_isLoading);
                 // Navigator.pop(
@@ -149,7 +134,6 @@ class _BodyState extends State<Body> {
                 //     },
                 //   ),
                 // );
->>>>>>> 1bd6907... Finish anon login.
               },
             ),
             SizedBox(height: widget.size.height * 0.03),
