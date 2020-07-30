@@ -1,3 +1,4 @@
+import 'package:circle/Services/Authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/Screens/Login/login_screen.dart';
 import 'package:circle/Screens/SignUp/components/or_divider.dart';

@@ -1,13 +1,13 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:circle/Services/Authentication/authentication.dart';
+import 'package:circle/Services/CloudDB/cloud_db.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:circle/components/rounded_button.dart';
 import 'package:circle/constants.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter_app/Services/CloudDB/cloud_db.dart';
-
 class AddContact extends StatefulWidget {
   AddContact({this.cloudDB});
   final CloudDB cloudDB;
