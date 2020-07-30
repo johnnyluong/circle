@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/constants.dart';
 
 class CirclesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
+        title: Text('Circles'),
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              //TODO: Add create Circle function here
+            },
+          ),
+        ],
+      ),
       body: Container(
         width: double.infinity,
         height: size.height,

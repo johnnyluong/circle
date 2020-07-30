@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/constants.dart';
 
 class RemindersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
+        title: Text('Reminders'),
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.add),
+            tooltip: 'Show Snackbar',
+            onPressed: () {
+              //TODO: Add Reminder functionality here
+            },
+          ),
+        ],
+      ),
       body: Container(
         width: double.infinity,
         height: size.height,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Screens/Home/home_screen.dart';
+import 'package:flutter_app/Screens/Home/main_screen.dart';
 import 'package:flutter_app/Screens/SignUp/signup_screen.dart';
 import 'package:flutter_app/components/already_have_an_account.dart';
 import 'package:flutter_app/components/rounded_button.dart';
@@ -53,7 +53,7 @@ class Body extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return HomeScreen(); //TODO: Integrate authentication
+                      return MainScreen(); //TODO: Integrate authentication
                     },
                   ),
                 );
