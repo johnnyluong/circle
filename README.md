@@ -1,4 +1,4 @@
-# Circle 
+# circle 
 
 A professional network management app build with Flutter.
 

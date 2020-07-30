@@ -3,8 +3,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app/components/rounded_button.dart';
-import 'package:flutter_app/constants.dart';
+import 'package:circle/components/rounded_button.dart';
+import 'package:circle/constants.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddContact extends StatefulWidget {
@@ -34,7 +34,11 @@ class AddContactState extends State<AddContact> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text('Add New Contact'),
+        iconTheme: IconThemeData(color: Colors.white),
+        title: Text(
+          'Add New Contact',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       resizeToAvoidBottomPadding: false,
       body: SingleChildScrollView(

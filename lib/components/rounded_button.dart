@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/constants.dart';
+import 'package:circle/constants.dart';
 
 class RoundedButton extends StatelessWidget {
   final String text;
   final Function press;
   final Color color, textColor;
-  
 
   const RoundedButton({
     Key key,

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Screens/Login/login_screen.dart';
-import 'package:flutter_app/Screens/SignUp/components/or_divider.dart';
-import 'package:flutter_app/Screens/SignUp/components/social_icon.dart';
-import 'package:flutter_app/components/already_have_an_account.dart';
-import 'package:flutter_app/components/rounded_button.dart';
-import 'package:flutter_app/components/rounded_input_field.dart';
-import 'package:flutter_app/components/rounded_password_field.dart';
+import 'package:circle/Screens/Login/login_screen.dart';
+import 'package:circle/Screens/SignUp/components/or_divider.dart';
+import 'package:circle/Screens/SignUp/components/social_icon.dart';
+import 'package:circle/components/already_have_an_account.dart';
+import 'package:circle/components/rounded_button.dart';
+import 'package:circle/components/rounded_input_field.dart';
+import 'package:circle/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_app/Screens/SignUp/components/background.dart';
+import 'package:circle/Screens/SignUp/components/background.dart';
 
 class Body extends StatelessWidget {
   const Body({

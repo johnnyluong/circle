@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Screens/Home/add_contact.dart';
-import 'package:flutter_app/constants.dart';
+import 'package:circle/Screens/Home/add_contact.dart';
+import 'package:circle/constants.dart';
 
 class MyNetworkScreen extends StatelessWidget {
   @override
@@ -9,11 +9,12 @@ class MyNetworkScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text('My Network'),
+        title: Text('My Network', style: TextStyle(color: Colors.white),),
         automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add),
+            color: Colors.white,
             onPressed: () {
               Navigator.push(
                 context,
@@ -56,4 +57,3 @@ class MyNetworkScreen extends StatelessWidget {
     );
   }
 }
-

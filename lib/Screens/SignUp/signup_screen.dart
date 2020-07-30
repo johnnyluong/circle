@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Screens/SignUp/components/body.dart';
+import 'package:circle/Screens/SignUp/components/body.dart';
 
 class SignupScreen extends StatelessWidget {
   @override
@@ -9,4 +9,3 @@ class SignupScreen extends StatelessWidget {
     );
   }
 }
-

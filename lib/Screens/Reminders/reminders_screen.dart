@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/constants.dart';
+import 'package:circle/constants.dart';
 
 class RemindersScreen extends StatelessWidget {
   @override
@@ -8,12 +8,12 @@ class RemindersScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text('Reminders'),
+        title: Text('Reminders', style: TextStyle(color: Colors.white),),
         automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add),
-            tooltip: 'Show Snackbar',
+            color: Colors.white,
             onPressed: () {
               //TODO: Add Reminder functionality here
             },

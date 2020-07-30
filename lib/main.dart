@@ -1,6 +1,6 @@
+import 'package:circle/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Screens/Welcome/welcome_screen.dart';
-import 'package:flutter_app/constants.dart';
+import 'package:circle/Screens/Welcome/welcome_screen.dart';
 
 void main() {
   runApp(MyApp());

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Screens/Circles/circles_screen.dart';
-import 'package:flutter_app/Screens/Circles/my_network_screen.dart';
-import 'package:flutter_app/Screens/Reminders/reminders_screen.dart';
-import 'package:flutter_app/Screens/Settings/settings_screen.dart';
-import 'package:flutter_app/constants.dart';
+import 'package:circle/Screens/Circles/circles_screen.dart';
+import 'package:circle/Screens/Circles/my_network_screen.dart';
+import 'package:circle/Screens/Reminders/reminders_screen.dart';
+import 'package:circle/constants.dart';
 
 import 'home_screen.dart';
 

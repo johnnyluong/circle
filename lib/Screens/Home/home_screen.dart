@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Screens/Settings/settings_screen.dart';
-import 'package:flutter_app/constants.dart';
-
+import 'package:circle/Screens/Settings/settings_screen.dart';
+import 'package:circle/constants.dart';
 
 class HomeScreen extends StatelessWidget {
   //FirstScreen();
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size; 
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text('Home'),
+        title: Text('Home', style: TextStyle(color: Colors.white),),
         automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.settings),
+            color: Colors.white,
             onPressed: () {
               Navigator.push(
                 context,

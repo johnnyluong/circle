@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Screens/Login/login_Screen.dart';
-import 'package:flutter_app/Screens/SignUp/signup_screen.dart';
-import 'package:flutter_app/constants.dart';
+import 'package:circle/Screens/Login/login_Screen.dart';
+import 'package:circle/Screens/SignUp/signup_screen.dart';
+import 'package:circle/constants.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'package:flutter_app/Screens/Welcome/components/background.dart';
-import 'package:flutter_app/components/rounded_button.dart';
+import 'package:circle/Screens/Welcome/components/background.dart';
+import 'package:circle/components/rounded_button.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -15,7 +15,7 @@ class Body extends StatelessWidget {
     return Background(
       //This widget controls the images in the corners
       child: SingleChildScrollView(
-          child: Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/constants.dart';
+import 'package:circle/constants.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SocialIcon extends StatelessWidget {

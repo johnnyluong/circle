@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/constants.dart';
+import 'package:circle/constants.dart';
 
 class CirclesScreen extends StatelessWidget {
   @override
@@ -8,11 +8,12 @@ class CirclesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text('Circles'),
+        title: Text('Circles', style: TextStyle(color: Colors.white),),
         automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add),
+            color: Colors.white,
             onPressed: () {
               //TODO: Add create Circle function here
             },

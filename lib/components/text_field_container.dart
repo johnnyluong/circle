@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/constants.dart';
-
+import 'package:circle/constants.dart';
 
 class TextFieldContainer extends StatelessWidget {
   final Widget child;
@@ -9,7 +8,6 @@ class TextFieldContainer extends StatelessWidget {
     Key key,
     @required this.child,
   }) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
