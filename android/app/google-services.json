@@ -30,6 +30,14 @@
             {
               "client_id": "171948444728-eiqt0thaaf9iglu7irqji3n05pm5gls5.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "171948444728-2h153ekejjk0qreoqttujahidcvhhfhe.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.testapp",
+                "app_store_id": "20202020"
+              }
             }
           ]
         }
