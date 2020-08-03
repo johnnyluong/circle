@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
-import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:circle/components/rounded_button.dart';
@@ -128,15 +126,12 @@ class AddContactState extends State<AddContact> {
             // Phone number
             NewContactField(
               hintText: "Phone Number",
-              controller: phone,
             ),
             NewContactField(
               hintText: "Email",
-              controller: email,
             ),
             NewContactField(
               hintText: "Tag",
-              controller: tag,
             ),
             // Uplpad button
             RoundedButton(
@@ -171,8 +166,7 @@ class AddContactState extends State<AddContact> {
 
 class NewContactField extends StatelessWidget {
   final String hintText;
-  TextEditingController controller;
-  NewContactField({Key key, this.hintText, this.controller}) : super(key: key);
+  NewContactField({Key key, this.hintText}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -182,7 +176,6 @@ class NewContactField extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       width: size.width * 0.95,
       child: TextField(
-        controller: controller,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           hintText: hintText,
