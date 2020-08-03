@@ -75,7 +75,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
       builder: (context) {
         return Column(
           children: <Widget>[
-            SizedBox(height: size.height * 0.06),
+            SizedBox(height: size.height * 0.065),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 15),
               padding: EdgeInsets.symmetric(
