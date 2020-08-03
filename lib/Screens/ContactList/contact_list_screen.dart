@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+// Builds the contact list screen that displays all the users' contacts
 class ContactListScreen extends StatefulWidget {
   _ContactListState createState() => _ContactListState();
 }
