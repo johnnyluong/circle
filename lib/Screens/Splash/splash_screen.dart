@@ -1,9 +1,11 @@
+import 'dart:async';
+
+import 'package:circle/Screens/Welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 // import 'dart:async';
 
 class SplashScreen extends StatelessWidget {
   @override
-<<<<<<< HEAD
   _SplashScreenState createState() => _SplashScreenState();
 }
 
@@ -26,8 +28,6 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-=======
->>>>>>> 1bd6907... Finish anon login.
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(

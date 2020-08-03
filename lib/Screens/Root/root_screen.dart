@@ -1,11 +1,8 @@
-import 'package:flutter_app/Services/Authentication/authentication.dart';
-import 'package:flutter_app/Screens/Splash/splash_screen.dart';
-import 'package:flutter_app/Screens/Welcome/welcome_screen.dart';
-import 'package:flutter_app/Screens/Home/home_screen.dart';
+import 'package:circle/Screens/Home/home_screen.dart';
+import 'package:circle/Screens/Splash/splash_screen.dart';
+import 'package:circle/Screens/Welcome/welcome_screen.dart';
+import 'package:circle/Services/Authentication/authentication.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Services/CloudDB/cloud_db.dart';
-// import 'package:flutter_app/constants.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 
 enum AuthStatus {
   NOT_DETERMINED,
