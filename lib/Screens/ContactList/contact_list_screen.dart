@@ -4,6 +4,7 @@ import 'package:flutter_app/Screens/ContactList/contact_detail.dart';
 
 // Builds the contact list screen that displays all the users' contacts
 class ContactListScreen extends StatefulWidget {
+  @override
   _ContactListState createState() => _ContactListState();
 }
 
