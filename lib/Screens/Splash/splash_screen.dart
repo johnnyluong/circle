@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // Load welcome screen after 5 seconds
     // TODO: Check whether the user is singed in or not.
     // If the user is signed in, load home screen. If the user is not signed in, load the welcome screen.
-    FirebaseUser user = getCurrentUser();
+    // FirebaseUser user = getCurrentUser();
     Timer(Duration(seconds: 5), () => route());
   }
 

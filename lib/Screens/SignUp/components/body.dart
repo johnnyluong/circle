@@ -19,6 +19,10 @@ class Body extends StatelessWidget {
   String email;
   String password;
 
+  final Auth _auth = Auth();
+  String email;
+  String password;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
