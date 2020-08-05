@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_app/Screens/Welcome/welcome_screen.dart';
+import 'package:flutter_app/Services/Authentication/authentication.dart';
+
+enum AuthStatus {
+  NOT_DETERMINED,
+  NOT_LOGGED_IN,
+  LOGGED_IN,
+}
 
 class SplashScreen extends StatefulWidget {
+  SplashScreen({this.auth});
+  final BaseAuth auth;
+
+  @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
@@ -12,6 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // Load welcome screen after 5 seconds
     // TODO: Check whether the user is singed in or not.
     // If the user is signed in, load home screen. If the user is not signed in, load the welcome screen.
+    FirebaseUser user = getCurrentUser();
     Timer(Duration(seconds: 5), () => route());
   }
 
