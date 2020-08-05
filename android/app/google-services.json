@@ -68,18 +68,11 @@
               "client_type": 3
             },
             {
-<<<<<<< HEAD
               "client_id": "171948444728-2h153ekejjk0qreoqttujahidcvhhfhe.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.example.testapp",
                 "app_store_id": "20202020"
-=======
-              "client_id": "171948444728-e658ulteu82b4p69n8gv0d84uasmej62.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "testapp2"
->>>>>>> f16bc1a... read contacts from database
               }
             }
           ]
