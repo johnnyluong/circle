@@ -10,9 +10,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:circle/Screens/SignUp/components/background.dart';
 
 class Body extends StatelessWidget {
-  const Body({
+  Body({
     Key key,
   }) : super(key: key);
+
+  final Auth _auth = Auth();
+  String email;
+  String password;
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +41,20 @@ class Body extends StatelessWidget {
             SizedBox(height: size.height * 0.02),
             RoundedInputField(
               text: "Your Email",
-              onChanged: (value) {}, 
+              onChanged: (value) async {
+                email = value;
+              },
             ),
             RoundedPasswordField(
-              onChanged: (value) {},
+              onChanged: (value) async {
+                password = value;
+              },
             ),
             RoundedButton(
               text: "SIGN UP",
-              press: () {}, //TODO: Authentication and routing
+              press: () async {
+                dynamic result = await _auth.signUp(email, password);
+              }, //TODO: Authentication and routing
             ),
             SizedBox(height: size.height * 0.02),
             AlreadyHaveAnAccountCheck(
@@ -84,5 +94,3 @@ class Body extends StatelessWidget {
     );
   }
 }
-
-
