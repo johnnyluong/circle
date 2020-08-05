@@ -1,6 +1,6 @@
+import 'package:circle/Screens/Splash/splash_screen.dart';
 import 'package:circle/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:circle/Screens/Welcome/welcome_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: WelcomeScreen(), //TODO: Change based on logged in status
+      // home: WelcomeScreen(), //TODO: Change based on logged in status
+      home: SplashScreen(),
     );
   }
 }
