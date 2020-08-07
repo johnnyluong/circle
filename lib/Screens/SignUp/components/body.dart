@@ -1,3 +1,4 @@
+import 'package:circle/Screens/Onboarding/onboarding_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/Screens/Login/login_screen.dart';
 import 'package:circle/Screens/SignUp/components/or_divider.dart';
@@ -37,14 +38,23 @@ class Body extends StatelessWidget {
             SizedBox(height: size.height * 0.02),
             RoundedInputField(
               text: "Your Email",
-              onChanged: (value) {}, 
+              onChanged: (value) {},
             ),
             RoundedPasswordField(
               onChanged: (value) {},
             ),
             RoundedButton(
               text: "SIGN UP",
-              press: () {}, //TODO: Authentication and routing
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Onboarding(); //TODO: Integrate authentication
+                    },
+                  ),
+                );
+              }, //TODO: Authentication and routing
             ),
             SizedBox(height: size.height * 0.02),
             AlreadyHaveAnAccountCheck(
@@ -84,5 +94,3 @@ class Body extends StatelessWidget {
     );
   }
 }
-
-

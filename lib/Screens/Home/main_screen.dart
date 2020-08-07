@@ -1,3 +1,4 @@
+import 'package:circle/Screens/ContactList/contact_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/Screens/Circles/circles_screen.dart';
 import 'package:circle/Screens/Circles/my_network_screen.dart';
@@ -17,7 +18,8 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     CirclesScreen(),
     RemindersScreen(),
-    MyNetworkScreen(),
+    // MyNetworkScreen(),
+    ContactListScreen(),
   ];
   @override
   Widget build(BuildContext context) {
