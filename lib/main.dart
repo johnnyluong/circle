@@ -1,3 +1,4 @@
+import 'package:circle/Screens/Onboarding/onboarding_screens.dart';
 import 'package:circle/Screens/Splash/splash_screen.dart';
 import 'package:circle/constants.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
       ),
       // home: WelcomeScreen(), //TODO: Change based on logged in status
       home: SplashScreen(),
+      // home: Onboarding(),
     );
   }
 }
