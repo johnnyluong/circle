@@ -8,13 +8,11 @@ import 'package:flutter/widgets.dart';
 import 'package:circle/components/rounded_button.dart';
 import 'package:circle/constants.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_app/Services/CloudDB/cloud_db.dart';
 
 class AddContact extends StatefulWidget {
-//modified constructor
-  AddContact({this.auth});
-  final BaseAuth auth;
-
+  AddContact({this.cloudDB});
+  final CloudDB cloudDB;
   State<StatefulWidget> createState() {
     return AddContactState(auth: auth);
   }
@@ -33,7 +31,8 @@ class AddContactState extends State<AddContact> {
   final tag = TextEditingController();
 
   File _image;
-  final _picker = ImagePicker();
+  final picker = ImagePicker();
+  final _textEditingController = TextEditingController();
 
   // Get image from photo
   Future _getImage() async {
@@ -44,6 +43,23 @@ class AddContactState extends State<AddContact> {
     setState(() {
       _image = image;
     });
+  }
+
+  Map<String, dynamic> makeContact(String firstName, String lastName,
+      String phoneNumber, String email, String tag) {
+    Map<String, dynamic> newContact = Map<String, dynamic>();
+    newContact['firstName'] = firstName;
+    newContact['lastName'] = lastName;
+    newContact['phoneNumber'] = phoneNumber;
+    newContact['email'] = email;
+    newContact['tag'] = tag;
+    return newContact;
+  }
+
+  addNewContact(String name) {
+    if (name.length > 0) {
+      widget.cloudDB.addContact(makeContact(name, "", "", "", ""));
+    }
   }
 
   @override
@@ -91,7 +107,7 @@ class AddContactState extends State<AddContact> {
                     Flexible(
                       flex: 1,
                       child: TextField(
-                        controller: first,
+                        controller: _textEditingController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: 'First Name'),
@@ -127,7 +143,7 @@ class AddContactState extends State<AddContact> {
               text: "ADD CONTACT",
               color: kPrimaryColor,
               textColor: Colors.white,
-              // add contact functionality
+              /*
               press: () async {
                 String fullname = first.text + " " + last.text;
                 await db
@@ -143,6 +159,8 @@ class AddContactState extends State<AddContact> {
                 });
                 print(user_id);
               },
+              */
+              press: addNewContact(_textEditingController.text.toString()),
             ),
           ],
         ),

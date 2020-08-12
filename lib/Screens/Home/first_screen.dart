@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'add_contact.dart';
 
 class FirstScreen extends StatelessWidget {
-  //FirstScreen();
+  final CloudDB cloudDB;
+  FirstScreen({this.cloudDB});
 
   @override
   Widget build(BuildContext context) {
@@ -39,28 +39,19 @@ class FirstScreen extends StatelessWidget {
               ),
             ),
           ),
-          Flexible(
-            flex: 1,
-            child: Container(
-              alignment: Alignment.topCenter,
-              child: RaisedButton(
-                color: Colors.purple,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AddContact()),
-                  );
-                },
-                child: Text(
-                  'Get Started',
-                  style: TextStyle(
-                      fontFamily: 'Aleo',
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-              ),
-            ),
+          RoundedButton(
+            text: "Get Started",
+            color: kPrimaryColor,
+            textColor: Colors.white,
+            press: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddContact(
+                          cloudDB: cloudDB,
+                        )),
+              );
+            },
           ),
         ],
       ),

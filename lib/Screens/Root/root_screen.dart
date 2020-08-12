@@ -3,6 +3,7 @@ import 'package:flutter_app/Screens/Splash/splash_screen.dart';
 import 'package:flutter_app/Screens/Welcome/welcome_screen.dart';
 import 'package:flutter_app/Screens/Home/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Services/CloudDB/cloud_db.dart';
 // import 'package:flutter_app/constants.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 
@@ -25,7 +26,7 @@ class RootScreen extends StatefulWidget {
 class _RootScreenState extends State<RootScreen> {
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   String _userId = "";
-
+  // CloudDB cloudDB;
   @override
   void initState() {
     super.initState();

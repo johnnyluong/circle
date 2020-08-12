@@ -8,19 +8,30 @@ class HomeScreen extends StatefulWidget {
   final BaseAuth auth;
   final VoidCallback logoutCallback;
   final String userId;
+  // final CloudDB cloudDB;
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
-  List<Widget> _widgetOptions = <Widget>[
-    FirstScreen(),
-    CirclesScreen(),
-    RemindersScreen(),
-    // MyNetworkScreen(),
-    ContactListScreen(),
-  ];
+
+  List<Widget> _widgetOptions;
+  CloudDB cloudDB;
+  @override
+  void initState() {
+    super.initState();
+    cloudDB = CloudDB.fromUID(widget.userId);
+    _widgetOptions = <Widget>[
+      FirstScreen(cloudDB: cloudDB),
+      CirclesScreen(),
+      RemindersScreen(),
+      // MyNetworkScreen(),
+      ContactListScreen(),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
