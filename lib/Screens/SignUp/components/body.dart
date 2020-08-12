@@ -10,11 +10,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:circle/Screens/SignUp/components/background.dart';
 
 class Body extends StatelessWidget {
-  Body({
-    Key key,
-  }) : super(key: key);
+  //modified constructor
+  Body({Key key, this.auth}) : super(key: key);
 
-  final Auth _auth = Auth();
+  final BaseAuth auth;
   String email;
   String password;
 
@@ -51,11 +50,20 @@ class Body extends StatelessWidget {
               },
             ),
             RoundedButton(
-              text: "SIGN UP",
-              press: () async {
-                dynamic result = await _auth.signUp(email, password);
-              }, //TODO: Authentication and routing
-            ),
+                text: "SIGN UP",
+                // User Authentication
+                press: () async {
+                  dynamic result = await auth.signUp(email, password);
+                  print(auth.getCurrentUser());
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return HomeScreen(
+                          auth: auth); //TODO: Integrate authentication
+                    },
+                  )
+                      //TODO: Authentication and routing
+                      );
+                }),
             SizedBox(height: size.height * 0.02),
             AlreadyHaveAnAccountCheck(
               login: false,

@@ -1,19 +1,37 @@
 import 'dart:io';
 import 'dart:ui';
+import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:circle/components/rounded_button.dart';
 import 'package:circle/constants.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddContact extends StatefulWidget {
+//modified constructor
+  AddContact({this.auth});
+  final BaseAuth auth;
+
   State<StatefulWidget> createState() {
-    return AddContactState();
+    return AddContactState(auth: auth);
   }
 }
 
 class AddContactState extends State<AddContact> {
+  //modified constructor
+  AddContactState({this.auth});
+  final BaseAuth auth;
+
+  //added TextEditingControllers
+  final first = TextEditingController();
+  final last = TextEditingController();
+  final phone = TextEditingController();
+  final email = TextEditingController();
+  final tag = TextEditingController();
+
   File _image;
   final _picker = ImagePicker();
 
@@ -30,6 +48,13 @@ class AddContactState extends State<AddContact> {
 
   @override
   Widget build(BuildContext context) {
+    final db = Firestore.instance.collection("Users");
+    String user_id;
+    // convert Future to String
+    auth.getUserID().then((val) {
+      user_id = val;
+    });
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -66,6 +91,7 @@ class AddContactState extends State<AddContact> {
                     Flexible(
                       flex: 1,
                       child: TextField(
+                        controller: first,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: 'First Name'),
@@ -75,6 +101,7 @@ class AddContactState extends State<AddContact> {
                     Flexible(
                       flex: 1,
                       child: TextField(
+                        controller: last,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: 'Last Name'),
@@ -85,19 +112,37 @@ class AddContactState extends State<AddContact> {
             // Phone number
             NewContactField(
               hintText: "Phone Number",
+              controller: phone,
             ),
             NewContactField(
               hintText: "Email",
+              controller: email,
             ),
             NewContactField(
               hintText: "Tag",
+              controller: tag,
             ),
             // Uplpad button
             RoundedButton(
               text: "ADD CONTACT",
               color: kPrimaryColor,
               textColor: Colors.white,
-              press: () {},
+              // add contact functionality
+              press: () async {
+                String fullname = first.text + " " + last.text;
+                await db
+                    .document(user_id)
+                    .collection("contacts")
+                    .document(fullname)
+                    .setData({
+                  'First Name': first.text,
+                  'Last Name': last.text,
+                  'phone': phone.text,
+                  'email': email.text,
+                  'tags': tag.text
+                });
+                print(user_id);
+              },
             ),
           ],
         ),
@@ -108,11 +153,8 @@ class AddContactState extends State<AddContact> {
 
 class NewContactField extends StatelessWidget {
   final String hintText;
-
-  const NewContactField({
-    Key key,
-    this.hintText,
-  }) : super(key: key);
+  TextEditingController controller;
+  NewContactField({Key key, this.hintText, this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -122,6 +164,7 @@ class NewContactField extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       width: size.width * 0.95,
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           hintText: hintText,

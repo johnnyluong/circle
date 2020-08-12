@@ -8,6 +8,10 @@ import 'package:circle/Screens/Welcome/components/background.dart';
 import 'package:circle/components/rounded_button.dart';
 
 class Body extends StatelessWidget {
+  //modified constructor
+  Body({this.auth});
+  final BaseAuth auth;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -51,7 +55,7 @@ class Body extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return SignupScreen();
+                      return SignupScreen(auth: auth);
                     },
                   ),
                 );

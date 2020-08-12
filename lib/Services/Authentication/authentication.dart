@@ -4,20 +4,27 @@ import 'package:firebase_auth/firebase_auth.dart';
 abstract class BaseAuth {
   Future<String> signInWithEmail(String email, String password);
   Future<String> signInAnonymously();
-
+  // Added getUserID function
+  Future<String> getUserID();
   Future<String> signUp(String email, String password);
-
   Future<FirebaseUser> getCurrentUser();
-
   Future<void> sendEmailVerification();
-
   Future<void> signOut();
-
   Future<bool> isEmailVerified();
 }
 
 class Auth implements BaseAuth {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  Future<String> getUserID() async {
+    try {
+      FirebaseUser user = await _firebaseAuth.currentUser();
+      return user.uid;
+    } catch (e) {
+      print("No user ID");
+      return null;
+    }
+  }
 
   Future<String> signInWithEmail(String email, String password) async {
     AuthResult result = await _firebaseAuth.signInWithEmailAndPassword(
@@ -32,6 +39,7 @@ class Auth implements BaseAuth {
     return user.uid;
   }
 
+  // Added try catch block
   Future<String> signUp(String email, String password) async {
     try {
       AuthResult result = await _firebaseAuth.createUserWithEmailAndPassword(

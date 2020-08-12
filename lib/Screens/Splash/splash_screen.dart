@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => WelcomeScreen(),
+        builder: (context) => WelcomeScreen(auth: widget.auth),
       ),
     );
   }
