@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 
 import 'package:circle/Screens/Welcome/components/background.dart';
 import 'package:circle/components/rounded_button.dart';
+import 'package:circle/Screens/Home/main_screen.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -58,6 +59,21 @@ class Body extends StatelessWidget {
               },
               color: kPrimaryLightColor,
               textColor: Colors.black,
+            ),
+            SizedBox(height: size.height * 0.03),
+            // anonymous sign in button
+            RoundedButton(
+              text: 'ANONYMOUS SIGN IN',
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return MainScreen();
+                    },
+                  ),
+                );
+              },
             ),
           ],
         ),

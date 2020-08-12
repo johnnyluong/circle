@@ -2,6 +2,8 @@ import 'package:circle/components/rounded_button.dart';
 import 'package:circle/components/rounded_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class CirclesScreen extends StatefulWidget {
   @override
@@ -9,6 +11,12 @@ class CirclesScreen extends StatefulWidget {
 }
 
 class _CirclesScreenState extends State<CirclesScreen> {
+  Future getCircles() async {
+    var firestore = Firestore.instance;
+    QuerySnapshot qn = await firestore.collection('My Circles').getDocuments();
+    return qn.documents;
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -16,7 +24,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         title: Text(
-          'Circles',
+          'My Circles',
           style: TextStyle(color: Colors.white),
         ),
         automaticallyImplyLeading: false,
@@ -28,34 +36,313 @@ class _CirclesScreenState extends State<CirclesScreen> {
           ),
         ],
       ),
-      body: Container(
-        width: double.infinity,
-        height: size.height,
-        child: Stack(
-          alignment: Alignment.center, //Controls vertical center
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Circles',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                  ),
+      body: SingleChildScrollView(
+        child: Container(
+          // width: double.infinity,
+          // width: size.width,
+          // height: size.height,
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: size.height / 4,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        child: Text('Less boring 1'),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        margin: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(40.0),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        // width: size.width / 2,
+                        child: Text('Less boring 2'),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        margin: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(40.0),
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  'This screen will contain the\n various Circles the user has.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 18,
-                  ),
+              ),
+              Container(
+                height: size.height / 4,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        child: Text('Less boring 1'),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        margin: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(40.0),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        // width: size.width / 2,
+                        child: Text('Less boring 2'),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        margin: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(40.0),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ],
+              ),
+              Container(
+                height: size.height / 4,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        child: Text('Less boring 1'),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        margin: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(40.0),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        // width: size.width / 2,
+
+                        child: Text('Mountainers', textAlign: TextAlign.center),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        margin: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(40.0),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: size.height / 4,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        child: Text('Less boring 1'),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        margin: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(40.0),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        // width: size.width / 2,
+                        child: Text('Less boring 2'),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        margin: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(40.0),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: size.height / 4,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        child: Text('Less boring 1'),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        margin: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(40.0),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        // width: size.width / 2,
+                        child: Text('Less boring 2'),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        margin: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(40.0),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: size.height / 4,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        child: Text('Less boring 1'),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        margin: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(40.0),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        // width: size.width / 2,
+                        child: Text('Less boring 2'),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        margin: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(40.0),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: size.height / 4,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        child: Text('Less boring 1'),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        margin: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(40.0),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        // width: size.width / 2,
+                        child: Text('Less boring 2'),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        margin: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(40.0),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: size.height / 4,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        child: Text('Less boring 1'),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        margin: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(40.0),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        // width: size.width / 2,
+                        child: Text('Less boring 2'),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        margin: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(40.0),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: size.height / 4,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        child: Text('Less boring 1'),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        margin: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(40.0),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        // width: size.width / 2,
+                        child: Text('Less boring 2'),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        margin: EdgeInsets.all(25.0),
+                        padding: EdgeInsets.all(40.0),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
