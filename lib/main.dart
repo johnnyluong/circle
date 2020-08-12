@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      // home: WelcomeScreen(), //TODO: Change based on logged in status
-      home: SplashScreen(auth: Auth()),
+      home: new RootScreen(auth: new Auth()),
+      // home: new RootScreen(),
     );
   }
 }

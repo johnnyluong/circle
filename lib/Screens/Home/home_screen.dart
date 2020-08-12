@@ -2,8 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:circle/Screens/Settings/settings_screen.dart';
 import 'package:circle/constants.dart';
 
-class HomeScreen extends StatelessWidget {
-  //FirstScreen();
+
+class HomeScreen extends StatefulWidget {
+  HomeScreen({this.auth, this.userId, this.logoutCallback});
+  final BaseAuth auth;
+  final VoidCallback logoutCallback;
+  final String userId;
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
+  List<Widget> _widgetOptions = <Widget>[
+    FirstScreen(),
+    CirclesScreen(),
+    RemindersScreen(),
+    // MyNetworkScreen(),
+    ContactListScreen(),
+  ];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

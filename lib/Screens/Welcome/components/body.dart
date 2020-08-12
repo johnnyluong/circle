@@ -4,6 +4,7 @@ import 'package:circle/Screens/SignUp/signup_screen.dart';
 import 'package:circle/constants.dart';
 import 'package:flutter_svg/svg.dart';
 
+<<<<<<< HEAD
 import 'package:circle/Screens/Welcome/components/background.dart';
 import 'package:circle/components/rounded_button.dart';
 
@@ -12,6 +13,17 @@ class Body extends StatelessWidget {
   Body({this.auth});
   final BaseAuth auth;
 
+=======
+import 'package:flutter_app/Screens/Welcome/components/background.dart';
+import 'package:flutter_app/components/rounded_button.dart';
+import 'package:flutter_app/Services/Authentication/authentication.dart';
+
+class Body extends StatelessWidget {
+  Body({this.auth, this.loginCallback});
+
+  final BaseAuth auth;
+  final VoidCallback loginCallback;
+>>>>>>> 1bd6907... Finish anon login.
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -42,7 +54,10 @@ class Body extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return LoginScreen();
+                      return LoginScreen(
+                        auth: auth,
+                        loginCallback: loginCallback,
+                      );
                     },
                   ),
                 );

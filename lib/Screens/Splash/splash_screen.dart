@@ -1,19 +1,9 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:flutter_app/Screens/Welcome/welcome_screen.dart';
-import 'package:flutter_app/Services/Authentication/authentication.dart';
+// import 'dart:async';
 
-enum AuthStatus {
-  NOT_DETERMINED,
-  NOT_LOGGED_IN,
-  LOGGED_IN,
-}
-
-class SplashScreen extends StatefulWidget {
-  SplashScreen({this.auth});
-  final BaseAuth auth;
-
+class SplashScreen extends StatelessWidget {
   @override
+<<<<<<< HEAD
   _SplashScreenState createState() => _SplashScreenState();
 }
 
@@ -36,6 +26,8 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
+=======
+>>>>>>> 1bd6907... Finish anon login.
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
