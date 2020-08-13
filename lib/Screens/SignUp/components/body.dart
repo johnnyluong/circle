@@ -1,5 +1,6 @@
 import 'package:circle/Screens/Home/main_screen.dart';
 import 'package:circle/Services/Authentication/authentication.dart';
+import 'package:circle/Screens/Onboarding/onboarding_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/Screens/Login/login_screen.dart';
 import 'package:circle/Screens/SignUp/components/or_divider.dart';
@@ -45,6 +46,7 @@ class Body extends StatelessWidget {
               onChanged: (value) async {
                 email = value;
               },
+
             ),
             RoundedPasswordField(
               onChanged: (value) async {
@@ -60,12 +62,14 @@ class Body extends StatelessWidget {
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
                       return MainScreen(
-                          auth: auth); //TODO: Integrate authentication
+                          auth: auth,
+                      ); //TODO: Integrate authentication
                     },
                   )
                       //TODO: Authentication and routing
                       );
                 }),
+
             SizedBox(height: size.height * 0.02),
             AlreadyHaveAnAccountCheck(
               login: false,
