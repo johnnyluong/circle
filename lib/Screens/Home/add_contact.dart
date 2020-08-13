@@ -44,8 +44,8 @@ class AddContactState extends State<AddContact> {
   }
 
   addNewContact(String name) {
-
     if (name.length > 0) {
+      widget.cloudDB.printData();
       widget.cloudDB.addContact(makeContact(name, "", "", "", "")); //TODO
     }
   }
@@ -155,4 +155,3 @@ class NewContactField extends StatelessWidget {
     );
   }
 }
-

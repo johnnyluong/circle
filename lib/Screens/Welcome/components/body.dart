@@ -69,20 +69,6 @@ class Body extends StatelessWidget {
               textColor: Colors.black,
             ),
             SizedBox(height: size.height * 0.03),
-            // anonymous sign in button
-            RoundedButton(
-              text: 'ANONYMOUS SIGN IN',
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return MainScreen();
-                    },
-                  ),
-                );
-              },
-            ),
           ],
         ),
       ),
