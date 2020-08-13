@@ -99,7 +99,6 @@ class ContactDetail extends StatefulWidget {
 class _ContactDetailState extends State<ContactDetail> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text('Contact Info'),
