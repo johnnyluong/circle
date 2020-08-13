@@ -1,9 +1,14 @@
-import 'package:circle/Screens/ContactList/contact_detail.dart';
+import 'package:circle/Screens/Home/add_contact.dart';
+import 'package:circle/Services/CloudDB/cloud_db.dart';
+import 'package:circle/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // Builds the contact list screen that displays all the users' contacts
 class ContactListScreen extends StatefulWidget {
+  final CloudDB cloudDB;
+  ContactListScreen({this.cloudDB});
+
   _ContactListState createState() => _ContactListState();
 }
 
@@ -16,39 +21,69 @@ class _ContactListState extends State<ContactListScreen> {
 
   navigateToDetail(DocumentSnapshot contact) {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (dontext) => ContactDetail(
-                  contact: contact,
-                )));
+      context,
+      MaterialPageRoute(
+        builder: (context) => ContactDetail(
+          contact: contact,
+        ),
+      ),
+    );
   }
 
   Widget build(BuildContext context) {
-    return Container(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
+        title: Text(
+          'My Network',
+          style: TextStyle(color: Colors.white),
+        ),
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.add),
+            color: Colors.white,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddContact(
+                    cloudDB: widget.cloudDB,
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+      body: Container(
         child: FutureBuilder(
-            future: getContacts(),
-            builder: (_, snapshot) {
-              // Display contact list
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: Text('Loading ... '),
-                );
-              } else {
-                return ListView.separated(
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (_, index) {
-                    return ListTile(
-                      title: Text(snapshot.data[index].data['FirstName'] +
-                          ' ' +
-                          snapshot.data[index].data['LastName']),
-                      onTap: () => navigateToDetail(snapshot.data[index]),
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) =>
-                      const Divider(),
-                );
-              }
-            }));
+          future: getContacts(),
+          builder: (_, snapshot) {
+            // Display contact list
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: Text('Loading ... '),
+              );
+            } else {
+              return ListView.separated(
+                itemCount: snapshot.data.length,
+                itemBuilder: (_, index) {
+                  return ListTile(
+                    title: Text(snapshot.data[index].data['FirstName'] +
+                        ' ' +
+                        snapshot.data[index].data['LastName']),
+                    onTap: () => navigateToDetail(snapshot.data[index]),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(),
+              );
+            }
+          },
+        ),
+      ),
+    );
   }
 }
 

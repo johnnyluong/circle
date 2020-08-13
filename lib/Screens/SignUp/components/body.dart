@@ -1,4 +1,4 @@
-import 'package:circle/Screens/Home/home_screen.dart';
+import 'package:circle/Screens/Home/main_screen.dart';
 import 'package:circle/Services/Authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/Screens/Login/login_screen.dart';
@@ -59,7 +59,7 @@ class Body extends StatelessWidget {
                   print(auth.getCurrentUser());
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
-                      return HomeScreen(
+                      return MainScreen(
                           auth: auth); //TODO: Integrate authentication
                     },
                   )

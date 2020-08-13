@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:circle/Screens/Login/login_screen.dart';
 import 'package:circle/Screens/SignUp/signup_screen.dart';
 import 'package:circle/constants.dart';
-import 'package:circle/Services/Authentication/authentication.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:circle/Screens/Welcome/components/background.dart';

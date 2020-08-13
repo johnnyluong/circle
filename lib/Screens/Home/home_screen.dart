@@ -2,43 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:circle/Screens/Settings/settings_screen.dart';
 import 'package:circle/constants.dart';
 
-
-class HomeScreen extends StatefulWidget {
-  HomeScreen({this.auth, this.userId, this.logoutCallback});
-  final BaseAuth auth;
+class HomeScreen extends StatelessWidget {
   final VoidCallback logoutCallback;
-  final String userId;
-  // final CloudDB cloudDB;
 
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int _currentIndex = 0;
-
-  List<Widget> _widgetOptions;
-  CloudDB cloudDB;
-  @override
-  void initState() {
-    super.initState();
-    cloudDB = CloudDB.fromUID(widget.userId);
-    _widgetOptions = <Widget>[
-      FirstScreen(cloudDB: cloudDB),
-      CirclesScreen(),
-      RemindersScreen(),
-      // MyNetworkScreen(),
-      ContactListScreen(),
-    ];
-  }
-
+  const HomeScreen({Key key, this.logoutCallback}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text('Home', style: TextStyle(color: Colors.white),),
+        title: Text(
+          'Home',
+          style: TextStyle(color: Colors.white),
+        ),
         automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
@@ -47,7 +24,11 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SettingsScreen()),
+                MaterialPageRoute(
+                  builder: (context) => SettingsScreen(
+                    logoutCallback: this.logoutCallback,
+                  ),
+                ),
               );
             },
           ),

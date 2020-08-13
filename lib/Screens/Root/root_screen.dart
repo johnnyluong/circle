@@ -1,4 +1,4 @@
-import 'package:circle/Screens/Home/home_screen.dart';
+import 'package:circle/Screens/Home/main_screen.dart';
 import 'package:circle/Screens/Splash/splash_screen.dart';
 import 'package:circle/Screens/Welcome/welcome_screen.dart';
 import 'package:circle/Services/Authentication/authentication.dart';
@@ -55,6 +55,7 @@ class _RootScreenState extends State<RootScreen> {
       authStatus = AuthStatus.NOT_LOGGED_IN;
       _userId = "";
     });
+    Navigator.pop(context);
   }
 
   @override
@@ -72,7 +73,7 @@ class _RootScreenState extends State<RootScreen> {
         break;
       case AuthStatus.LOGGED_IN:
         if (_userId.length > 0 && _userId != null) {
-          return new HomeScreen(
+          return new MainScreen(
             userId: _userId,
             auth: widget.auth,
             logoutCallback: logoutCallback,

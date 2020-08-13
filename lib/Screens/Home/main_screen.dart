@@ -1,24 +1,44 @@
-import 'package:flutter/material.dart';
 import 'package:circle/Screens/Circles/circles_screen.dart';
-import 'package:circle/Screens/Circles/my_network_screen.dart';
+import 'package:circle/Screens/ContactList/contact_list_screen.dart';
+import 'package:circle/Screens/Home/home_screen.dart';
 import 'package:circle/Screens/Reminders/reminders_screen.dart';
+import 'package:circle/Services/Authentication/authentication.dart';
+import 'package:circle/Services/CloudDB/cloud_db.dart';
+import 'package:flutter/material.dart';
 import 'package:circle/constants.dart';
 
-import 'home_screen.dart';
-
 class MainScreen extends StatefulWidget {
+  MainScreen({this.auth, this.userId, this.logoutCallback});
+  final BaseAuth auth;
+  final VoidCallback logoutCallback;
+  final String userId;
+
   @override
-  _MainScreenState createState() => _MainScreenState();
+  _MainScreenState createState() => _MainScreenState(auth: auth);
 }
 
 class _MainScreenState extends State<MainScreen> {
+  _MainScreenState({this.auth});
+  final Auth auth;
+
   int _currentIndex = 0;
-  List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
-    CirclesScreen(),
-    RemindersScreen(),
-    MyNetworkScreen(),
-  ];
+
+  List<Widget> _widgetOptions;
+  CloudDB cloudDB;
+  @override
+  void initState() {
+    super.initState();
+    cloudDB = CloudDB.fromUID(widget.userId);
+
+
+    _widgetOptions = <Widget>[
+      HomeScreen(logoutCallback: widget.logoutCallback),
+      CirclesScreen(),
+      RemindersScreen(),
+      ContactListScreen(cloudDB: cloudDB),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

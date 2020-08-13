@@ -9,6 +9,16 @@ class CloudDB {
       : this(uid, Firestore.instance.collection('users').document(uid));
 
   Future<DocumentReference> addContact(Map<String, dynamic> newContact) async {
-    return await userDoc.collection("contacts").add(newContact);
+    try {
+      return await userDoc.collection("contacts").add(newContact);
+    } catch (e) {
+      print("Add Contact Failed ... See clouDB.dart");
+      return null;
+    }
+  }
+
+  void printData() {
+    print("USER ID FROM CLOUD_DB: " + this.uid);
+    print(this.userDoc);
   }
 }

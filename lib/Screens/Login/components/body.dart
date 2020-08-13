@@ -1,6 +1,6 @@
 import 'package:circle/Services/Authentication/authentication.dart';
+import 'package:circle/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:circle/Screens/Home/main_screen.dart';
 import 'package:circle/Screens/SignUp/signup_screen.dart';
 import 'package:circle/components/already_have_an_account.dart';
 import 'package:circle/components/rounded_button.dart';
@@ -149,6 +149,19 @@ class _BodyState extends State<Body> {
                   ),
                 );
               },
+            ),
+            SizedBox(height: widget.size.height * 0.03),
+            GestureDetector(
+              onTap: () {
+                validateAndSubmit(); //
+              },
+              child: Text(
+                "Tap Here to Login Anonymously",
+                style: TextStyle(
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ],
         ),
