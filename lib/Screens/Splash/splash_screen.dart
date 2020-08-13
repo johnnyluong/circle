@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:circle/Screens/Welcome/welcome_screen.dart';
 import 'package:circle/Services/Authentication/authentication.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 enum AuthStatus {

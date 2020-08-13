@@ -1,3 +1,4 @@
+import 'package:circle/Screens/ContactList/contact_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
