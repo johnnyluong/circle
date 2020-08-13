@@ -3,14 +3,19 @@ import 'package:circle/Screens/Settings/settings_screen.dart';
 import 'package:circle/constants.dart';
 
 class HomeScreen extends StatelessWidget {
-  //FirstScreen();
+  final VoidCallback logoutCallback;
+
+  const HomeScreen({Key key, this.logoutCallback}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text('Home', style: TextStyle(color: Colors.white),),
+        title: Text(
+          'Home',
+          style: TextStyle(color: Colors.white),
+        ),
         automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
@@ -19,7 +24,11 @@ class HomeScreen extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SettingsScreen()),
+                MaterialPageRoute(
+                  builder: (context) => SettingsScreen(
+                    logoutCallback: this.logoutCallback,
+                  ),
+                ),
               );
             },
           ),

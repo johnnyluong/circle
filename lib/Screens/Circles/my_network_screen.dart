@@ -1,8 +1,13 @@
+import 'package:circle/Services/Authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/Screens/Home/add_contact.dart';
 import 'package:circle/constants.dart';
 
 class MyNetworkScreen extends StatelessWidget {
+  //modified constructor
+  MyNetworkScreen({this.auth});
+  final BaseAuth auth;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

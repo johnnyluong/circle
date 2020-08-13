@@ -1,4 +1,5 @@
-import 'package:circle/Screens/Onboarding/onboarding_screens.dart';
+import 'package:circle/Screens/Home/main_screen.dart';
+import 'package:circle/Services/Authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/Screens/Login/login_screen.dart';
 import 'package:circle/Screens/SignUp/components/or_divider.dart';
@@ -11,9 +12,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:circle/Screens/SignUp/components/background.dart';
 
 class Body extends StatelessWidget {
-  const Body({
-    Key key,
-  }) : super(key: key);
+  //modified constructor
+  Body({Key key, this.auth}) : super(key: key);
+
+  final BaseAuth auth;
+  String email;
+  String password;
 
   @override
   Widget build(BuildContext context) {
@@ -38,24 +42,33 @@ class Body extends StatelessWidget {
             SizedBox(height: size.height * 0.02),
             RoundedInputField(
               text: "Your Email",
-              onChanged: (value) {},
+              onChanged: (value) async {
+                email = value;
+              },
+
             ),
             RoundedPasswordField(
-              onChanged: (value) {},
+              onChanged: (value) async {
+                password = value;
+              },
             ),
             RoundedButton(
-              text: "SIGN UP",
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
+                text: "SIGN UP",
+                // User Authentication
+                press: () async {
+                  dynamic result = await auth.signUp(email, password);
+                  print(auth.getCurrentUser());
+                  Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
-                      return Onboarding(); //TODO: Integrate authentication
+                      return MainScreen(
+                          auth: auth,
+                      ); //TODO: Integrate authentication
                     },
-                  ),
-                );
-              }, //TODO: Authentication and routing
-            ),
+                  )
+                      //TODO: Authentication and routing
+                      );
+                }),
+
             SizedBox(height: size.height * 0.02),
             AlreadyHaveAnAccountCheck(
               login: false,

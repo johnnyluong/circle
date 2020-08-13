@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:circle/Services/CloudDB/cloud_db.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:circle/components/rounded_button.dart';
@@ -8,6 +9,8 @@ import 'package:circle/constants.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddContact extends StatefulWidget {
+  final CloudDB cloudDB;
+  AddContact({this.cloudDB});
   State<StatefulWidget> createState() {
     return AddContactState();
   }
@@ -16,6 +19,7 @@ class AddContact extends StatefulWidget {
 class AddContactState extends State<AddContact> {
   File _image;
   final _picker = ImagePicker();
+  final _textEditingController = TextEditingController();
 
   // Get image from photo
   Future _getImage() async {
@@ -26,6 +30,24 @@ class AddContactState extends State<AddContact> {
     setState(() {
       _image = image;
     });
+  }
+
+  Map<String, dynamic> makeContact(String firstName, String lastName,
+      String phoneNumber, String email, String tag) {
+    Map<String, dynamic> newContact = Map<String, dynamic>();
+    newContact['firstName'] = firstName;
+    newContact['lastName'] = lastName;
+    newContact['phoneNumber'] = phoneNumber;
+    newContact['email'] = email;
+    newContact['tag'] = tag;
+    return newContact;
+  }
+
+  addNewContact(String name) {
+    if (name.length > 0) {
+      widget.cloudDB.printData();
+      widget.cloudDB.addContact(makeContact(name, "", "", "", "")); //TODO
+    }
   }
 
   @override
@@ -44,18 +66,6 @@ class AddContactState extends State<AddContact> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            // Page description
-            Container(
-              height: 100,
-              alignment: Alignment.bottomCenter,
-              child: Text(
-                'Add New Contact',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-            // Space between description and image
-            Container(height: 20),
             // Upload image
             Container(
               height: 100,
@@ -78,6 +88,7 @@ class AddContactState extends State<AddContact> {
                     Flexible(
                       flex: 1,
                       child: TextField(
+                        controller: _textEditingController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: 'First Name'),
@@ -109,7 +120,9 @@ class AddContactState extends State<AddContact> {
               text: "ADD CONTACT",
               color: kPrimaryColor,
               textColor: Colors.white,
-              press: () {},
+              press: () async {
+                addNewContact(_textEditingController.text.toString());
+              },
             ),
           ],
         ),
