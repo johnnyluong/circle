@@ -30,7 +30,6 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
     cloudDB = CloudDB.fromUID(widget.userId);
 
-
     _widgetOptions = <Widget>[
       HomeScreen(logoutCallback: widget.logoutCallback),
       CirclesScreen(),

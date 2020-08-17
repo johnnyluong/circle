@@ -14,9 +14,12 @@ class ContactListScreen extends StatefulWidget {
 
 class _ContactListState extends State<ContactListScreen> {
   Future getContacts() async {
-    var firestore = Firestore.instance;
-    QuerySnapshot qn = await firestore.collection('contacts').getDocuments();
-    return qn.documents;
+    //TODO: add listener to listen to changes in contacts lists
+
+    // var firestore = Firestore.instance;
+    // QuerySnapshot qn = await firestore.collection('contacts').getDocuments();
+    // return qn.documents;
+    return widget.cloudDB.getAllContacts();
   }
 
   navigateToDetail(DocumentSnapshot contact) {
@@ -70,9 +73,9 @@ class _ContactListState extends State<ContactListScreen> {
                 itemCount: snapshot.data.length,
                 itemBuilder: (_, index) {
                   return ListTile(
-                    title: Text(snapshot.data[index].data['FirstName'] +
+                    title: Text(snapshot.data[index].data['firstName'] +
                         ' ' +
-                        snapshot.data[index].data['LastName']),
+                        snapshot.data[index].data['lastName']),
                     onTap: () => navigateToDetail(snapshot.data[index]),
                   );
                 },
