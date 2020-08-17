@@ -1,3 +1,4 @@
+import 'package:circle/Services/Authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/Screens/Login/login_screen.dart';
 import 'package:circle/Screens/SignUp/signup_screen.dart';
@@ -9,6 +10,10 @@ import 'package:circle/components/rounded_button.dart';
 import 'package:circle/Screens/Home/main_screen.dart';
 
 class Body extends StatelessWidget {
+  Body({this.auth, this.loginCallback});
+
+  final BaseAuth auth;
+  final VoidCallback loginCallback;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -39,7 +44,10 @@ class Body extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return LoginScreen();
+                      return LoginScreen(
+                        auth: auth,
+                        loginCallback: loginCallback,
+                      );
                     },
                   ),
                 );
@@ -52,7 +60,7 @@ class Body extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return SignupScreen();
+                      return SignupScreen(auth: auth);
                     },
                   ),
                 );
@@ -61,20 +69,6 @@ class Body extends StatelessWidget {
               textColor: Colors.black,
             ),
             SizedBox(height: size.height * 0.03),
-            // anonymous sign in button
-            RoundedButton(
-              text: 'ANONYMOUS SIGN IN',
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return MainScreen();
-                    },
-                  ),
-                );
-              },
-            ),
           ],
         ),
       ),

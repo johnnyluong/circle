@@ -68,11 +68,10 @@
               "client_type": 3
             },
             {
-              "client_id": "171948444728-2h153ekejjk0qreoqttujahidcvhhfhe.apps.googleusercontent.com",
+              "client_id": "171948444728-tjbun21onni2959nhorrppbbeejjpg3o.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.testapp",
-                "app_store_id": "20202020"
+                "bundle_id": "com.circle"
               }
             }
           ]

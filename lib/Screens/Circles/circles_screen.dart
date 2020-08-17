@@ -3,7 +3,6 @@ import 'package:circle/components/rounded_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 
 class CirclesScreen extends StatefulWidget {
   @override
