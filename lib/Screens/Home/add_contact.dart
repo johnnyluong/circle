@@ -45,7 +45,7 @@ class AddContactState extends State<AddContact> {
 
   addNewContact(String name) {
     if (name.length > 0) {
-      widget.cloudDB.addContact(makeContact(name, "evan", "", "", "")); //TODO
+      widget.cloudDB.addContact(makeContact(name, "", "", "", "")); //TODO
     }
   }
 
