@@ -1,12 +1,7 @@
-import 'package:circle/Services/Authentication/authentication.dart';
 import 'package:flutter/material.dart';
-import 'package:circle/Screens/Home/add_contact.dart';
 import 'package:circle/constants.dart';
 
-class MyNetworkScreen extends StatelessWidget {
-  //modified constructor
-  MyNetworkScreen({this.auth});
-  final BaseAuth auth;
+class ResourcesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -14,20 +9,11 @@ class MyNetworkScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text('My Network', style: TextStyle(color: primaryTextColor),),
+        title: Text(
+          'Resources',
+          style: TextStyle(color: primaryTextColor),
+        ),
         automaticallyImplyLeading: false,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.add),
-            color: primaryIconColor,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AddContact()),
-              );
-            },
-          ),
-        ],
       ),
       body: Container(
         width: double.infinity,
@@ -40,14 +26,14 @@ class MyNetworkScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'My Network',
+                  'Resources',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                   ),
                 ),
                 Text(
-                  'This screen will contain the list\nof professional connections\nthe user has.',
+                  'Resources screen of the Circle App.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,

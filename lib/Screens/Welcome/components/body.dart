@@ -39,6 +39,7 @@ class Body extends StatelessWidget {
             SizedBox(height: size.height * 0.03),
             RoundedButton(
               text: 'LOGIN',
+              color: kPrimaryLightColor,
               press: () {
                 Navigator.push(
                   context,
@@ -66,7 +67,7 @@ class Body extends StatelessWidget {
                 );
               },
               color: kPrimaryLightColor,
-              textColor: Colors.black,
+              textColor: primaryTextColor,
             ),
             SizedBox(height: size.height * 0.03),
           ],

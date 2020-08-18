@@ -23,23 +23,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: Center(
         child: Column(
           children: <Widget>[
-            SizedBox(height: size.height * 0.07),
+            SizedBox(height: size.height * 0.05),
             RoundedButton(
               text: 'Change Password',
-              color: kPrimaryColor,
-              textColor: Colors.white,
+              color: kPrimaryLightColor,
+              textColor: primaryTextColor,
               press: () {},
             ),
             RoundedButton(
               text: 'Notification Settings',
-              color: kPrimaryColor,
-              textColor: Colors.white,
+              color: kPrimaryLightColor,
+              textColor: primaryTextColor,
               press: () {},
             ),
             RoundedButton(
               text: 'Logout',
-              color: kPrimaryColor,
-              textColor: Colors.white,
+              color: kPrimaryLightColor,
+              textColor: primaryTextColor,
               press: () {
                 widget.logoutCallback();
               },

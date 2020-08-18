@@ -28,7 +28,7 @@ class SocialIcon extends StatelessWidget {
         ),
         child: SvgPicture.asset(
           iconSrc,
-          color: kPrimaryColor,
+          color: kPrimaryLightColor,
           height: 20,
           width: 20,
         ),

@@ -55,10 +55,10 @@ class AddContactState extends State<AddContact> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: primaryIconColor),
         title: Text(
           'Add New Contact',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: primaryTextColor),
         ),
       ),
       resizeToAvoidBottomPadding: false,

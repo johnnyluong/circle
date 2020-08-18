@@ -24,13 +24,13 @@ class _CirclesScreenState extends State<CirclesScreen> {
         backgroundColor: kPrimaryColor,
         title: Text(
           'My Circles',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: primaryTextColor),
         ),
         automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add),
-            color: Colors.white,
+            color: primaryIconColor,
             onPressed: () => _onButtonPressed(),
           ),
         ],
