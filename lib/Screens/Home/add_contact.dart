@@ -117,8 +117,8 @@ class AddContactState extends State<AddContact> {
             // Uplpad button
             RoundedButton(
               text: "ADD CONTACT",
-              color: kPrimaryColor,
-              textColor: Colors.white,
+              color: kPrimaryLightColor,
+              textColor: primaryTextColor,
               press: () async {
                 addNewContact(_textEditingController.text.toString());
               },

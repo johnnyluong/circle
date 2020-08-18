@@ -25,12 +25,12 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
           hintText: "Password",
           icon: Icon(
             Icons.lock,
-            color: kPrimaryColor,
+            color: kPrimaryLightColor,
           ),
           suffixIcon: IconButton(
             icon: Icon(
               Icons.visibility,
-              color: kPrimaryColor,
+              color: kPrimaryLightColor,
             ),
             onPressed: () {
               setState(() {

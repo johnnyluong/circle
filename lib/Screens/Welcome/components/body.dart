@@ -7,7 +7,6 @@ import 'package:flutter_svg/svg.dart';
 
 import 'package:circle/Screens/Welcome/components/background.dart';
 import 'package:circle/components/rounded_button.dart';
-import 'package:circle/Screens/Home/main_screen.dart';
 
 class Body extends StatelessWidget {
   Body({this.auth, this.loginCallback});
@@ -53,6 +52,8 @@ class Body extends StatelessWidget {
                   ),
                 );
               },
+              color: kPrimaryLightColor,
+              textColor: Colors.black,
             ),
             RoundedButton(
               text: 'SIGN UP',

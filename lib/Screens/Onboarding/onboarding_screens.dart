@@ -1,6 +1,7 @@
 import 'package:circle/Screens/Home/main_screen.dart';
 import 'package:circle/Screens/Onboarding/onboarding_data.dart';
 import 'package:circle/Screens/Onboarding/slider_tile.dart';
+import 'package:circle/constants.dart';
 import 'package:flutter/material.dart';
 
 class Onboarding extends StatefulWidget {
@@ -26,7 +27,7 @@ class _OnboardingState extends State<Onboarding> {
       width: isCurrentPage ? 10.0 : 6.0,
       decoration: BoxDecoration(
         color: isCurrentPage ? Colors.grey : Colors.grey[300],
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(primaryBorderRadius),
       ),
     );
   }

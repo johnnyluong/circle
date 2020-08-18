@@ -18,7 +18,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text('Circle Settings'),
+        title: Text('Settings'),
       ),
       body: Center(
         child: Column(

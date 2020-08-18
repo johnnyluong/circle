@@ -55,6 +55,7 @@ class _RootScreenState extends State<RootScreen> {
       authStatus = AuthStatus.NOT_LOGGED_IN;
       _userId = "";
     });
+    //Navigator.pop(context);
   }
 
   @override
