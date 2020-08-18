@@ -1,4 +1,4 @@
-import 'package:circle/Screens/Home/add_contact.dart';
+import 'package:circle/Screens/AddContactInfo/add_info.dart';
 import 'package:circle/Services/CloudDB/cloud_db.dart';
 import 'package:circle/constants.dart';
 import 'package:flutter/material.dart';
@@ -39,18 +39,18 @@ class _ContactListState extends State<ContactListScreen> {
         backgroundColor: kPrimaryColor,
         title: Text(
           'My Network',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: primaryTextColor),
         ),
         automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add),
-            color: Colors.white,
+            color: primaryIconColor,
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddContact(
+                  builder: (context) => AddInfo(
                     cloudDB: widget.cloudDB,
                   ),
                 ),
@@ -74,7 +74,7 @@ class _ContactListState extends State<ContactListScreen> {
                 itemBuilder: (_, index) {
                   return ListTile(
                     title: Text(snapshot.data[index].data['firstName'] +
-                        ' ' +
+                        " " +
                         snapshot.data[index].data['lastName']),
                     onTap: () => navigateToDetail(snapshot.data[index]),
                   );
@@ -145,7 +145,7 @@ class _ContactDetailState extends State<ContactDetail> {
                 flex: 1,
                 child: Text(
                   widget.contact.data['Tags'][0],
-                  style: TextStyle(backgroundColor: Colors.purple[100]),
+                  style: TextStyle(backgroundColor: primaryTextColor),
                 ),
               ),
               SizedBox(
@@ -178,6 +178,7 @@ class _ContactDetailState extends State<ContactDetail> {
               'Contact Info',
               style: TextStyle(
                 fontSize: 20,
+                color: primaryTextColor
               ),
             ),
           ),

@@ -55,10 +55,10 @@ class AddContactState extends State<AddContact> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: primaryIconColor),
         title: Text(
           'Add New Contact',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: primaryTextColor),
         ),
       ),
       resizeToAvoidBottomPadding: false,
@@ -117,8 +117,8 @@ class AddContactState extends State<AddContact> {
             // Uplpad button
             RoundedButton(
               text: "ADD CONTACT",
-              color: kPrimaryColor,
-              textColor: Colors.white,
+              color: kPrimaryLightColor,
+              textColor: primaryTextColor,
               press: () async {
                 addNewContact(_textEditingController.text.toString());
               },

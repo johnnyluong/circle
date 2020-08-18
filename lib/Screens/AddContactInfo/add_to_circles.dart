@@ -1,12 +1,15 @@
-import 'package:circle/Services/Authentication/authentication.dart';
+import 'package:circle/Screens/AddContactInfo/add_reminders.dart';
+import 'package:circle/components/floating_action_button.dart';
 import 'package:flutter/material.dart';
-import 'package:circle/Screens/Home/add_contact.dart';
 import 'package:circle/constants.dart';
 
-class MyNetworkScreen extends StatelessWidget {
-  //modified constructor
-  MyNetworkScreen({this.auth});
-  final BaseAuth auth;
+class AddToCirclesScreen extends StatefulWidget {
+
+  @override
+  _AddToCirclesScreenState createState() => _AddToCirclesScreenState();
+}
+
+class _AddToCirclesScreenState extends State<AddToCirclesScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -14,20 +17,10 @@ class MyNetworkScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text('My Network', style: TextStyle(color: primaryTextColor),),
-        automaticallyImplyLeading: false,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.add),
-            color: primaryIconColor,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AddContact()),
-              );
-            },
-          ),
-        ],
+        title: Text(
+          'Add Contacts to Circles',
+          style: TextStyle(color: primaryTextColor),
+        ),
       ),
       body: Container(
         width: double.infinity,
@@ -40,14 +33,14 @@ class MyNetworkScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'My Network',
+                  'TEMP',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                   ),
                 ),
                 Text(
-                  'This screen will contain the list\nof professional connections\nthe user has.',
+                  'Add contacts to circles here',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
@@ -59,6 +52,21 @@ class MyNetworkScreen extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: CustomFloatingActionButton(
+        color: kPrimaryDarkColor,
+        press: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return AddRemindersScreen();
+              },
+            ),
+          );
+        }, //Handle case of multiple entries vs single
+        text: "NEXT: SET REMINDERS",
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

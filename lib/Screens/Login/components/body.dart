@@ -104,8 +104,7 @@ class _BodyState extends State<Body> {
                 fontSize: 24,
               ),
             ),
-            SizedBox(
-                height: widget.size.height * 0.03), //Spacing betwen widgets
+            SizedBox(height: widget.size.height * 0.03), //Spacing betwen widgets
             SvgPicture.asset(
               "assets/icons/login.svg",
               height: widget.size.height * 0.35,
@@ -121,6 +120,8 @@ class _BodyState extends State<Body> {
             ),
             RoundedButton(
               text: "LOGIN",
+              color: kPrimaryLightColor,
+              textColor: primaryTextColor,
               press: () {
                 validateAndSubmit();
                 // while (_isLoading);
@@ -156,9 +157,9 @@ class _BodyState extends State<Body> {
                 validateAndSubmit(); //
               },
               child: Text(
-                "Tap Here to Login Anonymously",
+                "Tap Here for Guest Login",
                 style: TextStyle(
-                  color: kPrimaryColor,
+                  color: primaryTextColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),

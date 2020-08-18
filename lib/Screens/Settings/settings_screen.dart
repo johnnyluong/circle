@@ -18,28 +18,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text('Circle Settings'),
+        title: Text('Settings'),
       ),
       body: Center(
         child: Column(
           children: <Widget>[
-            SizedBox(height: size.height * 0.07),
+            SizedBox(height: size.height * 0.05),
             RoundedButton(
               text: 'Change Password',
-              color: kPrimaryColor,
-              textColor: Colors.white,
+              color: kPrimaryDarkColor,
+              textColor: kPrimaryColor,
               press: () {},
             ),
             RoundedButton(
               text: 'Notification Settings',
-              color: kPrimaryColor,
-              textColor: Colors.white,
+              color: kPrimaryDarkColor,
+              textColor: kPrimaryColor,
               press: () {},
             ),
             RoundedButton(
               text: 'Logout',
-              color: kPrimaryColor,
-              textColor: Colors.white,
+              color: kPrimaryDarkColor,
+              textColor: kPrimaryColor,
               press: () {
                 widget.logoutCallback();
               },
