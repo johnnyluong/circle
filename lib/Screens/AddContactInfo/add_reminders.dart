@@ -1,4 +1,3 @@
-import 'package:circle/Screens/Home/main_screen.dart';
 import 'package:circle/components/floating_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/constants.dart';

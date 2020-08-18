@@ -52,7 +52,6 @@ class Body extends StatelessWidget {
                   ),
                 );
               },
-              color: kPrimaryLightColor,
               textColor: Colors.black,
             ),
             RoundedButton(

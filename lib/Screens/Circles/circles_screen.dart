@@ -23,7 +23,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         title: Text(
-          'My Circles',
+          'Circles',
           style: TextStyle(color: primaryTextColor),
         ),
         automaticallyImplyLeading: false,
@@ -369,7 +369,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                 vertical: size.height * 0.1,
               ),
               decoration: BoxDecoration(
-                color: kPrimaryColor,
+                color: kPrimaryLightColor,
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(20),
               ),
@@ -390,7 +390,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
             ),
             RoundedButton(
               text: 'Create Circle',
-              color: kPrimaryColor,
+              color: kPrimaryDarkColor,
               textColor: Colors.white,
               press: () {},
             ),

@@ -21,7 +21,7 @@ class RoundedButton extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 8),
       width: size.width * 0.7,
       child: RaisedButton(
-        elevation: 3.0,
+        elevation: 6.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(primaryBorderRadius)
         ),

@@ -74,7 +74,7 @@ class _ContactListState extends State<ContactListScreen> {
                 itemBuilder: (_, index) {
                   return ListTile(
                     title: Text(snapshot.data[index].data['firstName'] +
-                        ' ' +
+                        " " +
                         snapshot.data[index].data['lastName']),
                     onTap: () => navigateToDetail(snapshot.data[index]),
                   );

@@ -1,12 +1,10 @@
 import 'dart:ui';
 
-import 'package:circle/Screens/AddContactInfo/add_to_circles.dart';
 import 'package:circle/Services/CloudDB/cloud_db.dart';
 import 'package:circle/components/floating_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:circle/constants.dart';
-import 'package:image_picker/image_picker.dart';
 
 class AddInfo extends StatefulWidget {
   final CloudDB cloudDB;
@@ -17,31 +15,54 @@ class AddInfo extends StatefulWidget {
 }
 
 class AddInfoState extends State<AddInfo> {
-  final _picker = ImagePicker();
-  final _textEditingController = TextEditingController();
-  bool _isButtonEnabled = true;
+  final _formKey = GlobalKey<FormState>();
 
-  _toggleButton() {
-    setState(() {
-      _isButtonEnabled = !_isButtonEnabled;
-    });
-  }
+  String _firstName;
+  String _lastName;
+  String _profession;
+  String _email;
+  String _phoneNumber;
+
+  String _errorMessage;
 
   Map<String, dynamic> makeContact(String firstName, String lastName,
-      String phoneNumber, String email, String tag) {
+      String profession, String email, String phoneNumber) {
     Map<String, dynamic> newContact = Map<String, dynamic>();
     newContact['firstName'] = firstName;
     newContact['lastName'] = lastName;
     newContact['phoneNumber'] = phoneNumber;
     newContact['email'] = email;
-    newContact['tag'] = tag;
+    newContact['profession'] = profession;
     return newContact;
   }
 
-  addNewContact(String name) {
-    if (name.length > 0) {
-      widget.cloudDB.addContact(makeContact(name, "", "", "", "")); //TODO
+  void addNewContact() {
+    print(_firstName);
+    print(_lastName);
+    print(_profession);
+    widget.cloudDB.addContact(
+        makeContact(_firstName, _lastName, _profession, _email, _phoneNumber));
+  }
+
+  // Check if form is valid before perform login or signup
+  bool validateAndSave() {
+    final form = _formKey.currentState;
+    if (form.validate()) {
+      form.save();
+      return true;
     }
+    return false;
+  }
+
+  void validateAndSubmit() async {
+    if (validateAndSave()) {
+      addNewContact();
+    }
+  }
+
+  void resetForm() {
+    _formKey.currentState.reset();
+    _errorMessage = "";
   }
 
   @override
@@ -56,69 +77,176 @@ class AddInfoState extends State<AddInfo> {
           style: TextStyle(color: primaryTextColor),
         ),
       ),
-      body: Container(
-        width: double.infinity,
-        height: size.height,
-        child: Stack(
-          alignment: Alignment.center, //Controls vertical center
+      body: SingleChildScrollView(
+        child: Column(
           children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(height: size.height * 0.1),
-                Text(
-                  'Who would you like to join\nyour journey?',
-                  style: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 26,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
+            SizedBox(height: size.height * 0.05),
+            Text(
+              'Who would you like to join\nyour journey?',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+              ),
+              textAlign: TextAlign.center,
             ),
+            _showForm()
           ],
         ),
       ),
       floatingActionButton: CustomFloatingActionButton(
-        enabled: _isButtonEnabled,
         color: kPrimaryDarkColor,
         press: () {
+          validateAndSubmit();
+          /*
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {
-                return AddToCirclesScreen();
+                //return AddToCirclesScreen();
               },
             ),
           );
+          */
         }, //Handle case of multiple entries vs single
         text: "NEXT: ADD TO CIRCLES",
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
-}
 
-class NewContactField extends StatelessWidget {
-  final String hintText;
+  Widget _showForm() {
+    return new Container(
+        padding: EdgeInsets.all(16.0),
+        child: new Form(
+          key: _formKey,
+          child: new ListView(
+            shrinkWrap: true,
+            children: <Widget>[
+              showNameInput(),
+              showProfessionInput(),
+              showEmailInput(),
+              showPhoneInput(),
+            ],
+          ),
+        ));
+  }
 
-  const NewContactField({
-    Key key,
-    this.hintText,
-  }) : super(key: key);
+  Widget showNameInput() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          showFirstNameInput(),
+          Container(width: 15), //Spacing between fields
+          showLastNameInput(),
+        ],
+      ),
+    );
+  }
 
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 8), //space around text
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-      width: size.width * 0.95,
-      child: TextField(
+  Widget showFirstNameInput() {
+    return Flexible(
+      child: TextFormField(
+        maxLines: 1,
+        keyboardType: TextInputType.name,
+        autofocus: false,
         decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          hintText: hintText,
+            hintText: 'First Name *',
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: kPrimaryDarkColor),
+            ),
+            icon: Icon(
+              Icons.person,
+              color: primaryIconColor,
+            )),
+        validator: (value) => value.isEmpty ? 'First Name required' : null,
+        onSaved: (value) => _firstName = value.trim(),
+      ),
+    );
+  }
+
+  Widget showLastNameInput() {
+    return Flexible(
+      child: TextFormField(
+        maxLines: 1,
+        keyboardType: TextInputType.name,
+        autofocus: false,
+        decoration: InputDecoration(
+          hintText: 'Last Name *',
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: kPrimaryDarkColor),
+          ),
         ),
+        validator: (value) => value.isEmpty ? 'Last Name required' : null,
+        onSaved: (value) => _lastName = value.trim(),
+      ),
+    );
+  }
+
+  Widget showProfessionInput() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+      child: TextFormField(
+        maxLines: 1,
+        keyboardType: TextInputType.name,
+        autofocus: false,
+        decoration: InputDecoration(
+          hintText: 'Profession *',
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: kPrimaryDarkColor),
+          ),
+          icon: Icon(
+            Icons.work,
+            color: primaryIconColor,
+          ),
+        ),
+        validator: (value) => value.isEmpty ? 'Must specify profession' : null,
+        onSaved: (value) => _profession = value.trim(),
+      ),
+    );
+  }
+
+  Widget showEmailInput() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+      child: TextFormField(
+        maxLines: 1,
+        keyboardType: TextInputType.emailAddress,
+        autofocus: false,
+        decoration: InputDecoration(
+            hintText: 'Email',
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: kPrimaryDarkColor),
+            ),
+            icon: Icon(
+              Icons.mail,
+              color: primaryIconColor,
+            )),
+        //validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
+        onSaved: (value) => _email = value.trim(),
+      ),
+    );
+  }
+
+  Widget showPhoneInput() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+      child: TextFormField(
+        maxLines: 1,
+        keyboardType: TextInputType.phone,
+        autofocus: false,
+        decoration: InputDecoration(
+            hintText: 'Phone Number',
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: kPrimaryDarkColor),
+            ),
+            icon: Icon(
+              Icons.phone,
+              color: primaryIconColor,
+            )),
+        //validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
+        onSaved: (value) => _phoneNumber = value.trim(),
       ),
     );
   }
