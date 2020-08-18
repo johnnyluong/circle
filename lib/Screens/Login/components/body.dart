@@ -1,5 +1,7 @@
 import 'package:circle/Services/Authentication/authentication.dart';
+import 'package:circle/components/text_field_container.dart';
 import 'package:circle/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/Screens/SignUp/signup_screen.dart';
 import 'package:circle/components/already_have_an_account.dart';
@@ -7,7 +9,9 @@ import 'package:circle/components/rounded_button.dart';
 import 'package:circle/components/rounded_input_field.dart';
 import 'package:circle/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:circle/Screens/Login/components/background.dart';
+import 'package:circle/components/text_field_line.dart';
+// import 'package:flutter/src/widgets/media_query.dart';
+// import 'package:circle/Screens/Login/components/background.dart';
 
 class Body extends StatefulWidget {
   const Body({
@@ -90,35 +94,110 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    return Background(
-      size: widget.size,
-      child: SingleChildScrollView(
+    return Scaffold(
+      body: SingleChildScrollView(
         //This fixes pixel overflow issue
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            SizedBox(
+              height: widget.size.height * 0.2,
+            ),
             Text(
-              'Login',
+              'Circle',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
               ),
             ),
             SizedBox(
-                height: widget.size.height * 0.03), //Spacing betwen widgets
-            SvgPicture.asset(
-              "assets/icons/login.svg",
-              height: widget.size.height * 0.35,
+              height: widget.size.height * 0.2,
             ),
-            SizedBox(height: widget.size.height * 0.03),
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(
+                left: 30,
+                right: 30,
+                bottom: 10,
+              ),
+              child: Text(
+                'Welcome',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+
+            TextFieldLine(
+              hintText: "Email",
+              icon: Icons.email,
+              onChanged: (value) async {
+                _email = value;
+              },
+            ),
+
+            // onChanged: onChanged,
+
             RoundedInputField(
               text: "Your Email",
-              icon: Icons.person,
-              onChanged: (value) {},
+              onChanged: (value) async {
+                // email = value;
+              },
             ),
-            RoundedPasswordField(
-              onChanged: (value) {},
+
+            Container(
+              padding: EdgeInsets.only(
+                left: 30,
+                right: 30,
+              ),
+              child: TextField(
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.email),
+                  hintText: 'Email',
+                ),
+              ),
             ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              padding: EdgeInsets.only(
+                left: 30,
+                right: 30,
+              ),
+              child: TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.lock),
+                  hintText: 'Password',
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            GestureDetector(
+              onTap: () {}, // TODO: Reset password
+              child: Container(
+                alignment: Alignment.centerRight,
+                padding: EdgeInsets.only(
+                  left: 30,
+                  right: 30,
+                  bottom: 10,
+                ),
+                child: Text('Forget Password?'),
+              ),
+            ),
+
+            // RoundedInputField(
+            // text: "Your Email",
+            // icon: Icons.person,
+            // onChanged: (value) {},
+            // ),
+            // RoundedPasswordField(
+            // onChanged: (value) {},
+            // ),
             RoundedButton(
               text: "LOGIN",
               press: () {

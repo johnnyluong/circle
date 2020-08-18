@@ -1,4 +1,5 @@
 import 'package:circle/Screens/Circles/circles_screen.dart';
+import 'package:circle/Screens/Circles/dynamic_circles.dart';
 import 'package:circle/Screens/ContactList/contact_list_screen.dart';
 import 'package:circle/Screens/Home/home_screen.dart';
 import 'package:circle/Screens/Reminders/reminders_screen.dart';
@@ -32,7 +33,8 @@ class _MainScreenState extends State<MainScreen> {
 
     _widgetOptions = <Widget>[
       HomeScreen(logoutCallback: widget.logoutCallback),
-      CirclesScreen(),
+      // CirclesScreen(),
+      DynamicCircles(),
       RemindersScreen(),
       ContactListScreen(cloudDB: cloudDB),
     ];
