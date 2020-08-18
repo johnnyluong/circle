@@ -35,6 +35,8 @@ class _ContactListState extends State<ContactListScreen> {
   }
 
   Widget build(BuildContext context) {
+    Future<dynamic> contacts = getContacts();
+    print(contacts);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
@@ -63,7 +65,7 @@ class _ContactListState extends State<ContactListScreen> {
       body: Container(
         child: FutureBuilder(
           future:
-              getContacts(), //Store this in a variable and use setState to avoid having to refresh each time
+              contacts, //Store this in a variable and use setState to avoid having to refresh each time
           builder: (_, snapshot) {
             // Display contact list
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -90,8 +92,6 @@ class _ContactListState extends State<ContactListScreen> {
     );
   }
 }
-
-
 
 class ContactDetail extends StatefulWidget {
   final DocumentSnapshot contact;

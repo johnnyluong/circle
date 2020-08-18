@@ -1,4 +1,5 @@
 import 'package:circle/Services/CloudDB/cloud_db.dart';
+import 'package:circle/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -79,20 +80,34 @@ class ContactAlertDialog extends StatelessWidget {
     return AlertDialog(
       title: Text("Delete Contact"),
       content: Text(
-        "Do you want to remove " + fullName + " from your contacts list?",
+        "Do you want to remove \'" + fullName + "\' from your contacts list?",
       ),
       actions: [
         FlatButton(
-            onPressed: () {
-              cloudDB.deleteContact(contact.reference);
-              Navigator.of(context).pop();
-            },
-            child: Text("yes")),
+          onPressed: () {
+            cloudDB.deleteContact(contact.reference);
+            Navigator.of(context).pop();
+          },
+          child: Text(
+            "Yes",
+            style: TextStyle(
+              fontSize: 16,
+              color: primaryTextColor,
+            ),
+          ),
+        ),
         FlatButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text("no")),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text(
+            "No",
+            style: TextStyle(
+              fontSize: 16,
+              color: primaryTextColor,
+            ),
+          ),
+        ),
       ],
     );
   }
