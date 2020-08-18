@@ -77,6 +77,7 @@ class _ContactListState extends State<ContactListScreen> {
                   return ContactListItem(
                     list: snapshot,
                     index: index,
+                    cloudDB: widget.cloudDB,
                   );
                 },
                 separatorBuilder: (BuildContext context, int index) =>

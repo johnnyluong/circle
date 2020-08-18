@@ -32,6 +32,13 @@ class CloudDB {
     }
   }
 
+  Future<void> deleteContact(DocumentReference contact) async {
+    Future<void> del = contact.delete();
+    del
+        .then((void _) => print("Contact deleted successfully"))
+        .catchError((e) => print("Contact deletion failed."));
+  }
+
   Future<void> addNoteToContact(DocumentReference contact, String note) async {
     contact.collection("notes").add({"note": note});
   }
