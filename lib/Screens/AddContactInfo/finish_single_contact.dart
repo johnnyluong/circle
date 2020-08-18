@@ -1,16 +1,16 @@
 import 'package:circle/Screens/AddContactInfo/add_reminders.dart';
+import 'package:circle/Screens/Root/root_screen.dart';
 import 'package:circle/components/floating_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/constants.dart';
 
-class AddToCirclesScreen extends StatefulWidget {
-
+class FinishSingleContactScreen extends StatefulWidget {
   @override
-  _AddToCirclesScreenState createState() => _AddToCirclesScreenState();
+  _FinishSingleContactScreenState createState() =>
+      _FinishSingleContactScreenState();
 }
 
-class _AddToCirclesScreenState extends State<AddToCirclesScreen> {
-
+class _FinishSingleContactScreenState extends State<FinishSingleContactScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -18,7 +18,7 @@ class _AddToCirclesScreenState extends State<AddToCirclesScreen> {
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         title: Text(
-          'Add Contacts to Circles',
+          'Finalize Contact Details',
           style: TextStyle(color: primaryTextColor),
         ),
       ),
@@ -40,7 +40,7 @@ class _AddToCirclesScreenState extends State<AddToCirclesScreen> {
                   ),
                 ),
                 Text(
-                  'Add contacts to circles here',
+                  'Finalize contact details here',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
@@ -55,16 +55,18 @@ class _AddToCirclesScreenState extends State<AddToCirclesScreen> {
       floatingActionButton: CustomFloatingActionButton(
         color: kPrimaryDarkColor,
         press: () {
+          /*
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {
-                return AddRemindersScreen();
+                return MainScreen();
               },
             ),
           );
+          */
         }, //Handle case of multiple entries vs single
-        text: "NEXT: SET REMINDERS",
+        text: "Finish",
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

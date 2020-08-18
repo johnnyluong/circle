@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:circle/Screens/AddContactInfo/finish_single_contact.dart';
 import 'package:circle/Services/CloudDB/cloud_db.dart';
 import 'package:circle/components/floating_action_button.dart';
 import 'package:flutter/material.dart';
@@ -54,10 +55,12 @@ class AddInfoState extends State<AddInfo> {
     return false;
   }
 
-  void validateAndSubmit() async {
+  Future<bool> validateAndSubmit() async {
     if (validateAndSave()) {
       addNewContact();
+      return true;
     }
+    return false;
   }
 
   void resetForm() {
@@ -95,18 +98,19 @@ class AddInfoState extends State<AddInfo> {
       ),
       floatingActionButton: CustomFloatingActionButton(
         color: kPrimaryDarkColor,
-        press: () {
-          validateAndSubmit();
-          /*
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                //return AddToCirclesScreen();
-              },
-            ),
-          );
-          */
+        press: () async {
+          bool success = await validateAndSubmit();
+          if (success) {
+            resetForm();   //TODO: Write to the database in next screen instead of current
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return FinishSingleContactScreen();
+                },
+              ),
+            );
+          } //TODO: Pass new contact value to next screen
         }, //Handle case of multiple entries vs single
         text: "NEXT: ADD TO CIRCLES",
       ),

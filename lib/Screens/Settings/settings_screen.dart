@@ -26,20 +26,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SizedBox(height: size.height * 0.05),
             RoundedButton(
               text: 'Change Password',
-              color: kPrimaryLightColor,
-              textColor: primaryTextColor,
+              color: kPrimaryDarkColor,
+              textColor: kPrimaryColor,
               press: () {},
             ),
             RoundedButton(
               text: 'Notification Settings',
-              color: kPrimaryLightColor,
-              textColor: primaryTextColor,
+              color: kPrimaryDarkColor,
+              textColor: kPrimaryColor,
               press: () {},
             ),
             RoundedButton(
               text: 'Logout',
-              color: kPrimaryLightColor,
-              textColor: primaryTextColor,
+              color: kPrimaryDarkColor,
+              textColor: kPrimaryColor,
               press: () {
                 widget.logoutCallback();
               },
