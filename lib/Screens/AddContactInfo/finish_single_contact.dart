@@ -1,5 +1,3 @@
-import 'package:circle/Screens/AddContactInfo/add_reminders.dart';
-import 'package:circle/Screens/Root/root_screen.dart';
 import 'package:circle/components/floating_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/constants.dart';

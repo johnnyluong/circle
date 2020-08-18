@@ -1,3 +1,4 @@
+import 'package:circle/Screens/Settings/about_screen.dart';
 import 'package:circle/constants.dart';
 import 'package:circle/components/rounded_button.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Column(
           children: <Widget>[
             SizedBox(height: size.height * 0.05),
+            RoundedButton(
+              text: 'About',
+              color: kPrimaryDarkColor,
+              textColor: kPrimaryColor,
+              press: () {
+                Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return AboutScreen();
+                },
+              ),
+            );
+              },
+            ),
             RoundedButton(
               text: 'Change Password',
               color: kPrimaryDarkColor,
