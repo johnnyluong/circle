@@ -35,7 +35,7 @@ class _MainScreenState extends State<MainScreen> {
       CirclesScreen(),
       ContactListScreen(cloudDB: cloudDB),
       RemindersScreen(),
-      ResourcesScreen(),
+      ResourcesScreen(cloudDB: cloudDB),
       SettingsScreen(logoutCallback: widget.logoutCallback),
     ];
   }
