@@ -3,8 +3,14 @@ import 'package:circle/components/rounded_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:circle/Services/CloudDB/cloud_db.dart';
 
 class CirclesScreen extends StatefulWidget {
+  final CloudDB cloudDB;
+  List<DocumentSnapshot> circleList;
+  int numberOfCircles = 0;
+  CirclesScreen({this.cloudDB});
+
   @override
   _CirclesScreenState createState() => _CirclesScreenState();
 }
@@ -16,14 +22,26 @@ class _CirclesScreenState extends State<CirclesScreen> {
     return qn.documents;
   }
 
+
+  void setNumberOfCircles() async {
+    List<DocumentSnapshot> circleData = await widget.cloudDB.getAllCircles();
+    widget.numberOfCircles = circleData.length;
+  }
+
+  void setCircleList() async {
+    widget.circleList = await widget.cloudDB.getAllCircles();
+  }
+
   @override
   Widget build(BuildContext context) {
+    // setNumberOfCircles();
+    setCircleList();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         title: Text(
-          'Circles',
+          'My Circles',
           style: TextStyle(color: primaryTextColor),
         ),
         automaticallyImplyLeading: false,
@@ -35,15 +53,19 @@ class _CirclesScreenState extends State<CirclesScreen> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              
-            ],
-          ),
-        ),
-      ),
+      body: GridView.builder(
+          itemCount: widget.circleList.length,
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          itemBuilder: (BuildContext context, int index) {
+            return new Card(
+              child: new GridTile(
+                child: Text(
+                  'test',
+                ),
+              ),
+            );
+          }),
     );
   }
 
@@ -69,7 +91,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                 vertical: size.height * 0.1,
               ),
               decoration: BoxDecoration(
-                color: kPrimaryLightColor,
+                color: kPrimaryColor,
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(20),
               ),
@@ -90,7 +112,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
             ),
             RoundedButton(
               text: 'Create Circle',
-              color: kPrimaryDarkColor,
+              color: kPrimaryColor,
               textColor: Colors.white,
               press: () {},
             ),

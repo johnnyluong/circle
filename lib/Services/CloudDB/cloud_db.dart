@@ -76,8 +76,15 @@ class CloudDB {
   Future<List<DocumentSnapshot>> getAllCircles() async {
     QuerySnapshot allCircles =
         await userDoc.collection("circles").getDocuments();
+    // List<DocumentSnapshot> allCirclesDoc = new List();
+    // print(allCircles.documents[0].data["circleName"]);
+    if (allCircles.documents == null) {
+      return new List();
+    }
     return allCircles.documents;
   }
+
+  int getNumberOfCircles() {}
 
   Future<List<DocumentSnapshot>> getCircleContacts(
       DocumentReference circle) async {
