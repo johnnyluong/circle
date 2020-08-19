@@ -24,7 +24,6 @@ class AddInfoState extends State<AddInfo> {
   String _email;
   String _phoneNumber;
 
-
   Map<String, dynamic> makeContact(String firstName, String lastName,
       String profession, String email, String phoneNumber) {
     Map<String, dynamic> newContact = Map<String, dynamic>();
@@ -124,19 +123,20 @@ class AddInfoState extends State<AddInfo> {
 
   Widget _showForm() {
     return new Container(
-        padding: EdgeInsets.all(16.0),
-        child: new Form(
-          key: _formKey,
-          child: new ListView(
-            shrinkWrap: true,
-            children: <Widget>[
-              showNameInput(),
-              showProfessionInput(),
-              showEmailInput(),
-              showPhoneInput(),
-            ],
-          ),
-        ));
+      padding: EdgeInsets.all(16.0),
+      child: new Form(
+        key: _formKey,
+        child: new ListView(
+          shrinkWrap: true,
+          children: <Widget>[
+            showNameInput(),
+            showProfessionInput(),
+            showEmailInput(),
+            showPhoneInput(),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget showNameInput() {
