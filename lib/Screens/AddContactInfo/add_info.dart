@@ -24,7 +24,6 @@ class AddInfoState extends State<AddInfo> {
   String _email;
   String _phoneNumber;
 
-  String _errorMessage;
 
   Map<String, dynamic> makeContact(String firstName, String lastName,
       String profession, String email, String phoneNumber) {
@@ -38,9 +37,15 @@ class AddInfoState extends State<AddInfo> {
   }
 
   void addNewContact() {
-    print(_firstName);
-    print(_lastName);
-    print(_profession);
+    print(_firstName +
+        ", " +
+        _lastName +
+        ", " +
+        _profession +
+        " " +
+        _email +
+        " " +
+        _phoneNumber);
     widget.cloudDB.addContact(
         makeContact(_firstName, _lastName, _profession, _email, _phoneNumber));
   }
@@ -65,7 +70,6 @@ class AddInfoState extends State<AddInfo> {
 
   void resetForm() {
     _formKey.currentState.reset();
-    _errorMessage = "";
   }
 
   @override

@@ -10,13 +10,6 @@ class AddRemindersScreen extends StatefulWidget {
 
 class _AddRemindersScreenState extends State<AddRemindersScreen> {
 
-  bool _isButtonEnabled = true;
-
-  _toggleButton() {
-    setState(() {
-      _isButtonEnabled = !_isButtonEnabled;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +53,6 @@ class _AddRemindersScreenState extends State<AddRemindersScreen> {
         ),
       ),
       floatingActionButton: CustomFloatingActionButton(
-        enabled: _isButtonEnabled,
         color: kPrimaryDarkColor,
         press: () {
           /*

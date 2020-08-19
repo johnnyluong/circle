@@ -1,5 +1,6 @@
 import 'package:circle/Screens/AddContactInfo/add_info.dart';
 import 'package:circle/Services/CloudDB/cloud_db.dart';
+import 'package:circle/components/contact_list_item.dart';
 import 'package:circle/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -34,6 +35,8 @@ class _ContactListState extends State<ContactListScreen> {
   }
 
   Widget build(BuildContext context) {
+    Future<dynamic> contacts = getContacts();
+    print(contacts);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
@@ -61,7 +64,8 @@ class _ContactListState extends State<ContactListScreen> {
       ),
       body: Container(
         child: FutureBuilder(
-          future: getContacts(),
+          future:
+              contacts, //Store this in a variable and use setState to avoid having to refresh each time
           builder: (_, snapshot) {
             // Display contact list
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -72,11 +76,10 @@ class _ContactListState extends State<ContactListScreen> {
               return ListView.separated(
                 itemCount: snapshot.data.length,
                 itemBuilder: (_, index) {
-                  return ListTile(
-                    title: Text(snapshot.data[index].data['firstName'] +
-                        " " +
-                        snapshot.data[index].data['lastName']),
-                    onTap: () => navigateToDetail(snapshot.data[index]),
+                  return ContactListItem(
+                    list: snapshot,
+                    index: index,
+                    cloudDB: widget.cloudDB,
                   );
                 },
                 separatorBuilder: (BuildContext context, int index) =>
@@ -176,10 +179,7 @@ class _ContactDetailState extends State<ContactDetail> {
           Container(
             child: Text(
               'Contact Info',
-              style: TextStyle(
-                fontSize: 20,
-                color: primaryTextColor
-              ),
+              style: TextStyle(fontSize: 20, color: primaryTextColor),
             ),
           ),
           Container(
