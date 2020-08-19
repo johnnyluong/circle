@@ -8,12 +8,12 @@ class RemindersScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text('Reminders', style: TextStyle(color: Colors.white),),
+        title: Text('Reminders', style: TextStyle(color: primaryTextColor),),
         automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add),
-            color: Colors.white,
+            color: primaryIconColor,
             onPressed: () {
               //TODO: Add Reminder functionality here
             },

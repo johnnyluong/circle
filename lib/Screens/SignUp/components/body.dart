@@ -1,5 +1,6 @@
 import 'package:circle/Screens/Home/main_screen.dart';
 import 'package:circle/Services/Authentication/authentication.dart';
+import 'package:circle/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/Screens/Login/login_screen.dart';
 import 'package:circle/Screens/SignUp/components/or_divider.dart';
@@ -53,6 +54,8 @@ class Body extends StatelessWidget {
               },
             ),
             RoundedButton(
+              color: kPrimaryLightColor,
+              textColor: primaryTextColor,
                 text: "SIGN UP",
                 // User Authentication
                 press: () async {

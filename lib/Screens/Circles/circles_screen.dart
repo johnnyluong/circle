@@ -23,14 +23,14 @@ class _CirclesScreenState extends State<CirclesScreen> {
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         title: Text(
-          'My Circles',
-          style: TextStyle(color: Colors.white),
+          'Circles',
+          style: TextStyle(color: primaryTextColor),
         ),
         automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add),
-            color: Colors.white,
+            color: primaryIconColor,
             onPressed: () => _onButtonPressed(),
           ),
         ],
@@ -53,7 +53,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                         child: Text('Less boring 1'),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
+                          color: kPrimaryLightColor,
                         ),
                         margin: EdgeInsets.all(25.0),
                         padding: EdgeInsets.all(40.0),
@@ -66,7 +66,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                         child: Text('Less boring 2'),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
+                          color: kPrimaryLightColor,
                         ),
                         margin: EdgeInsets.all(25.0),
                         padding: EdgeInsets.all(40.0),
@@ -86,7 +86,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                         child: Text('Less boring 1'),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
+                          color: kPrimaryLightColor,
                         ),
                         margin: EdgeInsets.all(25.0),
                         padding: EdgeInsets.all(40.0),
@@ -99,7 +99,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                         child: Text('Less boring 2'),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
+                          color: kPrimaryLightColor,
                         ),
                         margin: EdgeInsets.all(25.0),
                         padding: EdgeInsets.all(40.0),
@@ -119,7 +119,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                         child: Text('Less boring 1'),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
+                          color: kPrimaryLightColor,
                         ),
                         margin: EdgeInsets.all(25.0),
                         padding: EdgeInsets.all(40.0),
@@ -133,7 +133,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                         child: Text('Mountainers', textAlign: TextAlign.center),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
+                          color: kPrimaryLightColor,
                         ),
                         margin: EdgeInsets.all(25.0),
                         padding: EdgeInsets.all(40.0),
@@ -153,7 +153,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                         child: Text('Less boring 1'),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
+                          color: kPrimaryLightColor,
                         ),
                         margin: EdgeInsets.all(25.0),
                         padding: EdgeInsets.all(40.0),
@@ -166,7 +166,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                         child: Text('Less boring 2'),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
+                          color: kPrimaryLightColor,
                         ),
                         margin: EdgeInsets.all(25.0),
                         padding: EdgeInsets.all(40.0),
@@ -186,7 +186,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                         child: Text('Less boring 1'),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
+                          color: kPrimaryLightColor,
                         ),
                         margin: EdgeInsets.all(25.0),
                         padding: EdgeInsets.all(40.0),
@@ -199,7 +199,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                         child: Text('Less boring 2'),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
+                          color: kPrimaryLightColor,
                         ),
                         margin: EdgeInsets.all(25.0),
                         padding: EdgeInsets.all(40.0),
@@ -219,7 +219,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                         child: Text('Less boring 1'),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
+                          color: kPrimaryLightColor,
                         ),
                         margin: EdgeInsets.all(25.0),
                         padding: EdgeInsets.all(40.0),
@@ -232,7 +232,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                         child: Text('Less boring 2'),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
+                          color: kPrimaryLightColor,
                         ),
                         margin: EdgeInsets.all(25.0),
                         padding: EdgeInsets.all(40.0),
@@ -252,7 +252,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                         child: Text('Less boring 1'),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
+                          color: kPrimaryLightColor,
                         ),
                         margin: EdgeInsets.all(25.0),
                         padding: EdgeInsets.all(40.0),
@@ -265,7 +265,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                         child: Text('Less boring 2'),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
+                          color: kPrimaryLightColor,
                         ),
                         margin: EdgeInsets.all(25.0),
                         padding: EdgeInsets.all(40.0),
@@ -285,7 +285,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                         child: Text('Less boring 1'),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
+                          color: kPrimaryLightColor,
                         ),
                         margin: EdgeInsets.all(25.0),
                         padding: EdgeInsets.all(40.0),
@@ -298,7 +298,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                         child: Text('Less boring 2'),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
+                          color: kPrimaryLightColor,
                         ),
                         margin: EdgeInsets.all(25.0),
                         padding: EdgeInsets.all(40.0),
@@ -318,7 +318,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                         child: Text('Less boring 1'),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
+                          color: kPrimaryLightColor,
                         ),
                         margin: EdgeInsets.all(25.0),
                         padding: EdgeInsets.all(40.0),
@@ -331,7 +331,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                         child: Text('Less boring 2'),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue,
+                          color: kPrimaryLightColor,
                         ),
                         margin: EdgeInsets.all(25.0),
                         padding: EdgeInsets.all(40.0),
@@ -369,7 +369,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
                 vertical: size.height * 0.1,
               ),
               decoration: BoxDecoration(
-                color: kPrimaryColor,
+                color: kPrimaryLightColor,
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(20),
               ),
@@ -390,7 +390,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
             ),
             RoundedButton(
               text: 'Create Circle',
-              color: kPrimaryColor,
+              color: kPrimaryDarkColor,
               textColor: Colors.white,
               press: () {},
             ),

@@ -200,6 +200,8 @@ class _BodyState extends State<Body> {
             // ),
             RoundedButton(
               text: "LOGIN",
+              color: kPrimaryLightColor,
+              textColor: primaryTextColor,
               press: () {
                 validateAndSubmit();
                 // while (_isLoading);
@@ -235,9 +237,9 @@ class _BodyState extends State<Body> {
                 validateAndSubmit(); //
               },
               child: Text(
-                "Tap Here to Login Anonymously",
+                "Tap Here for Guest Login",
                 style: TextStyle(
-                  color: kPrimaryColor,
+                  color: primaryTextColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),

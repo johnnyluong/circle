@@ -1,8 +1,9 @@
 import 'package:circle/Screens/Circles/circles_screen.dart';
 import 'package:circle/Screens/Circles/dynamic_circles.dart';
 import 'package:circle/Screens/ContactList/contact_list_screen.dart';
-import 'package:circle/Screens/Home/home_screen.dart';
+import 'package:circle/Screens/Home/resources_screen.dart';
 import 'package:circle/Screens/Reminders/reminders_screen.dart';
+import 'package:circle/Screens/Settings/settings_screen.dart';
 import 'package:circle/Services/Authentication/authentication.dart';
 import 'package:circle/Services/CloudDB/cloud_db.dart';
 import 'package:flutter/material.dart';
@@ -32,11 +33,12 @@ class _MainScreenState extends State<MainScreen> {
     cloudDB = CloudDB.fromUID(widget.userId);
 
     _widgetOptions = <Widget>[
-      HomeScreen(logoutCallback: widget.logoutCallback),
       // CirclesScreen(),
-      DynamicCircles(),
-      RemindersScreen(),
+      DynamicCircles(cloudDB: cloudDB),
       ContactListScreen(cloudDB: cloudDB),
+      RemindersScreen(),
+      ResourcesScreen(cloudDB: cloudDB),
+      SettingsScreen(logoutCallback: widget.logoutCallback),
     ];
   }
 
@@ -50,15 +52,16 @@ class _MainScreenState extends State<MainScreen> {
         type: BottomNavigationBarType.fixed,
         iconSize: 23,
         currentIndex: _currentIndex,
+        selectedItemColor: primaryIconColor,
         items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Home'),
-            backgroundColor: kPrimaryColor,
-          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.donut_large),
             title: Text('Circles'),
+            backgroundColor: kPrimaryColor,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.group),
+            title: Text('My Network'),
             backgroundColor: kPrimaryColor,
           ),
           BottomNavigationBarItem(
@@ -67,8 +70,13 @@ class _MainScreenState extends State<MainScreen> {
             backgroundColor: kPrimaryColor,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.group),
-            title: Text('My Network'),
+            icon: Icon(Icons.list),
+            title: Text('Resources'),
+            backgroundColor: kPrimaryColor,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            title: Text('Settings'),
             backgroundColor: kPrimaryColor,
           ),
         ],

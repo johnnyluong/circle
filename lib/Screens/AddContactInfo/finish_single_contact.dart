@@ -1,11 +1,16 @@
+import 'package:circle/Screens/AddContactInfo/add_reminders.dart';
+import 'package:circle/Screens/Root/root_screen.dart';
+import 'package:circle/components/floating_action_button.dart';
 import 'package:flutter/material.dart';
-import 'package:circle/Screens/Settings/settings_screen.dart';
 import 'package:circle/constants.dart';
 
-class HomeScreen extends StatelessWidget {
-  final VoidCallback logoutCallback;
+class FinishSingleContactScreen extends StatefulWidget {
+  @override
+  _FinishSingleContactScreenState createState() =>
+      _FinishSingleContactScreenState();
+}
 
-  const HomeScreen({Key key, this.logoutCallback}) : super(key: key);
+class _FinishSingleContactScreenState extends State<FinishSingleContactScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -13,26 +18,9 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         title: Text(
-          'Home',
-          style: TextStyle(color: Colors.white),
+          'Finalize Contact Details',
+          style: TextStyle(color: primaryTextColor),
         ),
-        automaticallyImplyLeading: false,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.settings),
-            color: Colors.white,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SettingsScreen(
-                    logoutCallback: this.logoutCallback,
-                  ),
-                ),
-              );
-            },
-          ),
-        ],
       ),
       body: Container(
         width: double.infinity,
@@ -45,14 +33,14 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Home',
+                  'TEMP',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                   ),
                 ),
                 Text(
-                  'Home screen of the Circle App.',
+                  'Finalize contact details here',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
@@ -64,6 +52,23 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: CustomFloatingActionButton(
+        color: kPrimaryDarkColor,
+        press: () {
+          /*
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return MainScreen();
+              },
+            ),
+          );
+          */
+        }, //Handle case of multiple entries vs single
+        text: "Finish",
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

@@ -7,8 +7,9 @@ import 'package:circle/Services/CloudDB/cloud_db.dart';
 
 class DynamicCircles extends StatefulWidget {
   final CloudDB cloudDB;
-  List<DocumentSnapshot> circleList;
-  DynamicCircles({this.cloudDB, this.circleList});
+  List<DocumentSnapshot> circleList = new List();
+  int numberOfCircles = 0;
+  DynamicCircles({this.cloudDB});
 
   @override
   _DynamicCirclesScreen createState() => _DynamicCirclesScreen();
@@ -21,26 +22,33 @@ class _DynamicCirclesScreen extends State<DynamicCircles> {
     return qn.documents;
   }
 
-  Future<int> getNumberOfCircles() async {
+/*
+  Future<List<DocumentSnapshot>> getNumberOfCircles() async {
     List<DocumentSnapshot> circleData = await widget.cloudDB.getAllCircles();
-
-    print(circleData.length);
+    // print(circleData.length);
     widget.circleList = circleData;
+    print(circleData);
     // return circleData.length;
-    return circleData.length;
+    return circleData;
     // return Future.value(circleData.length);
     // var numberOfCircles = circleData.toList();
     // return numberOfCircles.length;
   }
+*/
 
-  int getNumber() {
-    var allCircles = widget.cloudDB.getAllCircles();
-    // return allCircles.length;
-    return 1;
+  void setNumberOfCircles() async {
+    List<DocumentSnapshot> circleData = await widget.cloudDB.getAllCircles();
+    widget.numberOfCircles = circleData.length;
+  }
+
+  void setCircleList() async {
+    widget.circleList = await widget.cloudDB.getAllCircles();
   }
 
   @override
   Widget build(BuildContext context) {
+    // setNumberOfCircles();
+    setCircleList();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -61,7 +69,9 @@ class _DynamicCirclesScreen extends State<DynamicCircles> {
       body: GridView.builder(
           // itemCount: await getNumberOfCircles(),
           itemCount: widget.circleList.length,
-          // itemCount: await getNumberOfCircles(),
+          // itemCount: getNumberOfCircles(),
+          // itemCount: getNumberOfCircles(),
+          // itemCount: widget.numberOfCircles,
 
           // itemCount: getCircles().toString().length,
           gridDelegate:
