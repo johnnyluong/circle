@@ -7,7 +7,7 @@ import 'package:circle/Services/CloudDB/cloud_db.dart';
 
 class CirclesScreen extends StatefulWidget {
   final CloudDB cloudDB;
-  List<DocumentSnapshot> circleList = new List();
+  List<DocumentSnapshot> circleList;
   int numberOfCircles = 0;
   CirclesScreen({this.cloudDB});
 
@@ -22,19 +22,6 @@ class _CirclesScreenState extends State<CirclesScreen> {
     return qn.documents;
   }
 
-/*
-  Future<List<DocumentSnapshot>> getNumberOfCircles() async {
-    List<DocumentSnapshot> circleData = await widget.cloudDB.getAllCircles();
-    // print(circleData.length);
-    widget.circleList = circleData;
-    print(circleData);
-    // return circleData.length;
-    return circleData;
-    // return Future.value(circleData.length);
-    // var numberOfCircles = circleData.toList();
-    // return numberOfCircles.length;
-  }
-*/
 
   void setNumberOfCircles() async {
     List<DocumentSnapshot> circleData = await widget.cloudDB.getAllCircles();
@@ -55,25 +42,19 @@ class _CirclesScreenState extends State<CirclesScreen> {
         backgroundColor: kPrimaryColor,
         title: Text(
           'My Circles',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: primaryTextColor),
         ),
         automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add),
-            color: Colors.white,
+            color: primaryIconColor,
             onPressed: () => _onButtonPressed(),
           ),
         ],
       ),
       body: GridView.builder(
-          // itemCount: await getNumberOfCircles(),
           itemCount: widget.circleList.length,
-          // itemCount: getNumberOfCircles(),
-          // itemCount: getNumberOfCircles(),
-          // itemCount: widget.numberOfCircles,
-
-          // itemCount: getCircles().toString().length,
           gridDelegate:
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
           itemBuilder: (BuildContext context, int index) {
