@@ -1,5 +1,4 @@
 import 'package:circle/Screens/Circles/circles_screen.dart';
-import 'package:circle/Screens/Circles/dynamic_circles.dart';
 import 'package:circle/Screens/ContactList/contact_list_screen.dart';
 import 'package:circle/Screens/Home/resources_screen.dart';
 import 'package:circle/Screens/Reminders/reminders_screen.dart';
@@ -33,8 +32,7 @@ class _MainScreenState extends State<MainScreen> {
     cloudDB = CloudDB.fromUID(widget.userId);
 
     _widgetOptions = <Widget>[
-      // CirclesScreen(),
-      DynamicCircles(cloudDB: cloudDB),
+      CirclesScreen(cloudDB: cloudDB),
       ContactListScreen(cloudDB: cloudDB),
       RemindersScreen(),
       ResourcesScreen(cloudDB: cloudDB),
