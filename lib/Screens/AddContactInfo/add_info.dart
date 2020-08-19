@@ -157,7 +157,7 @@ class AddInfoState extends State<AddInfo> {
     return Flexible(
       child: TextFormField(
         maxLines: 1,
-        keyboardType: TextInputType.name,
+        keyboardType: TextInputType.text,
         autofocus: false,
         decoration: InputDecoration(
             hintText: 'First Name *',
@@ -178,7 +178,7 @@ class AddInfoState extends State<AddInfo> {
     return Flexible(
       child: TextFormField(
         maxLines: 1,
-        keyboardType: TextInputType.name,
+        keyboardType: TextInputType.text,
         autofocus: false,
         decoration: InputDecoration(
           hintText: 'Last Name *',
@@ -197,7 +197,7 @@ class AddInfoState extends State<AddInfo> {
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
       child: TextFormField(
         maxLines: 1,
-        keyboardType: TextInputType.name,
+        keyboardType: TextInputType.text,
         autofocus: false,
         decoration: InputDecoration(
           hintText: 'Profession *',

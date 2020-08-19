@@ -32,7 +32,7 @@ class _MainScreenState extends State<MainScreen> {
     cloudDB = CloudDB.fromUID(widget.userId);
 
     _widgetOptions = <Widget>[
-      CirclesScreen(),
+      CirclesScreen(cloudDB: cloudDB),
       ContactListScreen(cloudDB: cloudDB),
       RemindersScreen(),
       ResourcesScreen(cloudDB: cloudDB),
