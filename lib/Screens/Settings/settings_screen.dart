@@ -26,7 +26,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: <Widget>[
             SizedBox(height: size.height * 0.05),
             RoundedButton(
-              text: 'About',
+              text: 'ABOUT',
               color: kPrimaryDarkColor,
               textColor: kPrimaryColor,
               press: () {
@@ -41,19 +41,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
               },
             ),
             RoundedButton(
-              text: 'Change Password',
+              text: 'CHANGE PASSWORD',
               color: kPrimaryDarkColor,
               textColor: kPrimaryColor,
               press: () {},
             ),
             RoundedButton(
-              text: 'Notification Settings',
+              text: 'NOTIFICATION SETTINGS',
               color: kPrimaryDarkColor,
               textColor: kPrimaryColor,
               press: () {},
             ),
             RoundedButton(
-              text: 'Logout',
+              text: 'LOGOUT',
               color: kPrimaryDarkColor,
               textColor: kPrimaryColor,
               press: () {
