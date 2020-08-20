@@ -11,8 +11,8 @@ import 'package:circle/constants.dart';
 class MainScreen extends StatefulWidget {
   MainScreen({
     @required this.auth,
-    @required this.userId,
-    @required this.logoutCallback,
+    this.userId,
+    this.logoutCallback,
   });
   final BaseAuth auth;
   final VoidCallback logoutCallback;

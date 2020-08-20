@@ -64,15 +64,16 @@ class _SignupScreenState extends State<SignupScreen> {
                 // User Authentication
                 press: () async {
                   dynamic result = await widget.auth.signUp(_email, _password);
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return MainScreen(
-                        auth: widget.auth,
-                      ); //TODO: Integrate authentication
-                    },
-                  )
-                      //TODO: Authentication and routing
-                      );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return MainScreen( //TODO: Authentication & UserID and logoutCallback should be passed in as well
+                          auth: widget.auth,
+                        );
+                      },
+                    ),
+                  );
                 }),
             SizedBox(height: size.height * 0.02),
             AlreadyHaveAnAccountCheck(
