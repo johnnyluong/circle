@@ -1,6 +1,6 @@
 import 'package:circle/Screens/Home/main_screen.dart';
+import 'package:circle/Screens/Login/login_screen.dart';
 import 'package:circle/Screens/Splash/splash_screen.dart';
-import 'package:circle/Screens/Welcome/welcome_screen.dart';
 import 'package:circle/Services/Authentication/authentication.dart';
 import 'package:flutter/material.dart';
 
@@ -27,15 +27,18 @@ class _RootScreenState extends State<RootScreen> {
   @override
   void initState() {
     super.initState();
-    widget.auth.getCurrentUser().then((user) {
-      setState(() {
-        if (user != null) {
-          _userId = user?.uid;
-        }
-        authStatus =
-            user?.uid == null ? AuthStatus.NOT_LOGGED_IN : AuthStatus.LOGGED_IN;
-      });
-    });
+    widget.auth.getCurrentUser().then(
+      (user) {
+        setState(() {
+          if (user != null) {
+            _userId = user?.uid;
+          }
+          authStatus = user?.uid == null
+              ? AuthStatus.NOT_LOGGED_IN
+              : AuthStatus.LOGGED_IN;
+        });
+      },
+    );
   }
 
   void loginCallback() {
@@ -47,7 +50,6 @@ class _RootScreenState extends State<RootScreen> {
     setState(() {
       authStatus = AuthStatus.LOGGED_IN;
     });
-    Navigator.pop(context);
   }
 
   void logoutCallback() {
@@ -55,7 +57,6 @@ class _RootScreenState extends State<RootScreen> {
       authStatus = AuthStatus.NOT_LOGGED_IN;
       _userId = "";
     });
-    //Navigator.pop(context);
   }
 
   @override
@@ -65,11 +66,10 @@ class _RootScreenState extends State<RootScreen> {
         return new SplashScreen();
         break;
       case AuthStatus.NOT_LOGGED_IN:
-        return new WelcomeScreen(
+        return LoginScreen(
           auth: widget.auth,
           loginCallback: loginCallback,
         );
-        // return new WelcomeScreen();
         break;
       case AuthStatus.LOGGED_IN:
         if (_userId.length > 0 && _userId != null) {
@@ -78,7 +78,6 @@ class _RootScreenState extends State<RootScreen> {
             auth: widget.auth,
             logoutCallback: logoutCallback,
           );
-          // return new HomeScreen();
         } else
           return new SplashScreen();
         break;

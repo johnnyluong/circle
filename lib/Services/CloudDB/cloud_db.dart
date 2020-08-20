@@ -9,17 +9,11 @@ class CloudDB {
       : this(uid, Firestore.instance.collection('users').document(uid));
 
   Future<DocumentReference> addContact(Map<String, dynamic> newContact) async {
-    // try {
     return userDoc.collection("contacts").add(newContact);
-    // } catch (e) {
-    //   print("Add Contact Failed ... See cloud_DB.dart");
-    //   return null;
-    // }
   }
 
   Future<void> updateContact(
       DocumentReference contact, Map<String, dynamic> newContact) async {
-    // await contact.setData(newContact);
     return contact.updateData(newContact);
   }
 
@@ -55,13 +49,6 @@ class CloudDB {
   Future<List<DocumentSnapshot>> getAllContacts() async {
     QuerySnapshot allContacts =
         await userDoc.collection("contacts").getDocuments();
-    // List<DocumentSnapshot> list = allContacts.documents;
-    // allContacts
-    //     .then((QuerySnapshot all) => list = all.documents)
-    //     .catchError((e) => print("getAllContacts method failed."));
-    // for (int i = 0; i < list.length; i++) {
-    //   print(list[i].data.toString());
-    // }
     return allContacts.documents;
   }
 
@@ -76,15 +63,12 @@ class CloudDB {
   Future<List<DocumentSnapshot>> getAllCircles() async {
     QuerySnapshot allCircles =
         await userDoc.collection("circles").getDocuments();
-    // List<DocumentSnapshot> allCirclesDoc = new List();
-    // print(allCircles.documents[0].data["circleName"]);
     if (allCircles.documents == null) {
       return new List();
     }
     return allCircles.documents;
   }
 
-  int getNumberOfCircles() {}
 
   Future<List<DocumentSnapshot>> getCircleContacts(
       DocumentReference circle) async {
@@ -118,9 +102,6 @@ class CloudDB {
   Future<void> addContactsToCircle(
       DocumentReference circle, List<DocumentReference> contacts) async {
     for (var i = 0; i < contacts.length; i++) {
-      // circle
-      //     .collection("circleContacts")
-      //     .add({"circleContact": contacts[i].path});
       circle.collection("circleContacts").add({"circleContact": contacts[i]});
     }
   }

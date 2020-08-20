@@ -31,13 +31,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
               textColor: kPrimaryColor,
               press: () {
                 Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return AboutScreen();
-                },
-              ),
-            );
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return AboutScreen();
+                    },
+                  ),
+                );
               },
             ),
             RoundedButton(
