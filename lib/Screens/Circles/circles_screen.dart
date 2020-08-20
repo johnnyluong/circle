@@ -7,7 +7,7 @@ import 'package:circle/Services/CloudDB/cloud_db.dart';
 
 class CirclesScreen extends StatefulWidget {
   final CloudDB cloudDB;
-  List<DocumentSnapshot> circleList;
+  List<DocumentSnapshot> circleList = List<DocumentSnapshot>();
   int numberOfCircles = 0;
   CirclesScreen({this.cloudDB});
 
@@ -23,20 +23,13 @@ class _CirclesScreenState extends State<CirclesScreen> {
   }
 
 
-  void setNumberOfCircles() async {
-    List<DocumentSnapshot> circleData = await widget.cloudDB.getAllCircles();
-    widget.numberOfCircles = circleData.length;
-  }
-
   void setCircleList() async {
     widget.circleList = await widget.cloudDB.getAllCircles();
   }
 
   @override
   Widget build(BuildContext context) {
-    // setNumberOfCircles();
     setCircleList();
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,

@@ -9,7 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:circle/constants.dart';
 
 class MainScreen extends StatefulWidget {
-  MainScreen({this.auth, this.userId, this.logoutCallback});
+  MainScreen({
+    @required this.auth,
+    @required this.userId,
+    @required this.logoutCallback,
+  });
   final BaseAuth auth;
   final VoidCallback logoutCallback;
   final String userId;

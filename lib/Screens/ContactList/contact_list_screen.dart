@@ -36,7 +36,6 @@ class _ContactListState extends State<ContactListScreen> {
 
   Widget build(BuildContext context) {
     Future<dynamic> contacts = getContacts();
-    print(contacts);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
