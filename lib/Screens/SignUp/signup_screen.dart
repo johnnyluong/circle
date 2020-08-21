@@ -79,14 +79,7 @@ class _SignupScreenState extends State<SignupScreen> {
             AlreadyHaveAnAccountCheck(
               login: false,
               press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return LoginScreen();
-                    },
-                  ),
-                );
+                Navigator.pop(context);
               },
             ),
             OrDivider(),
