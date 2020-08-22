@@ -21,6 +21,7 @@ class ContactListItem extends StatelessWidget {
 
     return Card(
       margin: EdgeInsets.fromLTRB(12.0, 14.0, 12.0, 0.0),
+      elevation: 2,
       child: ListTile(
         title: Text(
           fullName,

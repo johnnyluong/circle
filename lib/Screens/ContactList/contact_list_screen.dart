@@ -28,7 +28,6 @@ class _ContactListScreenState extends State<ContactListScreen> {
   }
 
   Widget build(BuildContext context) {
-    //Future<List<DocumentSnapshot>> contacts = widget.cloudDB.getAllContacts();
     return StreamProvider<QuerySnapshot>.value(
       value: widget.cloudDB.contacts,
       child: Scaffold(
