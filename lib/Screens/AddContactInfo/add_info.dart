@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:circle/Screens/AddContactInfo/finish_single_contact.dart';
+import 'package:circle/Screens/AddContactInfo/view_contact.dart';
 import 'package:circle/Services/CloudDB/cloud_db.dart';
 import 'package:circle/components/floating_action_button.dart';
 import 'package:circle/components/standard_info_input.dart';
@@ -115,7 +115,7 @@ class AddInfoState extends State<AddInfo> {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return FinishSingleContactScreen();
+                  return ViewContactScreen();
                 },
               ),
             );

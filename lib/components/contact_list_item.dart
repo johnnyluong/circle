@@ -40,6 +40,14 @@ class ContactListItem extends StatelessWidget {
         leading: CircleAvatar(
           radius: 18,
           backgroundColor: kPrimaryLightColor,
+          child: IconButton(
+            icon: Icon(
+              Icons.person,
+              color: primaryIconColor,
+              size: 21,
+            ),
+            onPressed: () {},
+          ),
         ),
         trailing: DropdownButtonHideUnderline(
           child: DropdownButton<String>(
@@ -63,4 +71,3 @@ class ContactListItem extends StatelessWidget {
     );
   }
 }
-
