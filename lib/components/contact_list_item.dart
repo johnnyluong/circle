@@ -20,7 +20,7 @@ class ContactListItem extends StatelessWidget {
         userDocument.data['firstName'] + " " + userDocument.data['lastName'];
 
     return Card(
-      margin: EdgeInsets.fromLTRB(12.0, 14.0, 12.0, 0.0),
+      margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
       elevation: 2,
       child: ListTile(
         title: Text(
