@@ -26,10 +26,10 @@ class CloudDB {
     }
   }
 
-  Future<void> deleteContact(DocumentReference contact) async {
+  Future<void> deleteContact(DocumentReference contact, String name) async {
     Future<void> del = contact.delete();
     del
-        .then((void _) => print("Contact deleted successfully"))
+        .then((void _) => print("'" + name + "' deleted successfully"))
         .catchError((e) => print("Contact deletion failed."));
   }
 
@@ -52,6 +52,12 @@ class CloudDB {
     return allContacts.documents;
   }
 
+  Stream<QuerySnapshot> get contacts {
+    final CollectionReference contactsCollection =
+        userDoc.collection("contacts");
+    return contactsCollection.snapshots();
+  }
+
   Future<DocumentReference> addCircle(String circleName) async {
     return userDoc.collection("circles").add({"circleName": circleName});
   }
@@ -68,7 +74,6 @@ class CloudDB {
     }
     return allCircles.documents;
   }
-
 
   Future<List<DocumentSnapshot>> getCircleContacts(
       DocumentReference circle) async {

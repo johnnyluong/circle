@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
       String userId = "";
       try {
         if (_isLoginForm) {
-          // userId = await widget.auth.signIn(_email, _password);
+          //userId = await widget.auth.signInWithEmail(_email, _password);
           userId = await widget.auth.signInAnonymously();
           print('Signed in: $userId');
         } else {

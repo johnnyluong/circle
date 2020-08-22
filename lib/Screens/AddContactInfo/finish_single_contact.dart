@@ -53,16 +53,8 @@ class _FinishSingleContactScreenState extends State<FinishSingleContactScreen> {
       floatingActionButton: CustomFloatingActionButton(
         color: kPrimaryDarkColor,
         press: () {
-          /*
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return MainScreen();
-              },
-            ),
-          );
-          */
+          Navigator.pop(context);
+          Navigator.pop(context);
         }, //Handle case of multiple entries vs single
         text: "Finish",
       ),
