@@ -53,7 +53,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // setCircleList();
+    setCircleList();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: PageView.builder(
@@ -67,62 +67,11 @@ class _CirclesScreenState extends State<CirclesScreen> {
         itemBuilder: (context, index) {
           return SliderTile(
             cloudDB: widget.cloudDB,
+            // allCircles: widget.circleList,
             currentScreenCircles: slides[index].getCurrentCircles(),
           );
         },
       ),
-      bottomSheet: currentIndex != slides.length - 1
-          ? Container(
-              height: 65,
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {
-                      pageController.animateToPage(slides.length - 1,
-                          duration: Duration(milliseconds: 400),
-                          curve: Curves.linear);
-                    },
-                    child: Text('SKIP'),
-                  ),
-                  Row(
-                    children: <Widget>[
-                      for (int i = 0; i < slides.length; i++)
-                        currentIndex == i
-                            ? pageIndexIndicator(true)
-                            : pageIndexIndicator(false)
-                    ],
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      pageController.animateToPage(currentIndex + 1,
-                          duration: Duration(milliseconds: 400),
-                          curve: Curves.linear);
-                    },
-                    child: Text('NEXT'),
-                  ),
-                ],
-              ),
-            )
-          : GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MainScreen()),
-                );
-              },
-              child: Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width,
-                height: 65,
-                color: Colors.blue,
-                child: Text(
-                  'GET STARTED NOW',
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w600),
-                ),
-              )),
     );
   }
 

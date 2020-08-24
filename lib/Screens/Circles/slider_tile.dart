@@ -6,7 +6,8 @@ import 'package:circle/Services/CloudDB/cloud_db.dart';
 class SliderTile extends StatelessWidget {
   final CloudDB cloudDB;
   List<DocumentSnapshot> currentScreenCircles;
-  SliderTile({this.cloudDB, this.currentScreenCircles});
+  List<DocumentSnapshot> allCircles;
+  SliderTile({this.cloudDB, this.currentScreenCircles, this.allCircles});
 
   Widget build(BuildContext context) {
     return GridView.builder(
