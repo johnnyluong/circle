@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:circle/Services/Authentication/authentication.dart';
 import 'package:circle/components/text_field_container.dart';
 import 'package:circle/constants.dart';
@@ -135,6 +136,11 @@ class _BodyState extends State<Body> {
               onChanged: (value) async {
                 _email = value;
               },
+            ),
+
+            AutoSizeText(
+              'The text is too long let\'s see if it could be displayed in one line',
+              maxLines: 1,
             ),
 
             // onChanged: onChanged,

@@ -84,8 +84,6 @@ class CloudDB {
     return allCircles.documents;
   }
 
-  int getNumberOfCircles() {}
-
   Future<List<DocumentSnapshot>> getCircleContacts(
       DocumentReference circle) async {
     QuerySnapshot allContacts =

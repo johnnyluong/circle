@@ -1,14 +1,17 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:circle/Screens/Circles/circle_model.dart';
+import 'package:circle/Screens/Home/main_screen.dart';
 import 'package:circle/components/rounded_button.dart';
 import 'package:circle/components/rounded_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:circle/Services/CloudDB/cloud_db.dart';
+import 'package:circle/Screens/Circles/slider_tile.dart';
 
 class CirclesScreen extends StatefulWidget {
   final CloudDB cloudDB;
   List<DocumentSnapshot> circleList;
-  int numberOfCircles = 0;
   CirclesScreen({this.cloudDB});
 
   @override
@@ -16,16 +19,32 @@ class CirclesScreen extends StatefulWidget {
 }
 
 class _CirclesScreenState extends State<CirclesScreen> {
+  List<CircleModel> slides = new List<CircleModel>();
+  int currentIndex = 0;
+  PageController pageController = new PageController(initialPage: 0);
+
+  @override
+  void initState() {
+    super.initState();
+    slides = getSlides();
+  }
+
+  Widget pageIndexIndicator(bool isCurrentPage) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 2.0),
+      height: isCurrentPage ? 10.0 : 6.0,
+      width: isCurrentPage ? 10.0 : 6.0,
+      decoration: BoxDecoration(
+        color: isCurrentPage ? Colors.grey : Colors.grey[300],
+        borderRadius: BorderRadius.circular(primaryBorderRadius),
+      ),
+    );
+  }
+
   Future getCircles() async {
     var firestore = Firestore.instance;
     QuerySnapshot qn = await firestore.collection('My Circles').getDocuments();
     return qn.documents;
-  }
-
-
-  void setNumberOfCircles() async {
-    List<DocumentSnapshot> circleData = await widget.cloudDB.getAllCircles();
-    widget.numberOfCircles = circleData.length;
   }
 
   void setCircleList() async {
@@ -34,38 +53,76 @@ class _CirclesScreenState extends State<CirclesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // setNumberOfCircles();
-    setCircleList();
+    // setCircleList();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kPrimaryColor,
-        title: Text(
-          'My Circles',
-          style: TextStyle(color: primaryTextColor),
-        ),
-        automaticallyImplyLeading: false,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.add),
-            color: primaryIconColor,
-            onPressed: () => _onButtonPressed(),
-          ),
-        ],
+      body: PageView.builder(
+        controller: pageController,
+        itemCount: slides.length,
+        onPageChanged: (val) {
+          setState(() {
+            currentIndex = val;
+          });
+        },
+        itemBuilder: (context, index) {
+          return SliderTile(
+            cloudDB: widget.cloudDB,
+            currentScreenCircles: slides[index].getCurrentCircles(),
+          );
+        },
       ),
-      body: GridView.builder(
-          itemCount: widget.circleList.length,
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-          itemBuilder: (BuildContext context, int index) {
-            return new Card(
-              child: new GridTile(
-                child: Text(
-                  'test',
-                ),
+      bottomSheet: currentIndex != slides.length - 1
+          ? Container(
+              height: 65,
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () {
+                      pageController.animateToPage(slides.length - 1,
+                          duration: Duration(milliseconds: 400),
+                          curve: Curves.linear);
+                    },
+                    child: Text('SKIP'),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      for (int i = 0; i < slides.length; i++)
+                        currentIndex == i
+                            ? pageIndexIndicator(true)
+                            : pageIndexIndicator(false)
+                    ],
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      pageController.animateToPage(currentIndex + 1,
+                          duration: Duration(milliseconds: 400),
+                          curve: Curves.linear);
+                    },
+                    child: Text('NEXT'),
+                  ),
+                ],
               ),
-            );
-          }),
+            )
+          : GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MainScreen()),
+                );
+              },
+              child: Container(
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width,
+                height: 65,
+                color: Colors.blue,
+                child: Text(
+                  'GET STARTED NOW',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w600),
+                ),
+              )),
     );
   }
 
@@ -104,6 +161,10 @@ class _CirclesScreenState extends State<CirclesScreen> {
                 ),
               ),
             ),
+            AutoSizeText(
+              'The text is too long let\'s see if it could be displayed in one line omg this actually fucking works',
+              maxLines: 1,
+            ),
             SizedBox(height: size.height * 0.02),
             RoundedInputField(
               text: 'Circle Name',
@@ -122,3 +183,46 @@ class _CirclesScreenState extends State<CirclesScreen> {
     );
   }
 }
+
+/*
+
+return Scaffold(
+      body: GridView.builder(
+        itemCount: widget.circleList.length,
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        itemBuilder: (context, index) => GestureDetector(
+          onTap: () {
+            print('Circle pressed');
+            MaterialPageRoute(
+              builder: (context) => MainScreen(),
+            );
+            // CirclesScreen(cloudDB: widget.cloudDB);
+          },
+          child: Container(
+            child: Container(
+              alignment: Alignment.center,
+              child: AutoSizeText(
+                widget.circleList.elementAt(index).data['circleName'],
+                maxLines: 1,
+                minFontSize: 12,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.blue[900],
+              ),
+              margin: EdgeInsets.all(15.0),
+              padding: EdgeInsets.all(15.0),
+            ),
+          ),
+        ),
+      ),
+    );
+
+
+*/
