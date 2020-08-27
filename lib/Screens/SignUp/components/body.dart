@@ -1,4 +1,5 @@
 import 'package:circle/Screens/Home/main_screen.dart';
+import 'package:circle/Screens/Onboarding/onboarding_screens.dart';
 import 'package:circle/Services/Authentication/authentication.dart';
 import 'package:circle/constants.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,6 @@ class Body extends StatelessWidget {
               onChanged: (value) async {
                 email = value;
               },
-
             ),
             RoundedPasswordField(
               onChanged: (value) async {
@@ -54,8 +54,8 @@ class Body extends StatelessWidget {
               },
             ),
             RoundedButton(
-              color: kPrimaryLightColor,
-              textColor: primaryTextColor,
+                color: kPrimaryLightColor,
+                textColor: primaryTextColor,
                 text: "SIGN UP",
                 // User Authentication
                 press: () async {
@@ -63,9 +63,8 @@ class Body extends StatelessWidget {
                   print(auth.getCurrentUser());
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
-                      return MainScreen(
-                          auth: auth,
-                      ); //TODO: Integrate authentication
+                      return Onboarding();
+                      //TODO: Integrate authentication
                     },
                   )
                       //TODO: Authentication and routing

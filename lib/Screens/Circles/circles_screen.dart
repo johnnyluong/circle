@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:circle/Screens/Circles/circle_model.dart';
+import 'package:circle/Screens/Circles/components/circle_model.dart';
 import 'package:circle/Screens/Home/main_screen.dart';
 import 'package:circle/components/rounded_button.dart';
 import 'package:circle/components/rounded_input_field.dart';
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:circle/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:circle/Services/CloudDB/cloud_db.dart';
-import 'package:circle/Screens/Circles/slider_tile.dart';
+import 'package:circle/Screens/Circles/components/slider_tile.dart';
 
 class CirclesScreen extends StatefulWidget {
   final CloudDB cloudDB;
@@ -26,7 +26,13 @@ class _CirclesScreenState extends State<CirclesScreen> {
   @override
   void initState() {
     super.initState();
-    slides = getSlides();
+    // slides = await getSlides(widget.cloudDB);
+
+    getSlides(widget.cloudDB).then((val) {
+      setState(() {
+        slides = val;
+      });
+    });
   }
 
   Widget pageIndexIndicator(bool isCurrentPage) {
@@ -55,8 +61,8 @@ class _CirclesScreenState extends State<CirclesScreen> {
   Widget build(BuildContext context) {
     setCircleList();
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: PageView.builder(
+    return Container(
+      child: PageView.builder(
         controller: pageController,
         itemCount: slides.length,
         onPageChanged: (val) {
