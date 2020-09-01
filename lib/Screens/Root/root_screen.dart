@@ -49,8 +49,8 @@ class _RootScreenState extends State<RootScreen> {
     });
     setState(() {
       authStatus = AuthStatus.LOGGED_IN;
-      // _isOnboarding = isSignup;
-      _isOnboarding = true;
+      _isOnboarding = isSignup;
+      // _isOnboarding = true;
     });
   }
 
