@@ -25,6 +25,7 @@ class SliderTile extends StatelessWidget {
     return Background(
       slides: slides,
       currentIndex: currentIndex,
+      cloudDB: cloudDB,
       child: Column(
         children: <Widget>[
           SizedBox(

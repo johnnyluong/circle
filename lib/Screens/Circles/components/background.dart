@@ -1,3 +1,5 @@
+import 'package:circle/Screens/AddContactInfo/add_info.dart';
+import 'package:circle/Services/CloudDB/cloud_db.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/constants.dart';
 import 'package:circle/Screens/Circles/components/circle_model.dart';
@@ -5,12 +7,14 @@ import 'package:circle/Screens/Circles/components/circle_model.dart';
 class Background extends StatelessWidget {
   final Widget child;
   final int currentIndex;
+  final CloudDB cloudDB;
   final List<CircleModel> slides;
 
   const Background({
     Key key,
     @required this.slides,
     @required this.currentIndex,
+    @required this.cloudDB,
     @required this.child,
   }) : super(key: key);
 
@@ -45,7 +49,16 @@ class Background extends StatelessWidget {
             child: FloatingActionButton(
               child: Icon(Icons.person_add),
               onPressed: () {
-                print('Display something');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return AddInfo(
+                        cloudDB: cloudDB,
+                      );
+                    },
+                  ),
+                );
               },
               backgroundColor: Colors.blue,
             ),
