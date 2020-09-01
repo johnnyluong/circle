@@ -26,10 +26,28 @@ class _ViewContactScreenState extends State<ViewContactScreen> {
         child: Column(
           children: <Widget>[
             ContactInfoNotice(),
-            MainContactInfo(),
-            SectionHeader(text: "Circles"),
-            AddToCirclesButton(),
-            SectionHeader(text: "Reminders"),
+            Card(
+              child: MainContactInfo(),
+              margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+            ),
+            Card(
+              margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+              child: Column(
+                children: <Widget>[
+                  SectionHeader(text: "Circles"),
+                  AddToCirclesButton(),
+                ],
+              ),
+            ),
+            Card(
+              margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+              child: Column(
+                children: <Widget>[
+                  SectionHeader(text: "Reminders"),
+                  SetRemindersButton(),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -54,7 +72,7 @@ class AddToCirclesButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 18),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 18),
       child: ListTile(
         title: RichText(
           text: TextSpan(
@@ -84,6 +102,44 @@ class AddToCirclesButton extends StatelessWidget {
   }
 }
 
+class SetRemindersButton extends StatelessWidget {
+  const SetRemindersButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 18),
+      child: ListTile(
+        title: RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: "Set Reminders ",
+                style: TextStyle(
+                  color: kPrimaryDarkColor,
+                  fontWeight: FontWeight.w300,
+                  fontSize: 22,
+                ),
+              ),
+              WidgetSpan(
+                child: Icon(
+                  Icons.add_circle_outline,
+                  size: 22,
+                ),
+              ),
+            ],
+          ),
+        ),
+        dense: true,
+        visualDensity: VisualDensity.compact,
+        onTap: () {}, //TODO set reminders here
+      ),
+    );
+  }
+}
+
 class ContactInfoNotice extends StatelessWidget {
   const ContactInfoNotice({
     Key key,
@@ -92,7 +148,7 @@ class ContactInfoNotice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 15),
+      padding: EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 5.0),
       child: RichText(
         text: TextSpan(
           children: [
@@ -127,7 +183,7 @@ class SectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(32, 20, 0, 20),
+      padding: EdgeInsets.fromLTRB(32, 15, 0, 15),
       alignment: Alignment.centerLeft,
       child: Text(
         text,
@@ -149,19 +205,14 @@ class MainContactInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 12),
       title: Text(
         "Alvin Lo",
-        style: TextStyle(
-          fontSize: 32,
-          fontWeight: FontWeight.w400
-        ),
+        style: TextStyle(fontSize: 32, fontWeight: FontWeight.w400),
       ),
       subtitle: Text(
         "Software Engineer",
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w300
-        ),
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
       ),
       dense: true,
       visualDensity: VisualDensity.compact,
