@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class CirclesDB {
   final String uid;
   final CollectionReference userCircles;
-  CirclesDB(this.uid, this.userCircles);
+  final CollectionReference users;
+  CirclesDB(this.uid, this.userCircles, this.users);
 
   CirclesDB.fromUID(String uid)
       : this(
@@ -12,6 +14,7 @@ class CirclesDB {
               .collection('users')
               .document(uid)
               .collection("circles"),
+          Firestore.instance.collection('users'),
         );
 
   Future<DocumentReference> addCircle(String circleName) async {
@@ -34,7 +37,15 @@ class CirclesDB {
       DocumentReference circle) async {
     QuerySnapshot allContacts =
         await circle.collection("circleContacts").getDocuments();
-    return allContacts.documents;
+    List<DocumentSnapshot> contactReferences = allContacts.documents;
+    List<DocumentSnapshot> contacts;
+    contactReferences.forEach((element) async {
+      DocumentReference contactDoc = users.document(element["circleContact"]);
+      DocumentSnapshot contactSnapshot = await contactDoc.get();
+      contacts.add(contactSnapshot);
+      print(contactSnapshot["firstName"]);
+    });
+    return contacts;
   }
 
   Future<DocumentSnapshot> getCircleByName(String circleName) async {
@@ -60,7 +71,9 @@ class CirclesDB {
   Future<void> addContactsToCircle(
       DocumentReference circle, List<DocumentReference> contacts) async {
     for (var i = 0; i < contacts.length; i++) {
-      circle.collection("circleContacts").add({"circleContact": contacts[i]});
+      circle
+          .collection("circleContacts")
+          .add({"circleContact": contacts[i].path});
     }
   }
 
