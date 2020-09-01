@@ -35,18 +35,6 @@ class _CirclesScreenState extends State<CirclesScreen> {
     });
   }
 
-  Widget pageIndexIndicator(bool isCurrentPage) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 2.0),
-      height: isCurrentPage ? 10.0 : 6.0,
-      width: isCurrentPage ? 10.0 : 6.0,
-      decoration: BoxDecoration(
-        color: isCurrentPage ? Colors.grey : Colors.grey[300],
-        borderRadius: BorderRadius.circular(primaryBorderRadius),
-      ),
-    );
-  }
-
   Future getCircles() async {
     var firestore = Firestore.instance;
     QuerySnapshot qn = await firestore.collection('My Circles').getDocuments();
@@ -75,6 +63,8 @@ class _CirclesScreenState extends State<CirclesScreen> {
             cloudDB: widget.cloudDB,
             // allCircles: widget.circleList,
             currentScreenCircles: slides[index].getCurrentCircles(),
+            currentIndex: currentIndex,
+            slides: slides,
           );
         },
       ),
