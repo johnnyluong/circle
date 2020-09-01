@@ -20,27 +20,11 @@ class SliderTile extends StatelessWidget {
       this.currentIndex,
       this.slides});
 
-  Widget pageIndexIndicator(bool isCurrentPage) {
-    return Row(children: <Widget>[
-      Container(
-        // padding: EdgeInsets.all(50),
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        height: isCurrentPage ? 10.0 : 6.0,
-        width: isCurrentPage ? 10.0 : 6.0,
-        decoration: BoxDecoration(
-          color: isCurrentPage ? Colors.grey : Colors.grey[300],
-          borderRadius: BorderRadius.circular(primaryBorderRadius),
-        ),
-      ),
-      SizedBox(
-        width: 10,
-      )
-    ]);
-  }
-
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Background(
+      slides: slides,
+      currentIndex: currentIndex,
       child: Column(
         children: <Widget>[
           SizedBox(
@@ -90,27 +74,6 @@ class SliderTile extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            height: 65,
-            padding: EdgeInsets.symmetric(horizontal: 30),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    for (int i = 0; i < slides.length; i++)
-                      SizedBox(
-                        // width: 20,
-                        child: currentIndex == i
-                            ? pageIndexIndicator(true)
-                            : pageIndexIndicator(false),
-                      ),
-                  ],
-                ),
-              ],
-            ),
-          )
         ],
       ),
     );
