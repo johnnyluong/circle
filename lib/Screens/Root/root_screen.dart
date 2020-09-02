@@ -9,7 +9,6 @@ enum AuthStatus {
   NOT_LOGGED_IN,
   LOGGED_IN,
 }
-// Widget _Splash = new SplashScreen();
 
 class RootScreen extends StatefulWidget {
   RootScreen({this.auth});
@@ -22,6 +21,7 @@ class RootScreen extends StatefulWidget {
 
 class _RootScreenState extends State<RootScreen> {
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
+  bool _isOnboarding = false;
   String _userId = "";
   // CloudDB cloudDB;
   @override
@@ -41,7 +41,7 @@ class _RootScreenState extends State<RootScreen> {
     );
   }
 
-  void loginCallback() {
+  void loginCallback([bool isSignup = false]) {
     widget.auth.getCurrentUser().then((user) {
       setState(() {
         _userId = user.uid.toString();
@@ -49,6 +49,8 @@ class _RootScreenState extends State<RootScreen> {
     });
     setState(() {
       authStatus = AuthStatus.LOGGED_IN;
+      _isOnboarding = isSignup;
+      // _isOnboarding = true;
     });
   }
 
@@ -77,6 +79,7 @@ class _RootScreenState extends State<RootScreen> {
             userId: _userId,
             auth: widget.auth,
             logoutCallback: logoutCallback,
+            isOnboarding: _isOnboarding,
           );
         } else
           return new SplashScreen();

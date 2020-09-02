@@ -14,7 +14,7 @@ class LoginScreen extends StatefulWidget {
   }) : super(key: key);
 
   final BaseAuth auth;
-  final VoidCallback loginCallback;
+  final Function([bool]) loginCallback;
   @override
   State<StatefulWidget> createState() => new _LoginScreenState();
 }
@@ -26,54 +26,52 @@ class _LoginScreenState extends State<LoginScreen> {
   String _password;
   String _errorMessage;
 
-  bool _isLoginForm;
   bool _isLoading;
 
   bool _hidePassword = true;
 
   bool validateAndSave() {
-    // final form = _formKey.currentState;
-    // if (form.validate()) {
-    //   form.save();
-    //   return true;
-    // }
-    // return false;
-    return true;
+    final form = _formKey.currentState;
+    if (form.validate()) {
+      form.save();
+      return true;
+    }
+    return false;
   }
 
-  // Perform login or signup
-  void validateAndSubmit() async {
+  // Perform login by email or anonymous login
+  void validateAndSubmit(bool isAnonymous) async {
     setState(() {
       _errorMessage = "";
       _isLoading = true;
     });
-    if (validateAndSave()) {
+
+    try {
       String userId = "";
-      try {
-        if (_isLoginForm) {
-          //userId = await widget.auth.signInWithEmail(_email, _password);
-          userId = await widget.auth.signInAnonymously();
+      if (isAnonymous) {
+        userId = await widget.auth.signInAnonymously();
+        print('Signed in anonymously: $userId');
+      } else {
+        if (validateAndSave()) {
+          userId = await widget.auth.signInWithEmail(_email, _password);
+          print('Email: $_email');
+          print('Password: $_password');
           print('Signed in: $userId');
-        } else {
-          userId = await widget.auth.signUp(_email, _password);
-          //widget.auth.sendEmailVerification();
-          //_showVerifyEmailSentDialog();
-          print('Signed up user: $userId');
         }
-        if (userId.length > 0 && userId != null && _isLoginForm) {
-          widget.loginCallback();
-        }
-        setState(() {
-          _isLoading = false;
-        });
-      } catch (e) {
-        print('Error: $e');
-        setState(() {
-          _isLoading = false;
-          _errorMessage = e.message;
-          _formKey.currentState.reset();
-        });
       }
+      if (userId.length > 0 && userId != null) {
+        widget.loginCallback();
+      }
+      setState(() {
+        _isLoading = false;
+      });
+    } catch (e) {
+      print('Error: $e');
+      setState(() {
+        _isLoading = false;
+        _errorMessage = e.message;
+        _formKey.currentState.reset();
+      });
     }
   }
 
@@ -81,7 +79,6 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     _errorMessage = "";
     _isLoading = false;
-    _isLoginForm = true;
     super.initState();
   }
 
@@ -125,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   right: 42,
                   bottom: 14,
                 ),
-                child: Text('Forget Password?'),
+                child: Text('Forgot Password?'),
               ),
             ),
             RoundedButton(
@@ -133,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
               color: kPrimaryColor,
               textColor: primaryTextColor,
               press: () {
-                validateAndSubmit();
+                validateAndSubmit(false);
               },
             ),
             RoundedButton(
@@ -144,17 +141,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) {
-                      return SignupScreen();
-                    },
-                  ),
+                      builder: (context) => SignupScreen(
+                            auth: widget.auth,
+                            loginCallback: widget.loginCallback,
+                          )),
                 );
               },
             ),
             SizedBox(height: size.height * 0.02),
             GestureDetector(
               onTap: () {
-                validateAndSubmit(); //
+                validateAndSubmit(true); //
               },
               child: Text(
                 "Tap Here for Guest Login",
@@ -180,18 +177,16 @@ class _LoginScreenState extends State<LoginScreen> {
           children: <Widget>[
             StandardInfoInput(
               hintText: "Email",
-              validator: (value) =>
-                  value.isEmpty ? 'Must enter email address' : null, //TODO
-              onSaved: (value) => _email = value.trim(),
+              validator: (value) => widget.auth.validateEmail(value),
+              onSaved: (value) => _email = value,
               icon: Icons.email,
               keyboardType: TextInputType.emailAddress,
             ),
             StandardPasswordInput(
               hidePassword: _hidePassword,
               hintText: "Password",
-              validator: (value) =>
-                  value.isEmpty ? 'Must enter password' : null, //TODO
-              onSaved: (value) => _password = value.trim(),
+              validator: (value) => widget.auth.validatePassword(value), //TODO
+              onSaved: (value) => _password = value,
               onPressed: () {
                 setState(() => _hidePassword = !_hidePassword);
               },

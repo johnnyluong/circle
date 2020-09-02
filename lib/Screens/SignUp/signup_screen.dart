@@ -1,3 +1,6 @@
+// import 'package:circle/Screens/Home/main_screen.dart';
+// import 'package:circle/Screens/Login/login_screen.dart';
+
 import 'package:circle/Screens/Home/main_screen.dart';
 import 'package:circle/Screens/SignUp/components/or_divider.dart';
 import 'package:circle/Screens/SignUp/components/social_icon.dart';
@@ -10,8 +13,12 @@ import 'package:circle/constants.dart';
 import 'package:flutter/material.dart';
 
 class SignupScreen extends StatefulWidget {
-  SignupScreen({this.auth});
+  SignupScreen({
+    @required this.auth,
+    @required this.loginCallback,
+  });
   final BaseAuth auth;
+  final Function([bool]) loginCallback;
 
   @override
   _SignupScreenState createState() => _SignupScreenState();
@@ -23,6 +30,67 @@ class _SignupScreenState extends State<SignupScreen> {
   String _email;
   String _password;
   bool _hidePassword = true;
+
+  bool _isLoading;
+  String _errorMessage;
+  bool validateAndSave() {
+    final form = _formKey.currentState;
+    if (form.validate()) {
+      form.save();
+      return true;
+    }
+    return false;
+  }
+
+  // Perform signup
+  void validateAndSubmit() async {
+    setState(() {
+      _errorMessage = "";
+      _isLoading = true;
+    });
+
+    try {
+      String userId = "";
+      if (validateAndSave()) {
+        userId = await widget.auth.signUp(_email, _password);
+        // widget.auth.sendEmailVerification();
+        print('Email: $_email');
+        print('Password: $_password');
+        print('Signed up user: $userId');
+      }
+
+      if (userId.length > 0 && userId != null) {
+        widget.loginCallback(true);
+        Navigator.pop(context);
+      }
+      setState(() {
+        _isLoading = false;
+      });
+    } catch (e) {
+      print('Error: $e');
+      setState(() {
+        _isLoading = false;
+        _errorMessage = e.message;
+        _formKey.currentState.reset();
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    _errorMessage = "";
+    _isLoading = false;
+    super.initState();
+    // widget.auth.getCurrentUser().then(
+    //   (user) {
+    //     setState(() {
+    //       if (user != null) {
+    //         Navigator.pop(context);
+    //       }
+    //     });
+    //   },
+    // );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,23 +125,13 @@ class _SignupScreenState extends State<SignupScreen> {
             _showForm(),
             SizedBox(height: size.height * 0.02),
             RoundedButton(
-                color: kPrimaryLightColor,
-                textColor: primaryTextColor,
-                text: "SIGN UP",
-                // User Authentication
-                press: () async {
-                  dynamic result = await widget.auth.signUp(_email, _password);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return MainScreen( //TODO: Authentication & UserID and logoutCallback should be passed in as well
-                          auth: widget.auth,
-                        );
-                      },
-                    ),
-                  );
-                }),
+              color: kPrimaryLightColor,
+              textColor: primaryTextColor,
+              text: "SIGN UP",
+              press: () {
+                validateAndSubmit();
+              },
+            ),
             SizedBox(height: size.height * 0.02),
             AlreadyHaveAnAccountCheck(
               login: false,
@@ -99,8 +157,7 @@ class _SignupScreenState extends State<SignupScreen> {
           children: <Widget>[
             StandardInfoInput(
               hintText: "Email",
-              validator: (value) =>
-                  value.isEmpty ? 'Invalid Email' : null, //TODO
+              validator: (value) => widget.auth.validateEmail(value),
               onSaved: (value) => _email = value.trim(),
               icon: Icons.email,
               keyboardType: TextInputType.emailAddress,
@@ -108,9 +165,8 @@ class _SignupScreenState extends State<SignupScreen> {
             StandardPasswordInput(
               hidePassword: _hidePassword,
               hintText: "Password",
-              validator: (value) =>
-                  value.isEmpty ? 'Invalid Password' : null, //TODO
-              onSaved: (value) => _password = value.trim(),
+              validator: (value) => widget.auth.validatePassword(value), //TODO
+              onSaved: (value) => _password = value,
               onPressed: () {
                 setState(() => _hidePassword = !_hidePassword);
               },
