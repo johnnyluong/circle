@@ -56,6 +56,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
     setCircleList();
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: primaryColor,
         title: Text(
           'Circles',
