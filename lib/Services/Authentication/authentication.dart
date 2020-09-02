@@ -11,6 +11,8 @@ abstract class BaseAuth {
   Future<void> sendEmailVerification();
   Future<void> signOut();
   Future<bool> isEmailVerified();
+  String validatePassword(String password);
+  String validateEmail(String email);
 }
 
 class Auth implements BaseAuth {
@@ -69,5 +71,16 @@ class Auth implements BaseAuth {
   Future<bool> isEmailVerified() async {
     FirebaseUser user = await _firebaseAuth.currentUser();
     return user.isEmailVerified;
+  }
+
+  String validatePassword(String password) {
+    if (password.isEmpty) return "Must enter password";
+    if (password.length < 6) return "Must enter 6 or more characters";
+    return null;
+  }
+
+  String validateEmail(String email) {
+    if (email.trim().isEmpty) return "Enter a valid email address";
+    return null;
   }
 }

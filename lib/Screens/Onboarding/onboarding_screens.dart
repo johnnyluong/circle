@@ -1,10 +1,13 @@
-import 'package:circle/Screens/Home/main_screen.dart';
 import 'package:circle/Screens/Onboarding/onboarding_data.dart';
 import 'package:circle/Screens/Onboarding/slider_tile.dart';
 import 'package:circle/constants.dart';
 import 'package:flutter/material.dart';
 
 class Onboarding extends StatefulWidget {
+  Onboarding({
+    @required this.onboardingCallback,
+  });
+  final Function([bool]) onboardingCallback;
   @override
   _OnboardingState createState() => _OnboardingState();
 }
@@ -87,10 +90,11 @@ class _OnboardingState extends State<Onboarding> {
             )
           : GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MainScreen()),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => MainScreen()),
+                // );
+                widget.onboardingCallback(false);
               },
               child: Container(
                 alignment: Alignment.center,
