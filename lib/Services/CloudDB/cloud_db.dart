@@ -69,6 +69,7 @@ class CloudDB {
     return contactsCollection.snapshots();
   }
 
+//////////////////////////CIRCLES////////////////////////////////////
   Future<DocumentReference> addCircle(String circleName) async {
     print("ADDING CIRCLE: " + circleName);
     return circlesDB.addCircle(circleName);

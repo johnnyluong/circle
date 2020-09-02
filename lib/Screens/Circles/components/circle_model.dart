@@ -6,14 +6,9 @@ class CircleModel {
   List<DocumentSnapshot> currentScreenCircles;
   List<DocumentSnapshot> allCircles;
 
-  CircleModel({this.cloudDB, this.currentScreenCircles, this.allCircles});
-
-  void initState() async {
-    allCircles = await cloudDB.getAllCircles();
-  }
+  CircleModel({this.cloudDB});
 
   void setCircleList() async {
-    // cloudDB might be null???
     allCircles = await cloudDB.getAllCircles();
   }
 
@@ -22,31 +17,32 @@ class CircleModel {
   }
 }
 
-// This might be wrong!!
-List<CircleModel> getSlides() {
+Future<List<CircleModel>> getSlides(CloudDB cloudDB) async {
   List<CircleModel> slides = new List<CircleModel>();
-  CircleModel circleModel = new CircleModel();
+  CircleModel circleModel = new CircleModel(cloudDB: cloudDB);
 
-  // This is suspicious
-  // circleModel.setCircleList();
+  await circleModel.setCircleList();
 
   int numberOfAllCircles = circleModel.allCircles.length;
+  print('real number of circles' + numberOfAllCircles.toString());
   int numberOfScreens = (numberOfAllCircles / 6).ceil();
 
+  print("num of all circles" + numberOfAllCircles.toString());
+  print('num of all screens' + numberOfScreens.toString());
+
   for (int i = 0; i < numberOfScreens; i++) {
-    // circleModel.setCircleList();
-    // If the current screen is not the last screen (full screen)
     if (i != numberOfScreens - 1) {
       circleModel.currentScreenCircles =
           circleModel.allCircles.sublist(i * 6, (i + 1) * 6);
       slides.add(circleModel);
-      // circleModel = new CircleModel();
+      circleModel = new CircleModel(cloudDB: cloudDB);
+      await circleModel.setCircleList();
     }
     // If the current screen is the last screen of circles (not full)
     else {
       circleModel.currentScreenCircles = circleModel.allCircles.sublist(i * 6);
       slides.add(circleModel);
-      // circleModel = new CircleModel();
+      circleModel = new CircleModel();
     }
   }
   return slides;
