@@ -1,3 +1,4 @@
+import 'package:circle/Screens/AddContactInfo/view_contact.dart';
 import 'package:circle/Services/CloudDB/cloud_db.dart';
 import 'package:circle/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -41,7 +42,7 @@ class ContactListItem extends StatelessWidget {
         visualDensity: VisualDensity.compact,
         leading: CircleAvatar(
           radius: 18,
-          backgroundColor: kPrimaryLightColor,
+          backgroundColor: secondaryIconColor,
           child: IconButton(
             icon: Icon(
               Icons.person,
@@ -68,7 +69,18 @@ class ContactListItem extends StatelessWidget {
             },
           ),
         ),
-        onTap: () {}, //TODO Route to view contact
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ViewContactScreen(
+                isNewContact: false,
+                name: fullName,
+                profession: userDocument.data['profession'],
+              ),
+            ),
+          );
+        }, //TODO Route to view contact
       ),
     );
   }

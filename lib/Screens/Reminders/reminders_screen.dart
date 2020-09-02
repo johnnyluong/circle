@@ -4,7 +4,6 @@ import 'package:circle/constants.dart';
 class RemindersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
