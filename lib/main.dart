@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Auth',
       theme: ThemeData(
         primaryColor: kPrimaryColor,
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: backgroundColor,
       ),
       home: new RootScreen(auth: new Auth()),
       // home: new RootScreen(),

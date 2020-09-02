@@ -1,5 +1,7 @@
 // import 'package:circle/Screens/Home/main_screen.dart';
 // import 'package:circle/Screens/Login/login_screen.dart';
+
+import 'package:circle/Screens/Home/main_screen.dart';
 import 'package:circle/Screens/SignUp/components/or_divider.dart';
 import 'package:circle/Screens/SignUp/components/social_icon.dart';
 import 'package:circle/Services/Authentication/authentication.dart';
@@ -188,15 +190,15 @@ class SignUpWithSocial extends StatelessWidget {
       children: <Widget>[
         SocialIcon(
           iconSrc: "assets/icons/facebook.svg",
-          press: () {}, //TODO: facebook integration
+          press: () {},
         ),
         SocialIcon(
           iconSrc: "assets/icons/twitter.svg",
-          press: () {}, //TODO: twitter integration
+          press: () {},
         ),
         SocialIcon(
           iconSrc: "assets/icons/google-plus.svg",
-          press: () {}, //TODO: google integration
+          press: () {},
         ),
       ],
     );
