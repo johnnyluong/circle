@@ -1,11 +1,13 @@
 import 'package:circle/components/floating_action_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/constants.dart';
 
 class ViewContactScreen extends StatefulWidget {
-  // const ViewContactScreen({
-  //   Key key,
-  // }) : super(key: key);
+  final Future<DocumentReference> contactRef;
+  final String name;
+  final String profession;
+  ViewContactScreen({@required this.contactRef, this.name, this.profession});
 
   @override
   _ViewContactScreenState createState() => _ViewContactScreenState();
@@ -23,32 +25,44 @@ class _ViewContactScreenState extends State<ViewContactScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            ContactInfoNotice(),
-            Card(
-              child: MainContactInfo(),
-              margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
-            ),
-            Card(
-              margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
-              child: Column(
+        child: FutureBuilder<DocumentReference>(
+          future: widget.contactRef,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return Column(
                 children: <Widget>[
-                  SectionHeader(text: "Circles"),
-                  AddToCirclesButton(),
+                  ContactInfoNotice(),
+                  Card(
+                    child: MainContactInfo(
+                      name: widget.name,
+                      profession: widget.profession,
+                    ),
+                    margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+                  ),
+                  Card(
+                    margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+                    child: Column(
+                      children: <Widget>[
+                        SectionHeader(text: "Circles"),
+                        AddToCirclesButton(),
+                      ],
+                    ),
+                  ),
+                  Card(
+                    margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+                    child: Column(
+                      children: <Widget>[
+                        SectionHeader(text: "Reminders"),
+                        SetRemindersButton(),
+                      ],
+                    ),
+                  ),
                 ],
-              ),
-            ),
-            Card(
-              margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
-              child: Column(
-                children: <Widget>[
-                  SectionHeader(text: "Reminders"),
-                  SetRemindersButton(),
-                ],
-              ),
-            ),
-          ],
+              );
+            } else {
+              return CircularProgressIndicator();
+            }
+          },
         ),
       ),
       floatingActionButton: CustomFloatingActionButton(
@@ -198,8 +212,12 @@ class SectionHeader extends StatelessWidget {
 }
 
 class MainContactInfo extends StatelessWidget {
+  final String name;
+  final String profession;
   const MainContactInfo({
     Key key,
+    @required this.name,
+    @required this.profession,
   }) : super(key: key);
 
   @override
@@ -207,11 +225,11 @@ class MainContactInfo extends StatelessWidget {
     return ListTile(
       contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 12),
       title: Text(
-        "Alvin Lo",
+        name,
         style: TextStyle(fontSize: 32, fontWeight: FontWeight.w400),
       ),
       subtitle: Text(
-        "Software Engineer",
+        profession,
         style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
       ),
       dense: true,
