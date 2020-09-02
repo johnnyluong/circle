@@ -16,6 +16,7 @@ class _AddRemindersScreenState extends State<AddRemindersScreen> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: kPrimaryColor,
         title: Text(
           'Add Reminders to Contacts',

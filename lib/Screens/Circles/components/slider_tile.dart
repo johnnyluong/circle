@@ -1,12 +1,10 @@
-import 'package:circle/Screens/Circles/components/circle_contact_list.dart';
 import 'package:circle/Screens/Circles/components/sample_circle_list.dart';
-import 'package:circle/Screens/Circles/components/sample_contact_info.dart';
+import 'package:circle/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:circle/Services/CloudDB/cloud_db.dart';
 import 'package:circle/Screens/Circles/components/background.dart';
-import 'package:circle/constants.dart';
 import 'package:circle/Screens/Circles/components/circle_model.dart';
 
 class SliderTile extends StatelessWidget {
@@ -23,7 +21,6 @@ class SliderTile extends StatelessWidget {
       this.slides});
 
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Background(
       slides: slides,
       currentIndex: currentIndex,
@@ -56,12 +53,12 @@ class SliderTile extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: primaryTextColor,
                   ),
                 ),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.blue[900],
+                  color: tertiaryBackgroundColor,
                 ),
                 margin: EdgeInsets.all(15.0),
                 padding: EdgeInsets.all(15.0),

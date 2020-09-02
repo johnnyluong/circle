@@ -6,6 +6,7 @@ class RemindersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: primaryColor,
         title: Text(
           'Reminders',

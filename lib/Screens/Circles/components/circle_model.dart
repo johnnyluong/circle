@@ -24,11 +24,8 @@ Future<List<CircleModel>> getSlides(CloudDB cloudDB) async {
   await circleModel.setCircleList();
 
   int numberOfAllCircles = circleModel.allCircles.length;
-  print('real number of circles' + numberOfAllCircles.toString());
   int numberOfScreens = (numberOfAllCircles / 6).ceil();
 
-  print("num of all circles" + numberOfAllCircles.toString());
-  print('num of all screens' + numberOfScreens.toString());
 
   for (int i = 0; i < numberOfScreens; i++) {
     if (i != numberOfScreens - 1) {

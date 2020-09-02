@@ -79,6 +79,7 @@ class AddInfoState extends State<AddInfo> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: primaryColor,
         iconTheme: IconThemeData(color: addItemButtonColor),
         title: Text(

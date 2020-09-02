@@ -1,6 +1,3 @@
-import 'package:circle/Screens/AddContactInfo/add_info.dart';
-import 'package:circle/Services/CloudDB/cloud_db.dart';
-import 'package:circle/components/contact_list_item.dart';
 import 'package:circle/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/Screens/Circles/components/sample_contact_info.dart';
@@ -21,7 +18,11 @@ class SampleCircleListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kPrimaryColor,
+        centerTitle: true,
+        iconTheme: IconThemeData(
+          color: addItemButtonColor,
+        ),
+        backgroundColor: primaryColor,
         title: Text(
           'RISE',
           style: TextStyle(color: primaryTextColor),
@@ -31,25 +32,55 @@ class SampleCircleListScreen extends StatelessWidget {
         itemCount: sampleContacts.length,
         itemBuilder: (context, index) {
           return Card(
-            child: ListTile(
-              onTap: () {},
-              title: Text(
-                sampleContacts[index].name,
-                style: TextStyle(fontSize: 16),
-              ),
-              subtitle: Text(
-                sampleContacts[index].title,
-                style: TextStyle(fontSize: 12),
-              ),
-              dense: true,
-              visualDensity: VisualDensity.compact,
-              leading: Icon(
-                Icons.person,
-                size: 28,
-              ),
-              trailing: Icon(Icons.menu),
+      color: backgroundColor,
+      margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+      elevation: 2,
+      child: ListTile(
+        title: Text(
+          sampleContacts[index].name,
+          style: TextStyle(
+            fontSize: 16,
+            color: primaryColor,
+          ),
+        ),
+        subtitle: Text(
+          sampleContacts[index].title,
+          style: TextStyle(
+            fontSize: 12,
+          ),
+        ),
+        dense: true,
+        visualDensity: VisualDensity.compact,
+        leading: CircleAvatar(
+          radius: 18,
+          backgroundColor: secondaryIconColor,
+          child: IconButton(
+            icon: Icon(
+              Icons.person,
+              color: primaryIconColor,
+              size: 21,
             ),
-          );
+            onPressed: () {},
+          ),
+        ),
+        trailing: DropdownButtonHideUnderline(
+          child: DropdownButton<String>(
+            icon: Icon(Icons.arrow_drop_down),
+            iconSize: 24,
+            elevation: 16,
+            items: <String>['Delete']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (String newValue) {},
+          ),
+        ),
+        onTap: () {},
+      ),
+    );
         },
       ),
     );

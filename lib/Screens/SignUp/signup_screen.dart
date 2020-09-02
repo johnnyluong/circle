@@ -140,8 +140,8 @@ class _SignupScreenState extends State<SignupScreen> {
                 Navigator.pop(context);
               },
             ),
-            OrDivider(),
-            SignUpWithSocial(),
+            //OrDivider(),
+            //SignUpWithSocial(),
           ],
         ),
       ),

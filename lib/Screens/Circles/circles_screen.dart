@@ -48,6 +48,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
     setCircleList();
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: primaryColor,
         title: Text(
           'Circles',
@@ -62,22 +63,24 @@ class _CirclesScreenState extends State<CirclesScreen> {
           ),
         ],
       ),
-      body: PageView.builder(
-        controller: pageController,
-        itemCount: slides.length,
-        onPageChanged: (val) {
-          setState(() {
-            currentIndex = val;
-          });
-        },
-        itemBuilder: (context, index) {
-          return SliderTile(
-            cloudDB: widget.cloudDB,
-            currentScreenCircles: slides[index].getCurrentCircles(),
-            currentIndex: currentIndex,
-            slides: slides,
-          );
-        },
+      body: Container(
+        child: PageView.builder(
+          controller: pageController,
+          itemCount: slides.length,
+          onPageChanged: (val) {
+            setState(() {
+              currentIndex = val;
+            });
+          },
+          itemBuilder: (context, index) {
+            return SliderTile(
+              cloudDB: widget.cloudDB,
+              currentScreenCircles: slides[index].getCurrentCircles(),
+              currentIndex: currentIndex,
+              slides: slides,
+            );
+          },
+        ),
       ),
     );
   }
@@ -95,47 +98,51 @@ class _CirclesScreenState extends State<CirclesScreen> {
       ),
       context: context,
       builder: (context) {
-        return Column(
-          children: <Widget>[
-            SizedBox(height: size.height * 0.065),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 15),
-              padding: EdgeInsets.symmetric(
-                horizontal: size.width * 0.28,
-                vertical: size.height * 0.1,
-              ),
-              decoration: BoxDecoration(
-                color: kPrimaryColor,
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Text(
-                //TODO: Add image upload functionality
-                'Upload Image',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
+        return SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: size.height * 0.065),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: size.width * 0.28,
+                    vertical: size.height * 0.1,
+                  ),
+                  decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    //TODO: Add image upload functionality
+                    'Upload Image',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
-              ),
+                SizedBox(height: size.height * 0.02),
+                RoundedInputField(
+                  text: 'Circle Name',
+                  icon: Icons.donut_large,
+                  onChanged: (value) {
+                    setState(() {
+                      circleName = value;
+                    });
+                  },
+                ),
+                RoundedButton(
+                  text: 'Create Circle',
+                  press: () {
+                    widget.cloudDB.addCircle(circleName);
+                    Navigator.pop(context);
+                  },
+                ),
+                SizedBox(height: size.height * 0.35),
+              ],
             ),
-            SizedBox(height: size.height * 0.02),
-            RoundedInputField(
-              text: 'Circle Name',
-              icon: Icons.donut_large,
-              onChanged: (value) {
-                setState(() {
-                  circleName = value;
-                });
-              },
-            ),
-            RoundedButton(
-              text: 'Create Circle',
-              press: () {
-                widget.cloudDB.addCircle(circleName);
-                Navigator.pop(context);
-              },
-            ),
-          ],
+          ),
         );
       },
     );

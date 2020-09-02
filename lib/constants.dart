@@ -22,6 +22,8 @@ const backgroundColor = Color(0xFFEEF5FF);
 
 const secondaryBackgroundColor = Color(0xFFFFFFFF);
 
+const tertiaryBackgroundColor = Color(0xFF4F53A8);
+
 const disabledColor = Color(0xFFAFAFB9);
 
 const primaryBorderRadius = 13.0;
