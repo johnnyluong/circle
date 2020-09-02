@@ -105,6 +105,7 @@ class _SignupScreenState extends State<SignupScreen> {
               style: TextStyle(
                 fontWeight: FontWeight.w300,
                 fontSize: 45,
+                color: secondaryTextColor,
               ),
             ),
             SizedBox(height: size.height * 0.12),
@@ -118,14 +119,13 @@ class _SignupScreenState extends State<SignupScreen> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 24,
+                  color: secondaryTextColor,
                 ),
               ),
             ),
             _showForm(),
             SizedBox(height: size.height * 0.02),
             RoundedButton(
-              color: kPrimaryLightColor,
-              textColor: primaryTextColor,
               text: "SIGN UP",
               press: () {
                 validateAndSubmit();

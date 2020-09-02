@@ -31,7 +31,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
       value: widget.cloudDB.contacts,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: kPrimaryColor,
+          backgroundColor: primaryColor,
           title: Text(
             'My Network',
             style: TextStyle(color: primaryTextColor),
@@ -40,7 +40,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.add),
-              color: primaryIconColor,
+              color: addItemButtonColor,
               onPressed: () {
                 Navigator.push(
                   context,

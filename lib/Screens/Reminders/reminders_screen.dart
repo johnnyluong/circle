@@ -7,7 +7,7 @@ class RemindersScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: primaryColor,
         title: Text(
           'Reminders',
           style: TextStyle(color: primaryTextColor),
@@ -16,7 +16,7 @@ class RemindersScreen extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add),
-            color: primaryIconColor,
+            color: addItemButtonColor,
             onPressed: () {
               //TODO: Add Reminder functionality here
             },
@@ -63,6 +63,7 @@ class ReminderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: backgroundColor,
       margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
       elevation: 2,
       child: ListTile(
@@ -76,6 +77,7 @@ class ReminderCard extends StatelessWidget {
           description,
           style: TextStyle(
             fontSize: 12,
+            color: primaryColor,
           ),
         ),
         dense: true,

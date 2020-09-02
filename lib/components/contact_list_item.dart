@@ -20,6 +20,7 @@ class ContactListItem extends StatelessWidget {
         userDocument.data['firstName'] + " " + userDocument.data['lastName'];
 
     return Card(
+      color: backgroundColor,
       margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
       elevation: 2,
       child: ListTile(
@@ -27,6 +28,7 @@ class ContactListItem extends StatelessWidget {
           fullName,
           style: TextStyle(
             fontSize: 16,
+            color: primaryColor,
           ),
         ),
         subtitle: Text(

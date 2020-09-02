@@ -97,6 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
               style: TextStyle(
                 fontWeight: FontWeight.w300,
                 fontSize: 45,
+                color: primaryColor,
               ),
             ),
             SizedBox(height: size.height * 0.12),
@@ -110,6 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 24,
+                  color: primaryColor,
                 ),
               ),
             ),
@@ -122,21 +124,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   right: 42,
                   bottom: 14,
                 ),
-                child: Text('Forgot Password?'),
+                child: Text(
+                  'Forgot Password?',
+                  style: TextStyle(color: addItemButtonColor),
+                ),
               ),
             ),
             RoundedButton(
               text: "LOGIN",
-              color: kPrimaryColor,
-              textColor: primaryTextColor,
               press: () {
                 validateAndSubmit(false);
               },
             ),
             RoundedButton(
               text: "SIGN UP",
-              color: kPrimaryLightColor,
-              textColor: primaryTextColor,
+              textColor: secondaryTextColor,
+              color: secondaryBackgroundColor,
               press: () {
                 Navigator.push(
                   context,
@@ -156,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Text(
                 "Tap Here for Guest Login",
                 style: TextStyle(
-                  color: primaryTextColor,
+                  color: addItemButtonColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
