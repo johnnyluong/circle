@@ -1,9 +1,10 @@
 import 'dart:ui';
 
-import 'package:circle/Screens/AddContactInfo/finish_single_contact.dart';
+import 'package:circle/Screens/AddContactInfo/view_contact.dart';
 import 'package:circle/Services/CloudDB/cloud_db.dart';
 import 'package:circle/components/floating_action_button.dart';
 import 'package:circle/components/standard_info_input.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:circle/constants.dart';
@@ -25,6 +26,9 @@ class AddInfoState extends State<AddInfo> {
   String _email;
   String _phoneNumber;
 
+  String contactID;
+  Future<DocumentReference> contactReference;
+
   Map<String, dynamic> makeContact(String firstName, String lastName,
       String profession, String email, String phoneNumber) {
     Map<String, dynamic> newContact = Map<String, dynamic>();
@@ -36,19 +40,12 @@ class AddInfoState extends State<AddInfo> {
     return newContact;
   }
 
-  void addNewContact() {
-    print("Contact Added: " +
-        _firstName +
-        " " +
-        _lastName +
-        ", " +
-        _profession +
-        " " +
-        _email +
-        " " +
-        _phoneNumber);
-    widget.cloudDB.addContact(
+  void addNewContact() async {
+    var reference = widget.cloudDB.addContact(
         makeContact(_firstName, _lastName, _profession, _email, _phoneNumber));
+    setState(() {
+      contactReference = reference;
+    });
   }
 
   // Check if form is valid before perform login or signup
@@ -115,7 +112,11 @@ class AddInfoState extends State<AddInfo> {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return FinishSingleContactScreen();
+                  return ViewContactScreen(
+                    contactRef: contactReference,
+                    name: _firstName + " " + _lastName,
+                    profession: _profession,
+                  );
                 },
               ),
             );

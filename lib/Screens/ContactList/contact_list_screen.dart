@@ -1,7 +1,6 @@
 import 'package:circle/Screens/AddContactInfo/add_info.dart';
 import 'package:circle/Services/CloudDB/cloud_db.dart';
 import 'package:circle/components/contact_list.dart';
-import 'package:circle/components/contact_list_item.dart';
 import 'package:circle/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

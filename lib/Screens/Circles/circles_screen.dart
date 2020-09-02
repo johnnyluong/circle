@@ -5,6 +5,7 @@ import 'package:circle/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:circle/Services/CloudDB/cloud_db.dart';
 
+// ignore: must_be_immutable
 class CirclesScreen extends StatefulWidget {
   final CloudDB cloudDB;
   List<DocumentSnapshot> circleList = List<DocumentSnapshot>();
