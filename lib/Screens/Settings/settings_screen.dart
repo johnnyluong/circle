@@ -18,6 +18,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: primaryColor,
         title: Text(
           'Settings',
