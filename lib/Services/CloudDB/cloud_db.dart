@@ -1,50 +1,55 @@
+import 'package:circle/Services/CloudDB/microservices/contacts_db.dart';
+import 'package:circle/Services/CloudDB/microservices/circles_db.dart';
+import 'package:circle/Services/CloudDB/microservices/reminders_db.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CloudDB {
   final String uid;
   final DocumentReference userDoc;
-  CloudDB(this.uid, this.userDoc);
+  final ContactsDB contactsDB;
+  final CirclesDB circlesDB;
+  final RemindersDB remindersDB;
+
+  CloudDB(
+    this.uid,
+    this.userDoc,
+    this.contactsDB,
+    this.circlesDB,
+    this.remindersDB,
+  );
 
   CloudDB.fromUID(String uid)
-      : this(uid, Firestore.instance.collection('users').document(uid));
-
+      : this(
+          uid,
+          Firestore.instance.collection('users').document(uid),
+          ContactsDB.fromUID(uid),
+          CirclesDB.fromUID(uid),
+          RemindersDB.fromUID(uid),
+        );
+//////////////////////////CONTACTS////////////////////////////////////
   Future<DocumentReference> addContact(Map<String, dynamic> newContact) async {
-    // try {
-    return userDoc.collection("contacts").add(newContact);
-    // } catch (e) {
-    //   print("Add Contact Failed ... See cloud_DB.dart");
-    //   return null;
-    // }
+    return contactsDB.addContact(newContact);
   }
 
   Future<void> updateContact(
       DocumentReference contact, Map<String, dynamic> newContact) async {
-    // await contact.setData(newContact);
-    return contact.updateData(newContact);
+    return contactsDB.updateContact(contact, newContact);
   }
 
   Future<void> deleteContacts(List<DocumentReference> contacts) async {
-    for (var i = 0; i < contacts.length; i++) {
-      Future<void> del = contacts[i].delete();
-      del
-          .then((void _) => print("Contact deleted successfully"))
-          .catchError((e) => print("Contact deletion failed."));
-    }
+    return contactsDB.deleteContacts(contacts);
   }
 
   Future<void> deleteContact(DocumentReference contact) async {
-    Future<void> del = contact.delete();
-    del
-        .then((void _) => print("Contact deleted successfully"))
-        .catchError((e) => print("Contact deletion failed."));
+    return contactsDB.deleteContact(contact);
   }
 
   Future<void> addNoteToContact(DocumentReference contact, String note) async {
-    contact.collection("notes").add({"note": note});
+    return contactsDB.addNoteToContact(contact, note);
   }
 
   Future<void> updateNote(DocumentReference oldNote, String note) async {
-    oldNote.updateData({"note": note});
+    return contactsDB.updateNote(oldNote, note);
   }
 
   Future<List<DocumentSnapshot>> getAllNotes(DocumentReference contact) async {
@@ -53,84 +58,100 @@ class CloudDB {
   }
 
   Future<List<DocumentSnapshot>> getAllContacts() async {
-    QuerySnapshot allContacts =
-        await userDoc.collection("contacts").getDocuments();
-    // List<DocumentSnapshot> list = allContacts.documents;
-    // allContacts
-    //     .then((QuerySnapshot all) => list = all.documents)
-    //     .catchError((e) => print("getAllContacts method failed."));
-    // for (int i = 0; i < list.length; i++) {
-    //   print(list[i].data.toString());
-    // }
-    return allContacts.documents;
+    return contactsDB.getAllContacts();
   }
 
+//////////////////////////CIRCLES////////////////////////////////////
   Future<DocumentReference> addCircle(String circleName) async {
-    return userDoc.collection("circles").add({"circleName": circleName});
+    return circlesDB.addCircle(circleName);
   }
 
   Future<void> renameCircle(DocumentReference circle, String newName) async {
-    return circle.updateData({"circleName": newName});
+    return circlesDB.renameCircle(circle, newName);
   }
 
   Future<List<DocumentSnapshot>> getAllCircles() async {
-    QuerySnapshot allCircles =
-        await userDoc.collection("circles").getDocuments();
-    // List<DocumentSnapshot> allCirclesDoc = new List();
-    // print(allCircles.documents[0].data["circleName"]);
-    if (allCircles.documents == null) {
-      return new List();
-    }
-    return allCircles.documents;
+    return circlesDB.getAllCircles();
   }
 
   Future<List<DocumentSnapshot>> getCircleContacts(
       DocumentReference circle) async {
-    QuerySnapshot allContacts =
-        await circle.collection("circleContacts").getDocuments();
-    return allContacts.documents;
+    return circlesDB.getCircleContacts(circle);
   }
 
   Future<DocumentSnapshot> getCircleByName(String circleName) async {
-    Query query = userDoc
-        .collection("circles")
-        .where("circleName", isEqualTo: circleName);
-    QuerySnapshot snapshot = await query.getDocuments();
-    List<DocumentSnapshot> list = snapshot.documents;
-    if (list.length == 1) {
-      return list[0];
-    } else {
-      return null;
-    }
+    return circlesDB.getCircleByName(circleName);
   }
 
   Future<void> deleteCircles(List<DocumentReference> circlesList) async {
-    for (var i = 0; i < circlesList.length; i++) {
-      Future<void> del = circlesList[i].delete();
-      del
-          .then((void _) => print("Circle deleted successfully"))
-          .catchError((e) => print("Circle deletion failed."));
-    }
+    return circlesDB.deleteCircles(circlesList);
   }
 
   Future<void> addContactsToCircle(
       DocumentReference circle, List<DocumentReference> contacts) async {
-    for (var i = 0; i < contacts.length; i++) {
-      // circle
-      //     .collection("circleContacts")
-      //     .add({"circleContact": contacts[i].path});
-      circle.collection("circleContacts").add({"circleContact": contacts[i]});
-    }
+    return circlesDB.addContactsToCircle(circle, contacts);
   }
 
   Future<void> removeContactsFromCircle(
       DocumentReference circle, List<DocumentReference> circleContacts) async {
-    for (var i = 0; i < circleContacts.length; i++) {
-      Future<void> del = circleContacts[i].delete();
-      del
-          .then((void _) => print("Contact deleted successfully"))
-          .catchError((e) => print("Contact deletion failed."));
-    }
+    return circlesDB.removeContactsFromCircle(circle, circleContacts);
+  }
+
+//////////////////////////REMINDERS////////////////////////////////////
+  Future<DocumentReference> addReminder(
+      Map<String, dynamic> newReminder) async {
+    return remindersDB.addReminder(newReminder);
+  }
+
+  Future<void> deleteReminders(List<DocumentReference> reminders) async {
+    return remindersDB.deleteReminders(reminders);
+  }
+
+  Future<void> updateReminder(
+      DocumentReference reminder, Map<String, dynamic> newReminder) async {
+    return remindersDB.updateReminder(reminder, newReminder);
+  }
+
+  Future<List<DocumentSnapshot>> getAllRemindersByContact(
+    DocumentReference contact,
+  ) async {
+    return remindersDB.getAllRemindersByContact(contact);
+  }
+
+  Future<List<DocumentSnapshot>> getAllIncompleteReminders() async {
+    return remindersDB.getAllIncompleteReminders();
+  }
+
+  Future<List<DocumentSnapshot>> getAllCompletedReminders() async {
+    return remindersDB.getAllCompletedReminders();
+  }
+
+  Future<List<DocumentSnapshot>> getAllReminders() async {
+    return remindersDB.getAllReminders();
+  }
+
+  Future<List<DocumentSnapshot>> getAllFutureReminders() async {
+    return remindersDB.getAllFutureReminders();
+  }
+
+  Future<List<DocumentSnapshot>> getAllPastReminders() async {
+    return remindersDB.getAllPastReminders();
+  }
+
+  Future<List<DocumentSnapshot>> getAllFutureIncompleteReminders() async {
+    return remindersDB.getAllFutureCompletedReminders();
+  }
+
+  Future<List<DocumentSnapshot>> getAllFutureCompletedReminders() async {
+    return remindersDB.getAllFutureCompletedReminders();
+  }
+
+  Future<List<DocumentSnapshot>> getAllPastIncompleteReminders() async {
+    return remindersDB.getAllPastIncompleteReminders();
+  }
+
+  Future<List<DocumentSnapshot>> getAllPastCompletedReminders() async {
+    return remindersDB.getAllPastCompletedReminders();
   }
 
   void printData() {

@@ -13,22 +13,37 @@ class CircleContactList extends StatefulWidget {
 
 class _CircleContactListState extends State<CircleContactList> {
   Future getCircleContacts() async {
-    //TODO: add listener to listen to changes in contacts lists
-    // return widget.cloudDB.getCircleContacts(widget.circle);
+    return widget.cloudDB.getCircleContacts(widget.circle);
   }
 
-  void setCircleContacts() async {
-    widget.circleContacts =
-        await widget.cloudDB.getCircleContacts(widget.circle);
-    print(widget.circleContacts.elementAt(0).data['circleContact']);
-    print(widget.circleContacts.length);
+  Stream<QuerySnapshot> get circleContacts {
+    final CollectionReference contactsCollection =
+        widget.circle.collection('circleContacts');
+    return contactsCollection.snapshots();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // widget.circleContacts = circleContactsTest;
+
+    getCircleContacts().then((val) {
+      setState(() {
+        widget.circleContacts = val;
+      });
+    });
+
+    if (widget.circleContacts == null) {
+      print('CircleContacts in null');
+    }
   }
 
   Widget build(BuildContext context) {
-    // await setCircleContacts();
-
     if (widget.circleContacts == null) {
       print('Circle contacts list is null');
+    } else {
+      print('This is working now ');
     }
 
     return Scaffold(
@@ -36,11 +51,12 @@ class _CircleContactListState extends State<CircleContactList> {
           title: Text('Current Circle Name TODO'),
         ),
         body: ListView.builder(
-            // itemCount: widget.circleContacts.length,
-            itemCount: 5,
+            itemCount: widget.circleContacts.length,
             itemBuilder: (context, index) {
               return Card(
-                child: ListTile(title: Text('ITEM PLACEHOLDER')),
+                // TODO: it returns a document snapshot but needs to be a string
+                child: ListTile(
+                    title: Text(widget.circleContacts.length.toString())),
               );
             }));
   }

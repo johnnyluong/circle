@@ -1,4 +1,6 @@
 import 'package:circle/Screens/Circles/components/circle_contact_list.dart';
+import 'package:circle/Screens/Circles/components/sample_circle_list.dart';
+import 'package:circle/Screens/Circles/components/sample_contact_info.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -42,10 +44,7 @@ class SliderTile extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return CircleContactList(
-                        circle: currentScreenCircles.elementAt(index).reference,
-                        cloudDB: cloudDB,
-                      );
+                      return SampleCircleListScreen();
                     },
                   ),
                 );
@@ -80,3 +79,15 @@ class SliderTile extends StatelessWidget {
     );
   }
 }
+
+/*
+
+
+return CircleContactList(
+                        circle: currentScreenCircles.elementAt(index).reference,
+                        cloudDB: cloudDB,
+                      );
+
+
+
+*/

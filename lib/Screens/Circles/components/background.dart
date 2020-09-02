@@ -3,6 +3,8 @@ import 'package:circle/Services/CloudDB/cloud_db.dart';
 import 'package:flutter/material.dart';
 import 'package:circle/constants.dart';
 import 'package:circle/Screens/Circles/components/circle_model.dart';
+import 'package:circle/components/rounded_button.dart';
+import 'package:circle/components/rounded_input_field.dart';
 
 class Background extends StatelessWidget {
   final Widget child;
@@ -38,6 +40,61 @@ class Background extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    void _onButtonPressed() {
+      Size size = MediaQuery.of(context).size;
+      showModalBottomSheet(
+        isScrollControlled: true,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(25),
+            topRight: Radius.circular(25),
+          ),
+        ),
+        context: context,
+        builder: (context) {
+          return Column(
+            children: <Widget>[
+              SizedBox(height: size.height * 0.065),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 15),
+                padding: EdgeInsets.symmetric(
+                  horizontal: size.width * 0.28,
+                  vertical: size.height * 0.1,
+                ),
+                decoration: BoxDecoration(
+                  color: kPrimaryColor,
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  //TODO: Add image upload functionality
+                  'Upload Image',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              SizedBox(height: size.height * 0.02),
+              RoundedInputField(
+                text: 'Circle Name',
+                icon: Icons.donut_large,
+                onChanged: (value) {},
+              ),
+              RoundedButton(
+                text: 'Create Circle',
+                color: kPrimaryColor,
+                textColor: Colors.white,
+                press: () {},
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Container(
       child: Stack(
         alignment: Alignment.center,
@@ -49,16 +106,7 @@ class Background extends StatelessWidget {
             child: FloatingActionButton(
               child: Icon(Icons.person_add),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return AddInfo(
-                        cloudDB: cloudDB,
-                      );
-                    },
-                  ),
-                );
+                _onButtonPressed();
               },
               backgroundColor: Colors.blue,
             ),
