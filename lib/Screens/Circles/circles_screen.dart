@@ -57,7 +57,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
     setCircleList();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: primaryColor,
         title: Text(
           'Circles',
           style: TextStyle(color: primaryTextColor),
@@ -66,7 +66,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add),
-            color: primaryIconColor,
+            color: addItemButtonColor,
             onPressed: _onButtonPressed,
           ),
         ],
@@ -93,6 +93,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
   void _onButtonPressed() {
     Size size = MediaQuery.of(context).size;
     showModalBottomSheet(
+      backgroundColor: backgroundColor,
       isScrollControlled: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -137,10 +138,9 @@ class _CirclesScreenState extends State<CirclesScreen> {
             ),
             RoundedButton(
               text: 'Create Circle',
-              color: kPrimaryDarkColor,
-              textColor: kPrimaryColor,
               press: () {
                 widget.cloudDB.addCircle(circleName);
+                Navigator.pop(context);
               },
             ),
           ],

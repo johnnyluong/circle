@@ -79,8 +79,8 @@ class AddInfoState extends State<AddInfo> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kPrimaryColor,
-        iconTheme: IconThemeData(color: primaryIconColor),
+        backgroundColor: primaryColor,
+        iconTheme: IconThemeData(color: addItemButtonColor),
         title: Text(
           'Add Contact Info',
           style: TextStyle(color: primaryTextColor),
@@ -95,6 +95,7 @@ class AddInfoState extends State<AddInfo> {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
+                color: secondaryTextColor,
               ),
               textAlign: TextAlign.center,
             ),
@@ -103,7 +104,6 @@ class AddInfoState extends State<AddInfo> {
         ),
       ),
       floatingActionButton: CustomFloatingActionButton(
-        color: kPrimaryDarkColor,
         press: () async {
           bool success = await validateAndSubmit();
           if (success) {
@@ -190,7 +190,7 @@ class AddInfoState extends State<AddInfo> {
             ),
             prefixIcon: Icon(
               Icons.person,
-              color: primaryIconColor,
+              color: secondaryIconColor,
             )),
         validator: (value) => value.isEmpty ? 'First Name required' : null,
         onSaved: (value) => _firstName = value.trim(),

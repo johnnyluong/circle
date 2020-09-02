@@ -3,13 +3,15 @@ import 'package:circle/constants.dart';
 
 // ignore: must_be_immutable
 class AboutScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kPrimaryColor,
+        iconTheme: IconThemeData(
+          color: addItemButtonColor,
+        ),
+        backgroundColor: primaryColor,
         title: Text(
           'About Circle',
           style: TextStyle(color: primaryTextColor),

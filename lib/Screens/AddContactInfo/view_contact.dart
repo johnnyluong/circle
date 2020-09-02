@@ -18,7 +18,10 @@ class _ViewContactScreenState extends State<ViewContactScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kPrimaryColor,
+        iconTheme: IconThemeData(
+          color: addItemButtonColor,
+        ),
+        backgroundColor: primaryColor,
         title: Text(
           'Finalize Contact Details',
           style: TextStyle(color: primaryTextColor),
@@ -33,6 +36,7 @@ class _ViewContactScreenState extends State<ViewContactScreen> {
                 children: <Widget>[
                   ContactInfoNotice(),
                   Card(
+                    color: backgroundColor,
                     child: MainContactInfo(
                       name: widget.name,
                       profession: widget.profession,
@@ -40,6 +44,7 @@ class _ViewContactScreenState extends State<ViewContactScreen> {
                     margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
                   ),
                   Card(
+                    color: backgroundColor,
                     margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
                     child: Column(
                       children: <Widget>[
@@ -49,6 +54,7 @@ class _ViewContactScreenState extends State<ViewContactScreen> {
                     ),
                   ),
                   Card(
+                    color: backgroundColor,
                     margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
                     child: Column(
                       children: <Widget>[
@@ -66,7 +72,6 @@ class _ViewContactScreenState extends State<ViewContactScreen> {
         ),
       ),
       floatingActionButton: CustomFloatingActionButton(
-        color: kPrimaryDarkColor,
         press: () {
           Navigator.pop(context);
           Navigator.pop(context);
@@ -94,7 +99,7 @@ class AddToCirclesButton extends StatelessWidget {
               TextSpan(
                 text: "Add contact to Circles ",
                 style: TextStyle(
-                  color: kPrimaryDarkColor,
+                  color: addItemButtonColor,
                   fontWeight: FontWeight.w300,
                   fontSize: 22,
                 ),
@@ -103,6 +108,7 @@ class AddToCirclesButton extends StatelessWidget {
                 child: Icon(
                   Icons.add_circle_outline,
                   size: 22,
+                  color: addItemButtonColor,
                 ),
               ),
             ],
@@ -132,7 +138,7 @@ class SetRemindersButton extends StatelessWidget {
               TextSpan(
                 text: "Set Reminders ",
                 style: TextStyle(
-                  color: kPrimaryDarkColor,
+                  color: addItemButtonColor,
                   fontWeight: FontWeight.w300,
                   fontSize: 22,
                 ),
@@ -141,6 +147,7 @@ class SetRemindersButton extends StatelessWidget {
                 child: Icon(
                   Icons.add_circle_outline,
                   size: 22,
+                  color: addItemButtonColor,
                 ),
               ),
             ],
@@ -175,7 +182,7 @@ class ContactInfoNotice extends StatelessWidget {
             TextSpan(
               text: "This information will only be seen by you.",
               style: TextStyle(
-                color: kPrimaryDarkColor,
+                color: secondaryTextColor,
                 fontWeight: FontWeight.w300,
                 fontSize: 14,
               ),
@@ -203,7 +210,7 @@ class SectionHeader extends StatelessWidget {
         text,
         textAlign: TextAlign.left,
         style: TextStyle(
-          color: primaryTextColor,
+          color: secondaryTextColor,
           fontSize: 25,
         ),
       ),
@@ -236,7 +243,7 @@ class MainContactInfo extends StatelessWidget {
       visualDensity: VisualDensity.compact,
       leading: CircleAvatar(
         radius: 35,
-        backgroundColor: kPrimaryLightColor,
+        backgroundColor: secondaryIconColor,
         child: IconButton(
           icon: Icon(
             Icons.person,

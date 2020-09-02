@@ -40,12 +40,12 @@ class StandardInfoInput extends StatelessWidget {
             fontSize: _fontSize,
           ),
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: kPrimaryDarkColor),
+            borderSide: BorderSide(color: primaryColor),
           ),
           prefixIcon: Icon(
             icon,
             size: _iconSize,
-            color: primaryIconColor,
+            color: secondaryIconColor,
           ),
         ),
         validator: validator,
