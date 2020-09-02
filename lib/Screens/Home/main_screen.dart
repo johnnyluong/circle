@@ -72,7 +72,11 @@ class _MainScreenState extends State<MainScreen> {
           type: BottomNavigationBarType.fixed,
           iconSize: 23,
           currentIndex: _currentIndex,
-          selectedItemColor: primaryIconColor,
+          selectedItemColor: addItemButtonColor,
+          unselectedItemColor: primaryIconColor,
+          backgroundColor: primaryColor,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.donut_large),

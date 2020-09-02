@@ -48,8 +48,24 @@ class _CirclesScreenState extends State<CirclesScreen> {
   @override
   Widget build(BuildContext context) {
     setCircleList();
-    Size size = MediaQuery.of(context).size;
-    return Container(
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: primaryColor,
+        title: Text(
+          'Circles',
+          style: TextStyle(color: primaryTextColor),
+        ),
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.add),
+            color: addItemButtonColor,
+            onPressed: _onButtonPressed,
+          ),
+        ],
+      ),
+      body: Container(
       child: PageView.builder(
         controller: pageController,
         itemCount: slides.length,
@@ -73,6 +89,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
   void _onButtonPressed() {
     Size size = MediaQuery.of(context).size;
     showModalBottomSheet(
+      backgroundColor: backgroundColor,
       isScrollControlled: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -117,10 +134,9 @@ class _CirclesScreenState extends State<CirclesScreen> {
             ),
             RoundedButton(
               text: 'Create Circle',
-              color: kPrimaryDarkColor,
-              textColor: kPrimaryColor,
               press: () {
                 widget.cloudDB.addCircle(circleName);
+                Navigator.pop(context);
               },
             ),
           ],

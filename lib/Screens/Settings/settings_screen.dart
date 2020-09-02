@@ -18,8 +18,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kPrimaryColor,
-        title: Text('Settings'),
+        centerTitle: true,
+        backgroundColor: primaryColor,
+        title: Text(
+          'Settings',
+          style: TextStyle(color: primaryTextColor),
+        ),
       ),
       body: Center(
         child: Column(
@@ -27,8 +31,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SizedBox(height: size.height * 0.05),
             RoundedButton(
               text: 'ABOUT',
-              color: kPrimaryDarkColor,
-              textColor: kPrimaryColor,
               press: () {
                 Navigator.push(
                   context,
@@ -42,20 +44,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             RoundedButton(
               text: 'CHANGE PASSWORD',
-              color: kPrimaryDarkColor,
-              textColor: kPrimaryColor,
-              press: () {},
             ),
             RoundedButton(
               text: 'NOTIFICATION SETTINGS',
-              color: kPrimaryDarkColor,
-              textColor: kPrimaryColor,
-              press: () {},
             ),
             RoundedButton(
               text: 'LOGOUT',
-              color: kPrimaryDarkColor,
-              textColor: kPrimaryColor,
               press: () {
                 widget.logoutCallback();
               },

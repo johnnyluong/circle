@@ -13,7 +13,8 @@ class ResourcesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kPrimaryColor,
+        centerTitle: true,
+        backgroundColor: primaryColor,
         title: Text(
           'Resources',
           style: TextStyle(color: primaryTextColor),
@@ -60,7 +61,7 @@ class ResourcesScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 65),
             child: RoundedButton(
-              color: kPrimaryDarkColor,
+              color: primaryColor,
               text: "ADD A CONTACT",
               press: () {
                 Navigator.push(

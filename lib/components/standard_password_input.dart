@@ -41,18 +41,18 @@ class StandardPasswordInput extends StatelessWidget {
             fontSize: _fontSize,
           ),
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: kPrimaryDarkColor),
+            borderSide: BorderSide(color: primaryColor),
           ),
           prefixIcon: Icon(
             Icons.lock,
             size: _iconSize,
-            color: primaryIconColor,
+            color: secondaryIconColor,
           ),
           suffixIcon: IconButton(
             icon: Icon(
               Icons.visibility,
               size: _iconSize,
-              color: hidePassword ? kPrimaryLightColor : primaryIconColor,
+              color: hidePassword ? disabledColor : secondaryIconColor,
             ),
             onPressed: onPressed,
           ),

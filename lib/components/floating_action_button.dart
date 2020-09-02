@@ -12,8 +12,8 @@ class CustomFloatingActionButton extends StatefulWidget {
     Key key,
     this.text,
     this.press,
-    this.color = kPrimaryLightColor,
-    this.textColor,
+    this.color = primaryColor,
+    this.textColor = primaryTextColor,
     this.enabled = true,
   }) : super(key: key);
 
