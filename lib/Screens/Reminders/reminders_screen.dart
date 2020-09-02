@@ -8,7 +8,10 @@ class RemindersScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text('Reminders', style: TextStyle(color: primaryTextColor),),
+        title: Text(
+          'Reminders',
+          style: TextStyle(color: primaryTextColor),
+        ),
         automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
@@ -20,35 +23,91 @@ class RemindersScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Container(
-        width: double.infinity,
-        height: size.height,
-        child: Stack(
-          alignment: Alignment.center, //Controls vertical center
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Reminders',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                  ),
-                ),
-                Text(
-                  'This screen will contain the\n Reminders the user has set.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 18,
-                  ),
-                ),
-              ],
-            ),
-          ],
+      body: Column(
+        children: <Widget>[ //Hard-coded Examples
+          ReminderCard(
+            name: "Troy Anderson",
+            description: "Informational Interview, Thursday 5:00PM",
+          ),
+          ReminderCard(
+            name: "Johnny Luong",
+            description: "Networking, Monday 2:00PM",
+          ),
+          ReminderCard(
+            name: "John Doe",
+            description: "Recruiting, Wednesday 1:00PM",
+          ),
+          ReminderCard(
+            name: "Evan Wang",
+            description: "Networking, Friday 9:00AM",
+          ),
+          ReminderCard(
+            name: "Rui Maki",
+            description: "Interview, Thursday 4:00PM",
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ReminderCard extends StatelessWidget {
+  final String name;
+  final String description;
+  const ReminderCard({
+    Key key,
+    this.name,
+    this.description,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+      elevation: 2,
+      child: ListTile(
+        title: Text(
+          name,
+          style: TextStyle(
+            fontSize: 16,
+          ),
         ),
+        subtitle: Text(
+          description,
+          style: TextStyle(
+            fontSize: 12,
+          ),
+        ),
+        dense: true,
+        visualDensity: VisualDensity.compact,
+        leading: CircleAvatar(
+          radius: 18,
+          backgroundColor: kPrimaryLightColor,
+          child: IconButton(
+            icon: Icon(
+              Icons.calendar_today,
+              color: primaryIconColor,
+              size: 21,
+            ),
+            onPressed: () {},
+          ),
+        ),
+        trailing: DropdownButtonHideUnderline(
+          child: DropdownButton<String>(
+            icon: Icon(Icons.arrow_drop_down),
+            iconSize: 24,
+            elevation: 16,
+            items: <String>['Delete']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (String newValue) {},
+          ),
+        ),
+        onTap: () {},
       ),
     );
   }

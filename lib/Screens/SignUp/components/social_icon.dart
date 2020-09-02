@@ -22,13 +22,13 @@ class SocialIcon extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(
             width: 2,
-            color: kPrimaryLightColor,
+            color: primaryIconColor,
           ),
           shape: BoxShape.circle,
         ),
         child: SvgPicture.asset(
           iconSrc,
-          color: kPrimaryLightColor,
+          color: primaryIconColor,
           height: 20,
           width: 20,
         ),

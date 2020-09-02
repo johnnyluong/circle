@@ -62,7 +62,16 @@ class CloudDB {
   }
 
 //////////////////////////CIRCLES////////////////////////////////////
+
+  Stream<QuerySnapshot> get contacts {
+    final CollectionReference contactsCollection =
+        userDoc.collection("contacts");
+    return contactsCollection.snapshots();
+  }
+
+//////////////////////////CIRCLES////////////////////////////////////
   Future<DocumentReference> addCircle(String circleName) async {
+    print("ADDING CIRCLE: " + circleName);
     return circlesDB.addCircle(circleName);
   }
 

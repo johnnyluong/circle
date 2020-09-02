@@ -1,28 +1,20 @@
 import 'package:circle/Screens/AddContactInfo/add_info.dart';
 import 'package:circle/Services/CloudDB/cloud_db.dart';
-import 'package:circle/components/contact_list_item.dart';
+import 'package:circle/components/contact_list.dart';
 import 'package:circle/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 
 // Builds the contact list screen that displays all the users' contacts
 class ContactListScreen extends StatefulWidget {
   final CloudDB cloudDB;
   ContactListScreen({this.cloudDB});
 
-  _ContactListState createState() => _ContactListState();
+  _ContactListScreenState createState() => _ContactListScreenState();
 }
 
-class _ContactListState extends State<ContactListScreen> {
-  Future getContacts() async {
-    //TODO: add listener to listen to changes in contacts lists
-
-    // var firestore = Firestore.instance;
-    // QuerySnapshot qn = await firestore.collection('contacts').getDocuments();
-    // return qn.documents;
-    return widget.cloudDB.getAllContacts();
-  }
-
+class _ContactListScreenState extends State<ContactListScreen> {
   navigateToDetail(DocumentSnapshot contact) {
     Navigator.push(
       context,
@@ -35,63 +27,42 @@ class _ContactListState extends State<ContactListScreen> {
   }
 
   Widget build(BuildContext context) {
-    Future<dynamic> contacts = getContacts();
-    print(contacts);
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kPrimaryColor,
-        title: Text(
-          'My Network',
-          style: TextStyle(color: primaryTextColor),
-        ),
-        automaticallyImplyLeading: false,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.add),
-            color: primaryIconColor,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddInfo(
-                    cloudDB: widget.cloudDB,
-                  ),
-                ),
-              );
-            },
+    return StreamProvider<QuerySnapshot>.value(
+      value: widget.cloudDB.contacts,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: kPrimaryColor,
+          title: Text(
+            'My Network',
+            style: TextStyle(color: primaryTextColor),
           ),
-        ],
-      ),
-      body: Container(
-        child: FutureBuilder(
-          future:
-              contacts, //Store this in a variable and use setState to avoid having to refresh each time
-          builder: (_, snapshot) {
-            // Display contact list
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: Text('Loading ... '),
-              );
-            } else {
-              return ListView.separated(
-                itemCount: snapshot.data.length,
-                itemBuilder: (_, index) {
-                  return ContactListItem(
-                    list: snapshot,
-                    index: index,
-                    cloudDB: widget.cloudDB,
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) =>
-                    const Divider(),
-              );
-            }
-          },
+          automaticallyImplyLeading: false,
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.add),
+              color: primaryIconColor,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddInfo(
+                      cloudDB: widget.cloudDB,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+        body: ContactList(
+          cloudDB: widget.cloudDB,
         ),
       ),
     );
   }
 }
+
+
 
 class ContactDetail extends StatefulWidget {
   final DocumentSnapshot contact;

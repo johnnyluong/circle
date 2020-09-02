@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 
 class CirclesDB {
   final String uid;
@@ -38,8 +37,6 @@ class CirclesDB {
     QuerySnapshot allContacts =
         await circle.collection("circleContacts").getDocuments();
     List<DocumentSnapshot> contactReferences = allContacts.documents;
-
-    print(contactReferences.length);
     List<DocumentSnapshot> contacts;
     contactReferences.forEach((element) async {
       DocumentReference contactDoc = users.document(element["circleContact"]);

@@ -1,8 +1,10 @@
 import 'dart:ui';
 
-import 'package:circle/Screens/AddContactInfo/finish_single_contact.dart';
+import 'package:circle/Screens/AddContactInfo/view_contact.dart';
 import 'package:circle/Services/CloudDB/cloud_db.dart';
 import 'package:circle/components/floating_action_button.dart';
+import 'package:circle/components/standard_info_input.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:circle/constants.dart';
@@ -24,6 +26,8 @@ class AddInfoState extends State<AddInfo> {
   String _email;
   String _phoneNumber;
 
+  String contactID;
+  Future<DocumentReference> contactReference;
 
   Map<String, dynamic> makeContact(String firstName, String lastName,
       String profession, String email, String phoneNumber) {
@@ -36,18 +40,12 @@ class AddInfoState extends State<AddInfo> {
     return newContact;
   }
 
-  void addNewContact() {
-    print(_firstName +
-        ", " +
-        _lastName +
-        ", " +
-        _profession +
-        " " +
-        _email +
-        " " +
-        _phoneNumber);
-    widget.cloudDB.addContact(
+  void addNewContact() async {
+    var reference = widget.cloudDB.addContact(
         makeContact(_firstName, _lastName, _profession, _email, _phoneNumber));
+    setState(() {
+      contactReference = reference;
+    });
   }
 
   // Check if form is valid before perform login or signup
@@ -61,9 +59,13 @@ class AddInfoState extends State<AddInfo> {
   }
 
   Future<bool> validateAndSubmit() async {
-    if (validateAndSave()) {
-      addNewContact();
-      return true;
+    try {
+      if (validateAndSave()) {
+        addNewContact();
+        return true;
+      }
+    } catch (e) {
+      print(e);
     }
     return false;
   }
@@ -105,17 +107,21 @@ class AddInfoState extends State<AddInfo> {
         press: () async {
           bool success = await validateAndSubmit();
           if (success) {
-            resetForm(); //TODO: Write to the database in next screen instead of current
+            resetForm();
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return FinishSingleContactScreen();
+                  return ViewContactScreen(
+                    contactRef: contactReference,
+                    name: _firstName + " " + _lastName,
+                    profession: _profession,
+                  );
                 },
               ),
             );
-          } //TODO: Pass new contact value to next screen
-        }, //Handle case of multiple entries vs single
+          } 
+        }, 
         text: "NEXT: ADD TO CIRCLES",
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -124,19 +130,37 @@ class AddInfoState extends State<AddInfo> {
 
   Widget _showForm() {
     return new Container(
-        padding: EdgeInsets.all(16.0),
-        child: new Form(
-          key: _formKey,
-          child: new ListView(
-            shrinkWrap: true,
-            children: <Widget>[
-              showNameInput(),
-              showProfessionInput(),
-              showEmailInput(),
-              showPhoneInput(),
-            ],
-          ),
-        ));
+      padding: EdgeInsets.all(16.0),
+      child: new Form(
+        key: _formKey,
+        child: new ListView(
+          shrinkWrap: true,
+          children: <Widget>[
+            showNameInput(),
+            StandardInfoInput(
+              hintText: "Profession *",
+              validator: (value) =>
+                  value.isEmpty ? 'Must enter Profession' : null,
+              onSaved: (value) => _profession = value.trim(),
+              icon: Icons.work,
+              keyboardType: TextInputType.text,
+            ),
+            StandardInfoInput(
+              hintText: "Email",
+              onSaved: (value) => _email = value.trim(),
+              icon: Icons.email,
+              keyboardType: TextInputType.emailAddress,
+            ),
+            StandardInfoInput(
+              hintText: "Phone Number",
+              onSaved: (value) => _phoneNumber = value.trim(),
+              icon: Icons.phone,
+              keyboardType: TextInputType.phone,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget showNameInput() {
@@ -157,14 +181,14 @@ class AddInfoState extends State<AddInfo> {
     return Flexible(
       child: TextFormField(
         maxLines: 1,
-        keyboardType: TextInputType.text,
+        keyboardType: TextInputType.name,
         autofocus: false,
         decoration: InputDecoration(
             hintText: 'First Name *',
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: kPrimaryDarkColor),
             ),
-            icon: Icon(
+            prefixIcon: Icon(
               Icons.person,
               color: primaryIconColor,
             )),
@@ -178,7 +202,7 @@ class AddInfoState extends State<AddInfo> {
     return Flexible(
       child: TextFormField(
         maxLines: 1,
-        keyboardType: TextInputType.text,
+        keyboardType: TextInputType.name,
         autofocus: false,
         decoration: InputDecoration(
           hintText: 'Last Name *',
@@ -188,73 +212,6 @@ class AddInfoState extends State<AddInfo> {
         ),
         validator: (value) => value.isEmpty ? 'Last Name required' : null,
         onSaved: (value) => _lastName = value.trim(),
-      ),
-    );
-  }
-
-  Widget showProfessionInput() {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
-      child: TextFormField(
-        maxLines: 1,
-        keyboardType: TextInputType.text,
-        autofocus: false,
-        decoration: InputDecoration(
-          hintText: 'Profession *',
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: kPrimaryDarkColor),
-          ),
-          icon: Icon(
-            Icons.work,
-            color: primaryIconColor,
-          ),
-        ),
-        validator: (value) => value.isEmpty ? 'Must specify profession' : null,
-        onSaved: (value) => _profession = value.trim(),
-      ),
-    );
-  }
-
-  Widget showEmailInput() {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
-      child: TextFormField(
-        maxLines: 1,
-        keyboardType: TextInputType.emailAddress,
-        autofocus: false,
-        decoration: InputDecoration(
-            hintText: 'Email',
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: kPrimaryDarkColor),
-            ),
-            icon: Icon(
-              Icons.mail,
-              color: primaryIconColor,
-            )),
-        //validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
-        onSaved: (value) => _email = value.trim(),
-      ),
-    );
-  }
-
-  Widget showPhoneInput() {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
-      child: TextFormField(
-        maxLines: 1,
-        keyboardType: TextInputType.phone,
-        autofocus: false,
-        decoration: InputDecoration(
-            hintText: 'Phone Number',
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: kPrimaryDarkColor),
-            ),
-            icon: Icon(
-              Icons.phone,
-              color: primaryIconColor,
-            )),
-        //validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
-        onSaved: (value) => _phoneNumber = value.trim(),
       ),
     );
   }

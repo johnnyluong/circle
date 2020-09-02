@@ -9,6 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:circle/Services/CloudDB/cloud_db.dart';
 import 'package:circle/Screens/Circles/components/slider_tile.dart';
 
+// ignore: must_be_immutable
 class CirclesScreen extends StatefulWidget {
   final CloudDB cloudDB;
   List<DocumentSnapshot> circleList;
@@ -22,6 +23,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
   List<CircleModel> slides = new List<CircleModel>();
   int currentIndex = 0;
   PageController pageController = new PageController(initialPage: 0);
+  String circleName;
 
   @override
   void initState() {
@@ -107,13 +109,19 @@ class _CirclesScreenState extends State<CirclesScreen> {
             RoundedInputField(
               text: 'Circle Name',
               icon: Icons.donut_large,
-              onChanged: (value) {},
+              onChanged: (value) {
+                setState(() {
+                  circleName = value;
+                });
+              },
             ),
             RoundedButton(
               text: 'Create Circle',
-              color: kPrimaryColor,
-              textColor: Colors.white,
-              press: () {},
+              color: kPrimaryDarkColor,
+              textColor: kPrimaryColor,
+              press: () {
+                widget.cloudDB.addCircle(circleName);
+              },
             ),
           ],
         );

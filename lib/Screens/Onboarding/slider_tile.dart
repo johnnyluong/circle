@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class SliderTile extends StatelessWidget {
   String imageAssetPath, title, desc;
   SliderTile({this.imageAssetPath, this.title, this.desc});
