@@ -26,8 +26,6 @@ class _CircleContactListState extends State<CircleContactList> {
   void initState() {
     super.initState();
 
-    // widget.circleContacts = circleContactsTest;
-
     getCircleContacts().then((val) {
       setState(() {
         widget.circleContacts = val;
@@ -47,17 +45,19 @@ class _CircleContactListState extends State<CircleContactList> {
     }
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Current Circle Name TODO'),
-        ),
-        body: ListView.builder(
-            itemCount: widget.circleContacts.length,
-            itemBuilder: (context, index) {
-              return Card(
-                // TODO: it returns a document snapshot but needs to be a string
-                child: ListTile(
-                    title: Text(widget.circleContacts.length.toString())),
-              );
-            }));
+      appBar: AppBar(
+        title: Text('Current Circle Name TODO'),
+      ),
+      body: ListView.builder(
+        itemCount: widget.circleContacts.length,
+        itemBuilder: (context, index) {
+          return Card(
+            // TODO: it returns a document snapshot but needs to be a string
+            child:
+                ListTile(title: Text(widget.circleContacts.length.toString())),
+          );
+        },
+      ),
+    );
   }
 }

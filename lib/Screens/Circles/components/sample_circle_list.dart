@@ -55,25 +55,3 @@ class SampleCircleListScreen extends StatelessWidget {
     );
   }
 }
-
-/*
-
-
-
-Container(
-        child: ListView.separated(
-          itemCount: 7,
-          itemBuilder: (_, index) {
-            return ContactListItem(
-              list: snapshot,
-              index: index,
-              cloudDB: widget.cloudDB,
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
-        ),
-      ),
-
-
-*/

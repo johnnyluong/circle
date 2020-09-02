@@ -26,8 +26,6 @@ class _CirclesScreenState extends State<CirclesScreen> {
   @override
   void initState() {
     super.initState();
-    // slides = await getSlides(widget.cloudDB);
-
     getSlides(widget.cloudDB).then((val) {
       setState(() {
         slides = val;
@@ -61,7 +59,6 @@ class _CirclesScreenState extends State<CirclesScreen> {
         itemBuilder: (context, index) {
           return SliderTile(
             cloudDB: widget.cloudDB,
-            // allCircles: widget.circleList,
             currentScreenCircles: slides[index].getCurrentCircles(),
             currentIndex: currentIndex,
             slides: slides,
@@ -106,10 +103,6 @@ class _CirclesScreenState extends State<CirclesScreen> {
                 ),
               ),
             ),
-            AutoSizeText(
-              'The text is too long let\'s see if it could be displayed in one line omg this actually fucking works',
-              maxLines: 1,
-            ),
             SizedBox(height: size.height * 0.02),
             RoundedInputField(
               text: 'Circle Name',
@@ -128,46 +121,3 @@ class _CirclesScreenState extends State<CirclesScreen> {
     );
   }
 }
-
-/*
-
-return Scaffold(
-      body: GridView.builder(
-        itemCount: widget.circleList.length,
-        gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemBuilder: (context, index) => GestureDetector(
-          onTap: () {
-            print('Circle pressed');
-            MaterialPageRoute(
-              builder: (context) => MainScreen(),
-            );
-            // CirclesScreen(cloudDB: widget.cloudDB);
-          },
-          child: Container(
-            child: Container(
-              alignment: Alignment.center,
-              child: AutoSizeText(
-                widget.circleList.elementAt(index).data['circleName'],
-                maxLines: 1,
-                minFontSize: 12,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.blue[900],
-              ),
-              margin: EdgeInsets.all(15.0),
-              padding: EdgeInsets.all(15.0),
-            ),
-          ),
-        ),
-      ),
-    );
-
-
-*/

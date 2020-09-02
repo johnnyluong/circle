@@ -48,9 +48,6 @@ class SliderTile extends StatelessWidget {
                     },
                   ),
                 );
-
-                // print(cloudDB.getCircleContacts(circle))
-                // On tap to be implemented
               },
               child: Container(
                 height: 20,
@@ -79,15 +76,3 @@ class SliderTile extends StatelessWidget {
     );
   }
 }
-
-/*
-
-
-return CircleContactList(
-                        circle: currentScreenCircles.elementAt(index).reference,
-                        cloudDB: cloudDB,
-                      );
-
-
-
-*/
