@@ -28,7 +28,7 @@ class SliderTile extends StatelessWidget {
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: 40,
+            height: 10,
           ),
           GridView.builder(
             shrinkWrap: true,
