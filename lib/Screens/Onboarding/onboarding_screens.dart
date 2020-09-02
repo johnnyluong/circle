@@ -1,4 +1,3 @@
-import 'package:circle/Screens/Home/main_screen.dart';
 import 'package:circle/Screens/Onboarding/onboarding_data.dart';
 import 'package:circle/Screens/Onboarding/slider_tile.dart';
 import 'package:circle/constants.dart';

@@ -62,7 +62,7 @@ class ContactListItem extends StatelessWidget {
               );
             }).toList(),
             onChanged: (String newValue) {
-              cloudDB.deleteContact(userDocument.reference, fullName);
+              cloudDB.deleteContact(userDocument.reference);
             },
           ),
         ),

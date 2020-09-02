@@ -1,7 +1,6 @@
 // import 'package:circle/Screens/Home/main_screen.dart';
 // import 'package:circle/Screens/Login/login_screen.dart';
 
-import 'package:circle/Screens/Home/main_screen.dart';
 import 'package:circle/Screens/SignUp/components/or_divider.dart';
 import 'package:circle/Screens/SignUp/components/social_icon.dart';
 import 'package:circle/Services/Authentication/authentication.dart';

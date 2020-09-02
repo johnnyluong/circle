@@ -107,7 +107,7 @@ class AddInfoState extends State<AddInfo> {
         press: () async {
           bool success = await validateAndSubmit();
           if (success) {
-            resetForm(); //TODO: Write to the database in next screen instead of current
+            resetForm();
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -120,8 +120,8 @@ class AddInfoState extends State<AddInfo> {
                 },
               ),
             );
-          } //TODO: Pass new contact value to next screen
-        }, //Handle case of multiple entries vs single
+          } 
+        }, 
         text: "NEXT: ADD TO CIRCLES",
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

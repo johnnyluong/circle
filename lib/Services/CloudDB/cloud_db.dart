@@ -39,7 +39,7 @@ class CloudDB {
   Future<void> deleteContacts(List<DocumentReference> contacts) async {
     return contactsDB.deleteContacts(contacts);
   }
-  
+
   Future<void> deleteContact(DocumentReference contact) async {
     return contactsDB.deleteContact(contact);
   }
@@ -70,6 +70,7 @@ class CloudDB {
   }
 
   Future<DocumentReference> addCircle(String circleName) async {
+    print("ADDING CIRCLE: " + circleName);
     return circlesDB.addCircle(circleName);
   }
 
