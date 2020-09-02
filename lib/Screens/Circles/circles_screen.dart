@@ -22,6 +22,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
   List<CircleModel> slides = new List<CircleModel>();
   int currentIndex = 0;
   PageController pageController = new PageController(initialPage: 0);
+  String circleName;
 
   @override
   void initState() {
@@ -55,6 +56,21 @@ class _CirclesScreenState extends State<CirclesScreen> {
   Widget build(BuildContext context) {
     setCircleList();
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
+        title: Text(
+          'Circles',
+          style: TextStyle(color: primaryTextColor),
+        ),
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.add),
+            color: primaryIconColor,
+            onPressed: _onButtonPressed,
+          ),
+        ],
+      ),
       body: PageView.builder(
         controller: pageController,
         itemCount: slides.length,
@@ -109,21 +125,23 @@ class _CirclesScreenState extends State<CirclesScreen> {
                 ),
               ),
             ),
-            AutoSizeText(
-              'The text is too long let\'s see if it could be displayed in one line omg this actually fucking works',
-              maxLines: 1,
-            ),
             SizedBox(height: size.height * 0.02),
             RoundedInputField(
               text: 'Circle Name',
               icon: Icons.donut_large,
-              onChanged: (value) {},
+              onChanged: (value) {
+                setState(() {
+                  circleName = value;
+                });
+              },
             ),
             RoundedButton(
               text: 'Create Circle',
-              color: kPrimaryColor,
-              textColor: Colors.white,
-              press: () {},
+              color: kPrimaryDarkColor,
+              textColor: kPrimaryColor,
+              press: () {
+                widget.cloudDB.addCircle(circleName);
+              },
             ),
           ],
         );
