@@ -26,7 +26,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
   @override
   void initState() {
     super.initState();
-    slides = getSlides();
+    //slides = getSlides(); //Commented out to handle no circles
   }
 
   Widget pageIndexIndicator(bool isCurrentPage) {
