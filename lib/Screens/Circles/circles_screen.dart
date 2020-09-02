@@ -1,6 +1,4 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:circle/Screens/Circles/components/circle_model.dart';
-import 'package:circle/Screens/Home/main_screen.dart';
 import 'package:circle/components/rounded_button.dart';
 import 'package:circle/components/rounded_input_field.dart';
 import 'package:flutter/material.dart';
@@ -48,9 +46,23 @@ class _CirclesScreenState extends State<CirclesScreen> {
   @override
   Widget build(BuildContext context) {
     setCircleList();
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      child: PageView.builder(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: primaryColor,
+        title: Text(
+          'Circles',
+          style: TextStyle(color: primaryTextColor),
+        ),
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.add),
+            color: addItemButtonColor,
+            onPressed: _onButtonPressed,
+          ),
+        ],
+      ),
+      body: PageView.builder(
         controller: pageController,
         itemCount: slides.length,
         onPageChanged: (val) {
@@ -73,6 +85,7 @@ class _CirclesScreenState extends State<CirclesScreen> {
   void _onButtonPressed() {
     Size size = MediaQuery.of(context).size;
     showModalBottomSheet(
+      backgroundColor: backgroundColor,
       isScrollControlled: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -117,10 +130,9 @@ class _CirclesScreenState extends State<CirclesScreen> {
             ),
             RoundedButton(
               text: 'Create Circle',
-              color: kPrimaryDarkColor,
-              textColor: kPrimaryColor,
               press: () {
                 widget.cloudDB.addCircle(circleName);
+                Navigator.pop(context);
               },
             ),
           ],

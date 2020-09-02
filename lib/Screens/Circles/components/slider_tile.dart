@@ -30,9 +30,6 @@ class SliderTile extends StatelessWidget {
       cloudDB: cloudDB,
       child: Column(
         children: <Widget>[
-          SizedBox(
-            height: 40,
-          ),
           GridView.builder(
             shrinkWrap: true,
             itemCount: currentScreenCircles.length,
