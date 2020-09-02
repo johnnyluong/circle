@@ -114,6 +114,7 @@ class AddInfoState extends State<AddInfo> {
                 builder: (context) {
                   return ViewContactScreen(
                     contactRef: contactReference,
+                    isNewContact: true,
                     name: _firstName + " " + _lastName,
                     profession: _profession,
                   );

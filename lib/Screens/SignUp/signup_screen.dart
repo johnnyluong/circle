@@ -30,7 +30,9 @@ class _SignupScreenState extends State<SignupScreen> {
   String _password;
   bool _hidePassword = true;
 
+  // ignore: unused_field
   bool _isLoading;
+  // ignore: unused_field
   String _errorMessage;
   bool validateAndSave() {
     final form = _formKey.currentState;
@@ -164,7 +166,7 @@ class _SignupScreenState extends State<SignupScreen> {
             StandardPasswordInput(
               hidePassword: _hidePassword,
               hintText: "Password",
-              validator: (value) => widget.auth.validatePassword(value), //TODO
+              validator: (value) => widget.auth.validatePassword(value),
               onSaved: (value) => _password = value,
               onPressed: () {
                 setState(() => _hidePassword = !_hidePassword);

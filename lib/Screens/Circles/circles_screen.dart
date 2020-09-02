@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:circle/Screens/Circles/circle_model.dart';
 import 'package:circle/components/rounded_button.dart';
 import 'package:circle/components/rounded_input_field.dart';

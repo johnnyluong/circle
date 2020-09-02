@@ -7,7 +7,12 @@ class ViewContactScreen extends StatefulWidget {
   final Future<DocumentReference> contactRef;
   final String name;
   final String profession;
-  ViewContactScreen({@required this.contactRef, this.name, this.profession});
+  final bool isNewContact;
+  ViewContactScreen(
+      {this.contactRef,
+      this.name,
+      this.profession,
+      @required this.isNewContact});
 
   @override
   _ViewContactScreenState createState() => _ViewContactScreenState();
@@ -23,16 +28,55 @@ class _ViewContactScreenState extends State<ViewContactScreen> {
         ),
         backgroundColor: primaryColor,
         title: Text(
-          'Finalize Contact Details',
+          widget.isNewContact ? 'Finalize Contact Details' : 'Contact Details',
           style: TextStyle(color: primaryTextColor),
         ),
       ),
       body: SingleChildScrollView(
-        child: FutureBuilder<DocumentReference>(
-          future: widget.contactRef,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return Column(
+        child: widget.isNewContact
+            ? FutureBuilder<DocumentReference>(
+                future: widget.contactRef,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return Column(
+                      children: <Widget>[
+                        ContactInfoNotice(),
+                        Card(
+                          color: backgroundColor,
+                          child: MainContactInfo(
+                            name: widget.name,
+                            profession: widget.profession,
+                          ),
+                          margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+                        ),
+                        Card(
+                          color: backgroundColor,
+                          margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+                          child: Column(
+                            children: <Widget>[
+                              SectionHeader(text: "Circles"),
+                              AddToCirclesButton(),
+                            ],
+                          ),
+                        ),
+                        Card(
+                          color: backgroundColor,
+                          margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+                          child: Column(
+                            children: <Widget>[
+                              SectionHeader(text: "Reminders"),
+                              SetRemindersButton(),
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  } else {
+                    return CircularProgressIndicator();
+                  }
+                },
+              )
+            : Column( //TODO: REFACTOR LATER -> contact_list uses snapshots but add_info uses references
                 children: <Widget>[
                   ContactInfoNotice(),
                   Card(
@@ -64,20 +108,17 @@ class _ViewContactScreenState extends State<ViewContactScreen> {
                     ),
                   ),
                 ],
-              );
-            } else {
-              return CircularProgressIndicator();
-            }
-          },
-        ),
+              ),
       ),
-      floatingActionButton: CustomFloatingActionButton(
-        press: () {
-          Navigator.pop(context);
-          Navigator.pop(context);
-        }, //Handle case of multiple entries vs single
-        text: "Finish",
-      ),
+      floatingActionButton: widget.isNewContact
+          ? CustomFloatingActionButton(
+              press: () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              }, //Handle case of multiple entries vs single
+              text: "Finish",
+            )
+          : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
@@ -116,7 +157,7 @@ class AddToCirclesButton extends StatelessWidget {
         ),
         dense: true,
         visualDensity: VisualDensity.compact,
-        onTap: () {}, //TODO Add Circles here
+        onTap: () {},
       ),
     );
   }
@@ -155,7 +196,7 @@ class SetRemindersButton extends StatelessWidget {
         ),
         dense: true,
         visualDensity: VisualDensity.compact,
-        onTap: () {}, //TODO set reminders here
+        onTap: () {},
       ),
     );
   }

@@ -188,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
             StandardPasswordInput(
               hidePassword: _hidePassword,
               hintText: "Password",
-              validator: (value) => widget.auth.validatePassword(value), //TODO
+              validator: (value) => widget.auth.validatePassword(value),
               onSaved: (value) => _password = value,
               onPressed: () {
                 setState(() => _hidePassword = !_hidePassword);
