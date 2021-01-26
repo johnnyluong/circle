@@ -4,13 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:circle/constants.dart';
 
 class AddToCirclesScreen extends StatefulWidget {
-
   @override
   _AddToCirclesScreenState createState() => _AddToCirclesScreenState();
 }
 
 class _AddToCirclesScreenState extends State<AddToCirclesScreen> {
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
